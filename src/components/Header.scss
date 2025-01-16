@@ -1,0 +1,187 @@
+header {
+  width: 100%;
+  min-width: 1280px;
+  height: 150px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 31;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
+
+  .topbar {
+    padding: 4px 0 6px;
+    text-align: right;
+    background-color: var(--main-color1);
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+
+    a {
+      margin-left: 24px;
+    }
+  }
+
+  > .layout_fix {
+    padding: 22px 20px;
+  }
+
+  h1.header_logo {
+    width: 150px;
+    height: 32px;
+    margin-bottom: 22px;
+    color: transparent;
+    background: transparent url("./images/logo.svg") no-repeat center (center / contain);
+    text-indent: -9999px;
+
+    a {
+      height: 32px;
+      display: block;
+    }
+  }
+
+  .gnb li {
+    margin-right: 60px;
+    position: relative;
+    display: inline-block;
+
+    a {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--main-color2);
+
+      &::before {
+        content: "";
+        width: 0;
+        height: 1px;
+        background-color: var(--main-color2);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transition: 0.25s ease;
+        display: block;
+      }
+
+      &:hover::before {
+        width: 100%;
+        right: auto;
+        left: 0;
+      }
+    }
+
+    &.btn_close {
+      display: none;
+    }
+  }
+
+  .shleyz {
+    position: absolute;
+    right: 20px;
+    bottom: -4px;
+
+    ul {
+      display: flex;
+      gap: 10px;
+    }
+
+    img {
+      position: relative;
+    }
+
+    .berry img {
+      height: 82px;
+      bottom: -21px;
+    }
+
+    .ramzzi img {
+      height: 80px;
+      bottom: -24px;
+    }
+
+    .sae img {
+      height: 70px;
+      bottom: -32px;
+    }
+
+    .cota img {
+      height: 104px;
+      bottom: -2px;
+    }
+  }
+}
+
+#main #quick {
+  visibility: hidden;
+}
+
+#quick {
+  text-align: center;
+  position: fixed;
+  top: 200px;
+  left: calc(50% + 660px);
+  z-index: 30;
+  transition: left 0.35s ease;
+
+  ul {
+    width: 60px;
+    padding: 16px 8px 0;
+    background: linear-gradient(to bottom, #003b64, #00243d 100%);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--wt-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    li {
+      margin-bottom: 16px;
+
+      a {
+        position: relative;
+        display: block;
+
+        &::before {
+          content: "";
+          width: 30px;
+          height: 30px;
+          margin: 0 auto 2px;
+          background-color: transparent;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          display: block;
+        }
+      }
+
+      &[title="채용"] a::before {
+        background-image: url("./images/quick-recruit.png");
+      }
+
+      &[title="온라인몰"] a::before {
+        background-image: url("./images/quick-delv.png");
+      }
+
+      &[title*="딜리버리"] a::before {
+        background-image: url("./images/quick-togo.png");
+      }
+    }
+  }
+
+  .pageTop {
+    width: 50px;
+    margin-top: 10px;
+    background-color: var(--main-color1);
+    color: var(--wt-color);
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 1460px) {
+  #quick {
+    left: 100%;
+    visibility: hidden;
+  }
+}

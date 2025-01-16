@@ -1,33 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createContext, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Header from './components/header.jsx';
+import Home from "./pages/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import Footer from "./components/Footer.jsx";
+
 import './App.css'
 
+
 function App() {
-  const [count, setCount] = useState(0)
+  const DataContext = createContext();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    setLoading(false);
+  },[])
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Router basename={import.meta.env.BASE_URL}>
+        <DataContext.Provider value={loading}>
+          <Header/>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+          <Footer/>
+        </DataContext.Provider>
+      </Router>
     </>
   )
 }
