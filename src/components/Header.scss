@@ -32,7 +32,7 @@ header {
     height: 32px;
     margin-bottom: 22px;
     color: transparent;
-    background: transparent url("./images/logo.svg") no-repeat center (center / contain);
+    background: transparent url("/images/logo.svg") no-repeat center (center / contain);
     text-indent: -9999px;
 
     a {
@@ -155,15 +155,15 @@ header {
       }
 
       &[title="채용"] a::before {
-        background-image: url("./images/quick-recruit.png");
+        background-image: url("/images/quick-recruit.png");
       }
 
       &[title="온라인몰"] a::before {
-        background-image: url("./images/quick-delv.png");
+        background-image: url("/images/quick-delv.png");
       }
 
       &[title*="딜리버리"] a::before {
-        background-image: url("./images/quick-togo.png");
+        background-image: url("/images/quick-togo.png");
       }
     }
   }

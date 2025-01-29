@@ -1,7 +1,11 @@
 const NotFound = () => {
   return (
     <>
-      ERROR !
+      <div id="container">
+        <div id="contents">
+          <div className="layout_fix">ERROR !</div>
+        </div>
+      </div>
     </>
   );
 };

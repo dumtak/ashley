@@ -1,0 +1,23 @@
+[class^="shleyz_"] {
+ text-align: center;
+
+ .layout_fix {
+   max-width: 840px;
+ }
+
+ &:nth-child(odd) {
+   background-color: #fdaf31;
+ }
+
+ &:nth-child(even) {
+   padding-top: 40px;
+   padding-bottom: 30px;
+   background-color: #fffdf4;
+ }
+}
+
+.shleyz_visual img {
+ position: relative;
+ top: 18px;
+ z-index: 1;
+}

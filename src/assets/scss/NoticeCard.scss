@@ -1,0 +1,65 @@
+.card_list {
+  margin-left: -20px;
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    width: 33.333%;
+    min-width: 33.333%;
+    padding-left: 20px;
+    padding-bottom: 20px;
+  }
+
+  .item {
+    height: 100%;
+    padding: 60px 60px 60px 50px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    display: block;
+
+    &:hover {
+      /* transform:translate(0,-5px); */
+      transform: scale(1.01);
+    }
+  }
+}
+
+.main__notice .badge_txt,
+.notice__list .badge_txt {
+  padding: 0;
+  border: 0;
+}
+
+:has([class*="notice"],[class*="event"]) [class*="_list"] .tit {
+// [class*="main__"] [class*="_list"] .tit {
+ line-height: 1.42;
+ font-size: 30px;
+ font-weight: 500;
+ color: var(--main-color2);
+ overflow: hidden;
+ text-overflow: ellipsis;
+ word-break: keep-all;
+ word-wrap: break-word;
+ display: block;
+ display: -webkit-box;
+ -webkit-line-clamp: 3;
+ -webkit-box-orient: vertical;
+}
+
+:has([class*="notice"]) .card_list .item .tit {
+ height: 128px;
+ white-space: pre-wrap;
+}
+
+:has([class*="notice"],[class*="event"]) [class*="_list"] .tit + .date {
+// [class*="main__"] [class*="_list"] .tit + .date {
+ line-height: 1;
+ font-size: 13px;
+ color: var(--main-color3);
+}
+
+.card_list .item .date {
+ margin-top: 60px;
+}

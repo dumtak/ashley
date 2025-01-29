@@ -44,8 +44,8 @@ const Footer = () => {
             <p>Copyright © 2024 ASHLEY</p>
           </div>
           <ul className="social">
-            <li><a href="#"><img src="images/footer-social-facebook.png" alt="페이스북 아이콘"/></a></li>
-            <li><a href="#"><img src="images/footer-social-insta.png" alt="인스타 아이콘"/></a></li>
+            <li><a href="#"><img src="/images/footer-social-facebook.png" alt="페이스북 아이콘"/></a></li>
+            <li><a href="#"><img src="/images/footer-social-insta.png" alt="인스타 아이콘"/></a></li>
           </ul>
         </div>
       </div>

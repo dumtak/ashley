@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./Header.scss";
 
 const Header = () => {
@@ -6,30 +8,31 @@ const Header = () => {
       <header>
       <div className="topbar">
         <div className="layout_fix">
-          <a href="member/login.html">로그인</a> 
-          <a href="member/join.html">회원가입</a>
+          <Link to="/member/login">로그인</Link>
+          <Link to="/member/join">회원가입</Link>
         </div>
       </div>
       <div className="layout_fix">
         <h1 className="header_logo">
-          <a href="index.html">애슐리</a>
+          <Link to="/">애슐리</Link>
         </h1>
         <a href="#none" className="btn_hamburger mo">모바일메뉴버튼</a>
         <ul className="gnb">
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">매장안내</a></li>
-          <li><a href="#">이벤트</a></li> 
-          <li><a href="#">멤버십</a></li> 
-          <li><a href="#">고객센터</a></li>
+          
+          <li><Link to="/">회사소개</Link></li>
+          <li><Link to="/">매장안내</Link></li>
+          <li><Link to="/">이벤트</Link></li> 
+          <li><Link to="/">멤버십</Link></li> 
+          <li><Link to="/">고객센터</Link></li>
         </ul>
-        <a href="about/shleyz.html" className="shleyz">
+        <Link to="/about/shleyz" className="shleyz">
           <ul>
-            <li className="berry"><img src="images/shleyz-berrybit.png" alt=""/></li>
-            <li className="ramzzi"><img src="images/shleyz-ramzzi.png" alt=""/></li>
-            <li className="sae"><img src="images/shleyz-omongsae.png" alt=""/></li>
-            <li className="cota"><img src="images/shleyz-cota.png" alt=""/></li>
+            <li className="berry"><img src="/images/shleyz-berrybit.png" alt=""/></li>
+            <li className="ramzzi"><img src="/images/shleyz-ramzzi.png" alt=""/></li>
+            <li className="sae"><img src="/images/shleyz-omongsae.png" alt=""/></li>
+            <li className="cota"><img src="/images/shleyz-cota.png" alt=""/></li>
           </ul>
-        </a>
+        </Link>
       </div>
     </header>
     </>
