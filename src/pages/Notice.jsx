@@ -2,15 +2,16 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { NoticeContext } from "../context/NoticeContext";
 
+import usePagination from "../hooks/usePagination";
+
 import "../assets/scss/NoticeCard.scss";
 
 const Notice = () => {
   const { notice, noticeGroup } = useContext(NoticeContext);
   console.log("noticeGroup==",notice, noticeGroup)
-
-
   console.log("sort==",notice.noticeList);
   
+  const { category, currentPage } = usePagination(notice.noticeList);
 
   return (
     <>

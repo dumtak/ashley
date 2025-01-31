@@ -7,6 +7,7 @@ import Header from './components/header.jsx';
 import Home from "./pages/Home.jsx";
 import Shleyz from "./pages/Shleyz.jsx";
 import Notice from "./pages/Notice.jsx";
+import Store from "./pages/Store.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -33,6 +34,7 @@ function App() {
                 <Route path="shleyz" element={<Shleyz/>}></Route>
               </Route>
               <Route path="/notice" element={<Notice/>}/>
+              <Route path="/store" element={<Store/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>
             <Footer/>
