@@ -21,12 +21,12 @@ const Store = () => {
     const currentSido = [];
     store.forEach(el => {
       if(!currentSido.includes(el.sido)){
-        console.log(el.sido)
         currentSido.push(el.sido);
       }
       setSido(currentSido);
     })
   },[store])
+  console.log(sido);
 
 
   return (

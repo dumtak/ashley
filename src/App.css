@@ -39,6 +39,11 @@ strong { font-weight:600; }
 #container #contents { padding-top:250px; padding-bottom:100px; }
 #container #contents.zero { padding-top:150px; padding-bottom:0; }
 
+.pagination { margin-top:60px; display:flex; align-items:center; justify-content:center; gap:24px; user-select:none; }
+.pagination span { cursor:pointer; }
+.pagination ol > li { padding:0 8px; margin:0 8px; color:var(--main-color3); display:inline-block; cursor:pointer; }
+.pagination ol > li.active { font-weight:600; color:var(--main-color2); }
+
 /* ===== COMPONENT - FLEX */
 .flex_items { display:flex; align-items:center; }
 .flex_items.justify { justify-content:space-between; }

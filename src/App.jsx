@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import { NoticeProvider } from "./context/NoticeContext";
 
@@ -14,18 +14,32 @@ import Footer from "./components/Footer.jsx";
 import './App.css'
 
 
+
+export default function Main() { //useLocation 사용으로 Router 분리
+  return (
+    <Router basename={import.meta.env.BASE_URL}>
+      <App />
+    </Router>
+  );
+}
+
 function App() {
   const DataContext = createContext();
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     setLoading(false);
   },[])
 
+  useEffect(()=>{
+    window.scrollTo({ top: 0 });
+  },[location])
+
   return (
     <>
       <NoticeProvider>
-        <Router basename={import.meta.env.BASE_URL}>
+        {/* <Router basename={import.meta.env.BASE_URL}> */}
           <DataContext.Provider value={loading}>
             <Header/>
             <Routes>
@@ -39,10 +53,11 @@ function App() {
             </Routes>
             <Footer/>
           </DataContext.Provider>
-        </Router>
+        {/* </Router> */}
       </NoticeProvider>
     </>
   )
 }
 
-export default App
+// export default App
+
