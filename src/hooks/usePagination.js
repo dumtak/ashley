@@ -3,22 +3,13 @@ import { useSearchParams } from "react-router-dom";
 
 const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [category, serCategory] = useState("전체");
-  // console.log("######", list);
 
   
 
   //#####includes 사용해서 전체 아닐때도 체크하는거 추가하기
-  // const category = searchParams.get("category") || "전체";
   const category = (!searchParams.get("category") || searchParams.get("category") === "all") ? "all" : searchParams.get("category"); //현재 카테고리
   const currentPage = (parseInt(searchParams.get("page")) === 0 || !searchParams.get("page")) ? 1 : parseInt(searchParams.get("page")); //현재 페이지번호
   const filterList = category === "all" ? list : list.filter(el => category === el.categoryEn)
-
-  console.log("filterList",filterList);
-
-  // const filterList = category === "all" ? (list || []) : (list || []).filter(cate => cate.categoryEn === category);
-  // console.log("필터리스트===", filterList);
-  // console.log(currentPage, filterList);
 
   //===list
   const listSplit = (currentPage - 1) * listLimit; //0번에서부터 9번까지 (1)
@@ -39,7 +30,6 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
     setSearchParams( {category:cate, page:1} );
   }
   const setPage = (e, num)=>{
-    // console.log("확인**", num === totalPagination);
     const numLimit = Math.max(1, Math.min(num, totalPagination)); //최소1,최대제한
     if(currentPage === numLimit){
       e.preventDefault();
@@ -47,7 +37,6 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
     }
     setSearchParams( {category, page:numLimit} );
   }
-
 
   return { category, currentPage, listItem, paginationGroup, setCategory,setPage };
   //카테고리, 현재 페이지번호, 현재 카테고리 리스트, 페이지네이션, 쿼리스트링 변경
