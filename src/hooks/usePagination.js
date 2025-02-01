@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 
 const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
   const [searchParams, setSearchParams] = useSearchParams();
-
   
 
   //#####includes 사용해서 전체 아닐때도 체크하는거 추가하기

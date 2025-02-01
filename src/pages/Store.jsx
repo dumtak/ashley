@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import usePagination from "../hooks/usePagination";
+
 const Store = () => {
   const [store, setStore] = useState([]);
   const [sido, setSido] = useState([]);
@@ -28,6 +30,8 @@ const Store = () => {
   },[store])
   console.log(sido);
 
+  const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination(store, 10);
+  
 
   return (
     <>
@@ -44,9 +48,12 @@ const Store = () => {
                 </tr>
               </thead>
               <tbody>
-                { store.slice().reverse().map((el,idx)=> (
+                { listItem.map((el,idx)=> (
                   <tr key={idx + 1}>
-                    <td>{store.length - idx}</td>
+                    {/* <td>{console.log(currentPage , 10 , idx)}</td>
+                    <td>{console.log((currentPage - 1) * 10 + idx + 1)}</td> */}
+                    <td>{store.length - (10 * (currentPage - 1)  + idx) }</td>
+                    {/* <td>{store.length - idx}</td> */}
                     <td>{el.consumerplantname}</td>
                     <td>{el.address1}</td>
                     <td>{el.comptelno}</td>
@@ -54,6 +61,19 @@ const Store = () => {
                 )) }
               </tbody>
             </table>
+            { paginationGroup && (
+              <>
+                <div className="pagination">
+                  <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>이전</span>
+                  <ol>
+                    { paginationGroup.map((num) => (
+                      <li onClick={(e) => setPage(e, num)} className={currentPage === num ? "active" : ""} key={num}>{num}</li>
+                    ))}
+                  </ol>
+                  <span onClick={(e)=>setPage(e, currentPage + 1)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>다음</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
