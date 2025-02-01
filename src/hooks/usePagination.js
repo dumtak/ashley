@@ -38,8 +38,8 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
     setSearchParams( {category, page:numLimit} );
   }
 
-  return { category, currentPage, listItem, paginationGroup, setCategory,setPage };
-  //카테고리, 현재 페이지번호, 현재 카테고리 리스트, 페이지네이션, 쿼리스트링 변경
+  return { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage };
+  //카테고리, 현재페이지번호, 현재카테고리리스트, 페이지네이션, set(쿼리스트링 변경)
   
 }
 

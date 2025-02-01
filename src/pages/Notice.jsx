@@ -9,7 +9,7 @@ import "../assets/scss/NoticeCard.scss";
 
 const Notice = () => {
   const { notice, categoryEnMapping } = useContext(NoticeContext);
-  const { category, currentPage, listItem, paginationGroup, setCategory,setPage } = usePagination(notice, 3);
+  const { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage } = usePagination(notice, 12);
 
   return (
     <>
@@ -41,13 +41,13 @@ const Notice = () => {
             { paginationGroup && (
               <>
                 <div className="pagination">
-                  <span onClick={(e)=>setPage(e, currentPage - 1)} className="prev">이전</span>
+                  <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>이전</span>
                   <ol>
                     { paginationGroup.map((num) => (
                       <li onClick={(e) => setPage(e, num)} className={currentPage === num ? "active" : ""} key={num}>{num}</li>
                     ))}
                   </ol>
-                  <span onClick={(e)=>setPage(e, currentPage + 1)} className="next">다음</span>
+                  <span onClick={(e)=>setPage(e, currentPage + 1)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>다음</span>
                 </div>
               </>
             )}
