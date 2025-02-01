@@ -236,7 +236,7 @@ const Home = () => {
                 <h2 className="tit">공지사항<Link to="/notice" className="btn_more"></Link></h2>
               </div>
               <ul className="card_list">
-                { notice.noticeList && notice.noticeList.slice(0,6).map(el=> (
+                { notice && notice.slice(0,6).map(el=> (
                   <li key={el.id}>
                     <Link to="/" className="item">
                       <span className="badge_txt">{el.category}</span>

@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 
@@ -11,9 +10,13 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
 
   //#####includes 사용해서 전체 아닐때도 체크하는거 추가하기
   // const category = searchParams.get("category") || "전체";
-  const category = (!searchParams.get("category") || searchParams.get("category") === "전체") ? "전체" : searchParams.get("category"); //현재 카테고리
+  const category = (!searchParams.get("category") || searchParams.get("category") === "all") ? "all" : searchParams.get("category"); //현재 카테고리
   const currentPage = (parseInt(searchParams.get("page")) === 0 || !searchParams.get("page")) ? 1 : parseInt(searchParams.get("page")); //현재 페이지번호
-  const filterList = category === "전체" ? (list || []) : (list || []).filter(cate => cate.category.split(' ').join('') === category.split(' ').join('')); //애슐리 오픈
+  const filterList = category === "all" ? list : list.filter(el => category === el.categoryEn)
+
+  console.log("filterList",filterList);
+
+  // const filterList = category === "all" ? (list || []) : (list || []).filter(cate => cate.categoryEn === category);
   // console.log("필터리스트===", filterList);
   // console.log(currentPage, filterList);
 

@@ -8,15 +8,18 @@ import "../assets/scss/Heading.scss";
 import "../assets/scss/NoticeCard.scss";
 
 const Notice = () => {
-  const { notice, noticeCategory, noticeCategoryEn } = useContext(NoticeContext);
-  const { category, currentPage, listItem, paginationGroup, setCategory,setPage } = usePagination(notice.noticeList, 3);
-  // console.log("noticeCategory==",notice, noticeCategory);
+  const { notice, noticeCategory, noticeCategoryEn, categoryEnMapping } = useContext(NoticeContext);
+  const { category, currentPage, listItem, paginationGroup, setCategory,setPage } = usePagination(notice, 3);
+
+  // console.log("noticeCategory==",notice, noticeCategory, noticeCategoryEn);
   // console.log("sort==",notice.noticeList);
   // console.log("##list##",notice);
 
-
   // console.log(category, noticeCategory)
-  console.log(category, Object.keys(noticeCategory))
+  // console.log(category, Object.keys(noticeCategory))
+
+
+  console.log("&&&", notice, noticeCategory, noticeCategoryEn, categoryEnMapping ,"&&&")
 
   return (
     <>
@@ -25,14 +28,24 @@ const Notice = () => {
           <div className="layout_fix">
             <div className="heading">
               <h2>공지사항</h2>
-              { category && noticeCategory && (
+              {/* { category && noticeCategory && (
                 <ul className="tab_category">
-                  <li onClick={()=>setCategory("전체")} className={category === "전체" ? "active" : ""}>전체</li>
-                  { Object.keys(noticeCategory).map(cate => (
+                  <li onClick={()=>setCategory("all")} className={category === "all" ? "active" : ""}>전체</li>
+                  {  }
+                  { categoryEnMapping.map(cate => (
                     <li onClick={()=>setCategory(cate)} className={category === cate ? "active" : ""} key={cate}>{cate}</li>
                   )) }
                 </ul>
-              )}
+              )} */}
+
+                <ul className="tab_category">
+                  <li onClick={()=>setCategory("all")} className={category === "all" ? "active" : ""}>전체</li>
+                  { Object.keys(categoryEnMapping).map(key=> (
+                    <li onClick={()=>setCategory(categoryEnMapping[key])}
+                    className={category === categoryEnMapping[key] ? "active" : ""}
+                    key={categoryEnMapping[key]}>{key}</li>
+                  )) }
+                </ul>
             </div>
             <ul className="card_list">
               { listItem && listItem.map((el) => (
