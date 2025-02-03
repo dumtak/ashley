@@ -28,8 +28,8 @@ const Event = () => {
                 <li key={el.id}>
                   <Link to={`/event/detail?id=${el.id}`} className="item">
                     <div className="badge">{el.category}</div>
-                    <div className="subject">{el.subject}</div>
-                    <span className="date">{el.date}</span>
+                    <p className="tit">{el.subject}</p>
+                    <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
                   </Link>
                 </li>
               )) }

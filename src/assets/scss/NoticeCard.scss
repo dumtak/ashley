@@ -8,7 +8,6 @@
     min-width: 33.333%;
     padding-left: 20px;
     padding-bottom: 20px;
-
     &.empty { width:100%; padding:100px 0 160px; margin-left:20px; text-align:center; font-size:16px; color:var(--main-color3); }
   }
 
@@ -16,6 +15,7 @@
     height: 100%;
     padding: 60px 60px 60px 50px;
     background-color: #fff;
+    position: relative;
     border-radius: 16px;
     box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
     transition: 0.35s cubic-bezier(0.25, 1, 0.5, 1);

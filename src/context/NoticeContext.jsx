@@ -12,10 +12,7 @@ export const NoticeProvider = ({ children }) => {
   const pathcate = location.pathname.split("/")[1];
 
   const [ notice, setNotice ] = useState([]);
-  const [ noticeMatch, setNoticeMatch ] = useState([]);
-
   const [ event, setEvent ] = useState([]);
-  const [ eventMatch, setEventMatch ] = useState([]);
   // const [noticeCategory, setNoticeCategory] = useState([]); //한글카테고리
   // const [noticeCategoryEn, setNoticeCategoryEn] = useState([]); //영문카테고리
   const noticeEnMapping = {
