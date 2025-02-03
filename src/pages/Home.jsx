@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -12,47 +12,72 @@ import "../assets/scss/NoticeCard.scss";
 
 // import "../context/NoticeContext.json";
 import "./Home.scss";
-// import { Link } from 'react-router-dom';
 
-
-const setVisual = {
-  infinite: true,
-  className: "center",
-  // slide: "div",
-  slide: 'div',
-  draggable : false,
-  centerMode: true,
-  centerPadding: "60px",
-  slidesToShow: 1,
-  vertical : false, //방향
-  // slidesPerRow: 1,
-  // rows: 3,
-  arrows: true,
-  appendArrows: document.querySelector(".main__visual .swiper-arrow"),
-  prevArrow: document.querySelector(".main__visual .swiper-prev"),
-  nextArrow: document.querySelector(".main__visual .swiper-next"),
-  autoplay : false,
-  speed: 500,
-  dots: true, // pagination
-  pauseOnHover: true,
-  responsive: [
-    {
-      breakpoint: 991,
-      settings: {
-        centerPadding: "0",
-        arrows: false,
-      }
-    }
-  ]
-};
 
 
 const Home = () => {
-  const { notice } = useContext(NoticeContext);
-  console.log("notice==",notice);
-  // const noticePanel = notice.noticeList.slice(0,6);
-  // console.log("noticePanel",noticePanel);
-  
+  const { notice, event } = useContext(NoticeContext);
+
+  const setVisual = {
+    infinite: true,
+    className: "center",
+    // slide: "div",
+    slide: 'div',
+    draggable : false,
+    centerMode: true,
+    centerPadding: "60px",
+    slidesToShow: 1,
+    vertical : false, //방향
+    // slidesPerRow: 1,
+    // rows: 3,
+    arrows: true,
+    appendArrows: document.querySelector(".main__visual .swiper-arrow"),
+    prevArrow: document.querySelector(".main__visual .swiper-prev"),
+    nextArrow: document.querySelector(".main__visual .swiper-next"),
+    autoplay : false,
+    speed: 500,
+    dots: true, // pagination
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          centerPadding: "0",
+          arrows: false,
+        }
+      }
+    ]
+  };
+  const setEvent = {
+    initialSlide: 0,
+    infinite: false,
+    draggable : true,
+    touchThreshold:10000,
+    pauseOnHover: true,
+    // slide: 'ul',
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    dots: true,
+    arrows: true,
+    speed: 500,
+    autoplay : true,
+    // afterChange: handleChange,
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          initialSlide: 0,
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          // afterChange: handleAfterChange,
+        }
+      }
+    ]
+  }
+
+
   return (
     <>
       <div id="main">
@@ -69,24 +94,24 @@ const Home = () => {
           <article className="main__visual" rel="js-main-visual">
             <div className="layout_fix">
             <Slider {...setVisual} className="slick_visual">
-                <div className="slide_item">
-                    <a href="#" target="_blank">
-                      <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
-                      <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                    </a>
-                </div>
-                <div className="slide_item">
+              <div className="slide_item">
                   <a href="#" target="_blank">
-                    <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
-                    <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
+                    <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
+                    <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
                   </a>
-                </div>
-                <div className="slide_item">
-                  <a href="#" target="_blank">
-                    <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
-                    <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                  </a>
-                </div>
+              </div>
+              <div className="slide_item">
+                <a href="#" target="_blank">
+                  <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
+                  <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
+                </a>
+              </div>
+              <div className="slide_item">
+                <a href="#" target="_blank">
+                  <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
+                  <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
+                </a>
+              </div>
             </Slider>
 
 
@@ -233,12 +258,13 @@ const Home = () => {
           <article className="main__notice" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
             <div className="layout_fix">
               <div className="heading">
-                <h2 className="tit">공지사항<Link to="/notice" className="btn_more"></Link></h2>
+                <h2 className="tit">공지사항<Link to="/notice" className="btn_more">더보기</Link></h2>
               </div>
               <ul className="card_list">
                 { notice && notice.slice(0,6).map(el=> (
                   <li key={el.id}>
-                    <Link to="/" className="item">
+                    <Link to={{ pathname:`/notice/detail`, search:`?category=all&id=${el.id}` }} className="item">
+                    {/* <Link to={{ pathname:`/notice/detail`, search:`?category=${noticeEnMapping[el.category]}&id=${el.id}` }} className="item"> */}
                       <span className="badge_txt">{el.category}</span>
                       <p className="tit">{el.subject}</p>
                       <p className="date">{el.date}</p>
@@ -251,64 +277,75 @@ const Home = () => {
           <article className="main__banner" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
             <div className="layout_fix" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
               <h3>모두가 누리는 맛있는 세상<br/>당신의 열정과 꿈을 키우세요!</h3>
-              <a href="#" className="btn_link">채용 바로가기</a>
+              <Link to="https://elandeats.career.greetinghr.com" target="_blank" className="btn_link">채용 바로가기</Link>
             </div>
           </article>
           <article className="main__event" rel="js-main-event" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
             <div className="layout_fix">
               <div className="heading">
-                <h2 className="tit">이벤트<a href="#" className="btn_more"></a></h2>
-                <div className="swiper-arrow">
+                <h2 className="tit">이벤트<Link to="/event" className="btn_more">더보기</Link></h2>
+                {/* <div className="swiper-arrow">
                   <a className="swiper-prev" href="#">이전</a>
                   <a className="swiper-next" href="#">다음</a>
-                </div>
+                </div> */}
               </div>
-              <div className="swiper-container">
-                <ul className="event_list swiper-wrapper">
-                    <li className="swiper-slide" data-index="1">
-                      <a href="#" target="_blank">
+                <Slider {...setEvent} className="slick_event event_list">
+                  { event.map(el => {
+                  return (
+                    <div key={el.subject} className="slide_item">
+                      <Link to="/" target="_blank">
                         <div className="item">
-                          <span className="badge">슐리데이</span>
-                          <p className="tit">
-                            매월 마지막 화·수요일은<br/>
-                            애슐리퀸즈 슐리데이
-                          </p>
-                          <p className="date">2024-08-30 ~ 2024-08-31</p>
+                          <span className="badge">{el.badge}</span>
+                          <p className="tit">{el.subject}</p>
+                          <p className="date">{el.date}</p>
                         </div>
-                        <img src="./images/main-event-img1.jpg" alt="이벤트 이미지1"/>
-                      </a>
-                  </li>
-                  <li className="swiper-slide" data-index="2">
+                        <img src={el.imgThumb} alt={el.subject}/>
+                      </Link>
+                    </div>
+                  )
+                  } ) }
+                </Slider>
+                  <div className="slide_item">
                     <a href="#" target="_blank">
                       <div className="item">
-                        <span className="badge">방문포장</span>
+                        <span className="badge">슐리데이</span>
                         <p className="tit">
-                          집에서 즐기는 뷔폐<br/>
-                          애슐리 딜리버리<br/>
-                          방문포장 10% 할인
+                          매월 마지막 화·수요일은<br/>
+                          애슐리퀸즈 슐리데이
                         </p>
-                        <p className="date">2024-08-30 ~ 2024-09-31</p>
+                        <p className="date">2024-08-30 ~ 2024-08-31</p>
                       </div>
-                      <img src="./images/main-event-img2.jpg" alt="이벤트 이미지2"/>
+                      <img src="./images/main-event-img1.jpg" alt="이벤트 이미지1"/>
                     </a>
-                  </li>
-                  <li className="swiper-slide" data-index="3">
-                    <a href="#" target="_blank">
-                      <div className="item">
-                        <span className="badge">프로모션</span>
-                        <p className="tit">
-                          초복에는 하루종일<br/>
-                          애슐리 퀸즈<br/>
-                          생맥주 무제한 무료!
-                        </p>
-                        <p className="date">2024-07-01 ~ 2024-08-08</p>
-                      </div>
-                      <img src="./images/main-event-img3.jpg" alt="이벤트 이미지3"/>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="swiper-pager"></div>
+                </div>
+                <div className="slide_item">
+                  <a href="#" target="_blank">
+                    <div className="item">
+                      <span className="badge">방문포장</span>
+                      <p className="tit">
+                        집에서 즐기는 뷔폐<br/>
+                        애슐리 딜리버리<br/>
+                        방문포장 10% 할인
+                      </p>
+                      <p className="date">2024-08-30 ~ 2024-09-31</p>
+                    </div>
+                    <img src="./images/main-event-img2.jpg" alt="이벤트 이미지2"/>
+                  </a>
+                </div>
+                <div className="slide_item">
+                  <a href="#" target="_blank">
+                    <div className="item">
+                      <span className="badge">프로모션</span>
+                      <p className="tit">
+                        초복에는 하루종일<br/>
+                        애슐리 퀸즈<br/>
+                        생맥주 무제한 무료!
+                      </p>
+                      <p className="date">2024-07-01 ~ 2024-08-08</p>
+                    </div>
+                    <img src="./images/main-event-img3.jpg" alt="이벤트 이미지3"/>
+                  </a>
+                </div>
             </div>
           </article>
           <article className="main__insta">

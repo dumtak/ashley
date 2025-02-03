@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 
 
-const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
+const usePagination = (type, list, listLimit = 10, paginationLimit = 5)=>{
   const [searchParams, setSearchParams] = useSearchParams();
   
 
@@ -9,6 +9,7 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
   const category = (!searchParams.get("category") || searchParams.get("category") === "all") ? "all" : searchParams.get("category"); //현재 카테고리
   const currentPage = (parseInt(searchParams.get("page")) === 0 || !searchParams.get("page")) ? 1 : parseInt(searchParams.get("page")); //현재 페이지번호
   const filterList = category === "all" ? list : list.filter(el => category === el.categoryEn)
+
 
   //===list
   const listSplit = (currentPage - 1) * listLimit; //0번에서부터 9번까지 (1)
@@ -34,7 +35,7 @@ const usePagination = (list, listLimit = 10, paginationLimit = 5)=>{
       e.preventDefault();
       return;
     }
-    setSearchParams( {category, page:numLimit} );
+    (type === "notice") ? setSearchParams( {category, page:numLimit} ) : setSearchParams( {page:numLimit} );
   }
 
   return { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage };

@@ -1,0 +1,64 @@
+//=== 공지사항, 이벤트
+.board__detail {
+  .tb_board { border-width:1px 0; border-style:solid; border-color:var(--main-color2) transparent var(--br-color);
+    thead {
+      th { padding:40px; font-weight:400; color:var(--main-color2); border-bottom:1px solid var(--br-color); word-break:keep-all;
+        @media(max-width:767px){ padding:24px 40px; }
+        .category { font-size:13px; font-weight:400; color:var(--main-color4); }
+        .subject {margin:4px 0 12px; font-size:22px; font-weight:400;
+          @media(max-width:767px){ margin:6px 0 8px; font-size:18px; }
+        }
+        .date { font-size:15px; color:var(--main-color3);
+          @media(max-width:767px){ font-size:14px; }
+        }
+      }
+    }
+    tbody {
+      td { padding:80px; text-align:center;
+        @media(max-width:767px){ padding:40px 24px; }
+        .banner {
+          img { width:100%; }
+        }
+        .info { line-height:1.68; font-size:15px; font-weight:400; color:var(--main-color2); white-space:pre-wrap; }
+      }
+    }
+  }
+  .btn_wrap { 
+    a { margin:0 auto; flex:0 1 160px;
+      @media(max-width:767px){ flex:1; }
+    }
+  }
+}
+
+
+//=== 매장안내
+.store__list {
+  .tb_store { border-bottom:1px solid var(--br-color);
+    thead {
+      th { min-width:40px; padding:0 0 16px; text-align:left; font-size:14px; font-weight:400; color:var(--main-color3); border-bottom:1px solid var(--main-color2); }
+    }
+    tbody {
+      tr {
+        &.empty td { padding:160px 0; text-align:center; font-size:16px; color:var(--main-color3); }
+        td { height:62px; padding:0 0 2px; font-size:14px; color:var(--main-color2); }
+        &:not(.empty):hover td { background-color:var(--bg-color); }
+      }
+    }
+  }
+}
+
+@media(max-width:767px){
+  .store__list {
+    .tb_store { border:0;
+      thead { display:none; }
+      tbody,tr,th,td { display:block; }
+      tbody {
+        tr{ padding:32px; border:1px solid var(--br-color); border-radius:16px;
+          + tr { margin-top:24px; }
+          td { height:auto; }
+          &:hover td { background-color:#fff; }
+        }
+      }
+    }
+  }
+}

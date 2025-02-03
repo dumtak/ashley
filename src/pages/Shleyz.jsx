@@ -1,4 +1,4 @@
-import "./Shleyz.scss";
+import "../assets/scss/Shleyz.scss";
 
 const Shleyz = () => {
   return (

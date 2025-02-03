@@ -1,13 +1,16 @@
 :not(:has([class*="main__"])) .heading { margin-bottom:32px;
-  h2 { line-height:1; font-size:40px; font-weight:500; color:var(--main-color1); }
+  h2 { line-height:1; font-size:40px; font-weight:500; color:var(--main-color1);
+    @media(max-width:767px) { font-size:26px; }
+  }
 }
 
 [class$="__list"]{
   .tab_category { margin-top:40px; display:flex; gap:24px;
-    > li { line-height:1; font-size:24px; color:rgba(102,102,102,1);     transition-property: all;
-      transition-timing-function: cubic-bezier(.4,0,.2,1);
-      transition-duration: 15s; cursor:pointer; border-bottom:2px solid transparent;
-      &.active { padding-bottom:8px; font-weight:600; color:rgba(34,34,34,1); opacity:1; border-color:var(--main-color2); }
+    > li { line-height:1; font-size:24px; color:var(--main-color3); cursor:pointer; border-bottom:2px solid transparent;
+      &.active { padding-bottom:8px; font-weight:500; opacity:1; border-color:var(--main-color2); animation:tabActive .25s cubic-bezier(.4,0,.2,1) forwards;
+        @keyframes tabActive { 0%{ color:var(--main-color4); } 100%{ color:var(--main-color2); } }
+      }
     }
   }
 }
+

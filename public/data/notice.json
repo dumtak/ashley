@@ -4,31 +4,37 @@
    "id": 1,
    "category": "신메뉴",
    "subject": "Berry Sweet Love 2/6 (THU)\n전매장 출시",
+   "imgDetail":"/banner/20250124_berry.jpg",
    "date": "2025-01-24"
   },{
    "id": 2,
    "category": "공지",
    "subject": "뉴코아 광명점\n소비자 조사 참여\n포인트 적립 당첨자 안내",
+   "content": "광명점_설문조사_포인트_적립고객_리스트 : NO 이름 애슐리앱 ID\n1 곽** khs720****\n2 정** jung****\n3 정** wm0****\n4 김** girinch****\n5 김** sandy****\n6 이** log****\n7 이** kool0****\n8 백** kiaok****\n9 박** nyxi****\n10 박** os****\n11 김** jhk10****\n12 강** k2****\n13 양** ysh7****\n14 김** teddyp****\n15 이** lnk34****\n16 정** kittytom****\n17 허** younilk****\n18 김** m****\n19 박** jinkyu1****\n20 신** hang****\n21 이** dogpa****\n22 김** kym78****\n23 정** yadream1****\n24 송** endea****\n25 안** aromi****\n26 정** inly1****\n27 이** candy5****\n28 정** heali1****\n29 정** jhl5****\n30 김** hj6****\n31 이** nymph0****\n32 이** Kljh0****\n33 이** lijeu****\n34 안** dungfly****\n35 장** sut****\n36 박** misisip****\n37 박** az1****\n38 이** imaque****\n39 유** ydj****\n40 하** enjo****\n41 임** jo****\n42 이** chooni****\n43 이** mlh****\n44 김** kimse****\n45 김** evj****\n46 김** ji_****\n47 김** knamk****\n48 이** dltmf7****\n49 김** ms****\n50 이** h019****",
    "date": "2025-01-22"
   },{
    "id": 3,
    "category": "애슐리 오픈",
    "subject": "2월 28일 (금)\n마곡점\nGRAND OPENING",
+   "imgDetail":"/banner/20250120_open.jpg",
    "date": "2025-01-20"
   },{
    "id": 4,
    "category": "공지",
    "subject": "How To Use\nASHLEY QUEENS",
+   "imgDetail":"/banner/20250123_howto.png",
    "date": "2025-01-13"
   },{
    "id": 5,
    "category": "신메뉴",
    "subject": "애슐리퀸즈 25년 딸기 [베리 스위트 러브] 선출시 매장 안내",
+   "imgDetail":"/banner/20250113_showcase.jpg",
    "date": "2025-01-13"
-  },{
-   "id": 6,
-   "category": "공지",
-   "subject": "[임시휴무] 애슐리퀸즈 NC수원터미널점\n임시 휴업 안내",
+   },{
+     "id": 6,
+     "category": "공지",
+     "subject": "[임시휴무] 애슐리퀸즈 NC수원터미널점\n임시 휴업 안내",
+     "imgDetail":"/banner/20250106_closed.jpg",
    "date": "2025-01-06"
   },{
    "id": 7,
@@ -103,12 +109,12 @@
   },{
    "id": 21,
    "category": "애슐리 오픈",
-   "subject": "10월 27일 (금) 던던 동대문점 GRAND OPENING",
+   "subject": "10월 27일 (금) 던던 동대문점\nGRAND OPENING",
    "date": "2024-10-19"
   },{
    "id": 22,
    "category": "애슐리 오픈",
-   "subject": "10월 25일 (수) 진주혁신점 GRAND OPENING",
+   "subject": "10월 25일 (수) 진주혁신점\nGRAND OPENING",
    "date": "2024-10-18"
   }
  ]

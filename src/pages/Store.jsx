@@ -30,7 +30,7 @@ const Store = () => {
   },[store])
   console.log(sido);
 
-  const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination(store, 10);
+  const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination("store",store,10);
   
 
   return (
@@ -38,30 +38,37 @@ const Store = () => {
       <div id="container" className="store__list">
         <div id="contents">
           <div className="layout_fix">
-            <table>
+            <table className="tb_store">
               <thead>
                 <tr>
-                  <th>idx</th>
+                  <th>번호</th>
                   <th>매장명</th>
                   <th>주소</th>
                   <th>전화번호</th>
                 </tr>
               </thead>
               <tbody>
-                { listItem.map((el,idx)=> (
-                  <tr key={idx + 1}>
-                    {/* <td>{console.log(currentPage , 10 , idx)}</td>
-                    <td>{console.log((currentPage - 1) * 10 + idx + 1)}</td> */}
-                    <td>{store.length - (10 * (currentPage - 1)  + idx) }</td>
-                    {/* <td>{store.length - idx}</td> */}
-                    <td>{el.consumerplantname}</td>
-                    <td>{el.address1}</td>
-                    <td>{el.comptelno}</td>
-                  </tr>
-                )) }
+              { listItem.length !== 0 ? (
+                  listItem.map((el,idx)=> (
+                    <tr key={idx + 1}>
+                      {/* <td>{console.log(currentPage , 10 , idx)}</td>
+                      <td>{console.log((currentPage - 1) * 10 + idx + 1)}</td> */}
+                      <td className="idx">{store.length - (10 * (currentPage - 1)  + idx) }</td>
+                      {/* <td>{store.length - idx}</td> */}
+                      <td className="name">{el.consumerplantname}</td>
+                      <td className="addr">{el.address1}</td>
+                      <td className="num">{el.comptelno}</td>
+                    </tr>
+                  ))
+              ) : (
+                <tr className="empty">
+                  <td colSpan="4">일치하는 결과를 찾을 수 없습니다 !</td>
+                </tr>
+              )}
+                 
               </tbody>
             </table>
-            { paginationGroup && (
+            { listItem.length !== 0 && paginationGroup && (
               <>
                 <div className="pagination">
                   <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>이전</span>
