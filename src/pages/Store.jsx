@@ -50,10 +50,10 @@ const Store = () => {
               <tbody>
               { listItem.length !== 0 ? (
                   listItem.map((el,idx)=> (
-                    <tr key={idx + 1}>
+                    <tr key={store.length-(10*(currentPage-1)+idx)}>
                       {/* <td>{console.log(currentPage , 10 , idx)}</td>
                       <td>{console.log((currentPage - 1) * 10 + idx + 1)}</td> */}
-                      <td className="idx">{store.length - (10 * (currentPage - 1)  + idx) }</td>
+                      <td className="idx">{store.length - (10 * (currentPage - 1) + idx) }</td>
                       {/* <td>{store.length - idx}</td> */}
                       <td className="name">{el.consumerplantname}</td>
                       <td className="addr">{el.address1}</td>

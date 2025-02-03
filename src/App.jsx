@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 
 import { NoticeProvider } from "./context/NoticeContext";
 
-import Header from './components/header.jsx';
-import Home from "./pages/Home.jsx";
-import Shleyz from "./pages/Shleyz.jsx";
-import Notice from "./pages/board/Notice.jsx";
-import Event from "./pages/board/Event.jsx";
-import DetailType from "./pages/board/DetailType.jsx";
-import Store from "./pages/Store.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import Footer from "./components/Footer.jsx";
+import Header from './components/Header';
+import Home from "./pages/Home";
+import Shleyz from "./pages/Shleyz";
+import Notice from "./pages/board/Notice";
+import Event from "./pages/board/Event";
+import DetailType from "./pages/board/DetailType";
+import Store from "./pages/Store";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 import './App.css'
 

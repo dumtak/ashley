@@ -23,7 +23,14 @@
       }
     }
   }
-  .btn_wrap { 
+  .nav_post { border-bottom:1px solid var(--br-color);
+    li { padding:20px 24px 22px;
+      + li { border-top:1px solid var(--br-color); }
+      span { margin-right:16px; color:var(--main-color4); vertical-align:middle; }
+      a { max-width:80%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; vertical-align:middle; }
+    }
+  }
+  .btn_wrap { margin-top:60px;
     a { margin:0 auto; flex:0 1 160px;
       @media(max-width:767px){ flex:1; }
     }

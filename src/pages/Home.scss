@@ -251,10 +251,10 @@
     // }
   
     .slick-list { height:320px; position:relative; border-width:1px 0; border-style:solid; border-color:var(--br-color); overflow:hidden;
+      .slick-active + .slick-active { border-left: 1px solid var(--br-color);
+        @media(max-width:991px){ border:0; }
+      }
       .slick-slide { overflow:hidden;
-        + .slick-slide:not(.slick-current) .slide_item { border-left: 1px solid var(--br-color);
-          @media(max-width:991px){ border:0; }
-        }
   
         .slide_item {
           height: 100%;

@@ -18,6 +18,9 @@ import "./Home.scss";
 const Home = () => {
   const { notice, event } = useContext(NoticeContext);
 
+
+
+
   const setVisual = {
     infinite: true,
     className: "center",
@@ -91,6 +94,7 @@ const Home = () => {
         </div>
         <div id="contents">
         <section className="main_section">
+        <div className="container"></div>
           <article className="main__visual" rel="js-main-visual">
             <div className="layout_fix">
             <Slider {...setVisual} className="slick_visual">
@@ -290,12 +294,12 @@ const Home = () => {
                 </div> */}
               </div>
                 <Slider {...setEvent} className="slick_event event_list">
-                  { event.map(el => {
+                  { event.slice(0,6).map(el => {
                   return (
                     <div key={el.subject} className="slide_item">
-                      <Link to="/" target="_blank">
+                      <Link to={`/event/detail?id=${el.id}`}>
                         <div className="item">
-                          <span className="badge">{el.badge}</span>
+                          <span className="badge">{el.category}</span>
                           <p className="tit">{el.subject}</p>
                           <p className="date">{el.date}</p>
                         </div>
@@ -305,47 +309,6 @@ const Home = () => {
                   )
                   } ) }
                 </Slider>
-                  <div className="slide_item">
-                    <a href="#" target="_blank">
-                      <div className="item">
-                        <span className="badge">슐리데이</span>
-                        <p className="tit">
-                          매월 마지막 화·수요일은<br/>
-                          애슐리퀸즈 슐리데이
-                        </p>
-                        <p className="date">2024-08-30 ~ 2024-08-31</p>
-                      </div>
-                      <img src="./images/main-event-img1.jpg" alt="이벤트 이미지1"/>
-                    </a>
-                </div>
-                <div className="slide_item">
-                  <a href="#" target="_blank">
-                    <div className="item">
-                      <span className="badge">방문포장</span>
-                      <p className="tit">
-                        집에서 즐기는 뷔폐<br/>
-                        애슐리 딜리버리<br/>
-                        방문포장 10% 할인
-                      </p>
-                      <p className="date">2024-08-30 ~ 2024-09-31</p>
-                    </div>
-                    <img src="./images/main-event-img2.jpg" alt="이벤트 이미지2"/>
-                  </a>
-                </div>
-                <div className="slide_item">
-                  <a href="#" target="_blank">
-                    <div className="item">
-                      <span className="badge">프로모션</span>
-                      <p className="tit">
-                        초복에는 하루종일<br/>
-                        애슐리 퀸즈<br/>
-                        생맥주 무제한 무료!
-                      </p>
-                      <p className="date">2024-07-01 ~ 2024-08-08</p>
-                    </div>
-                    <img src="./images/main-event-img3.jpg" alt="이벤트 이미지3"/>
-                  </a>
-                </div>
             </div>
           </article>
           <article className="main__insta">

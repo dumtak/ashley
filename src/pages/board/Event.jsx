@@ -27,7 +27,7 @@ const Event = () => {
               { listItem && listItem.map(el => (
                 <li key={el.id}>
                   <Link to={`/event/detail?id=${el.id}`} className="item">
-                    <div className="badge">{el.badge}</div>
+                    <div className="badge">{el.category}</div>
                     <div className="subject">{el.subject}</div>
                     <span className="date">{el.date}</span>
                   </Link>
