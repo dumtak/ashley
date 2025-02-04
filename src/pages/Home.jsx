@@ -306,8 +306,11 @@ const Home = () => {
                       <div key={el.subject} className="slide_item">
                         <Link to={`/event/detail?id=${el.id}`}>
                           <div className="item">
-                            
                             <span className="badge">{el.category}</span>
+                            {/* {console.log(el.dDay >= 0, el.dDay === 0, el.dDay !== 0, typeof el.dDay)} */}
+                            { event && (
+                              <span className={`badge_date ${el.dDay < 0 ? "end" : "ing"}`}>{`${el.dDay === "0" ? "상시" : el.dDay === 0 ? "D-Day" : el.dDay > 0 ? `D-${el.dDay}` : "종료"}`}</span>
+                            ) }
                             <p className="tit">{el.subject}</p>
                             <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
                           </div>

@@ -5,6 +5,8 @@ import { NoticeProvider } from "./context/NoticeContext";
 
 import Header from './components/Header';
 import Home from "./pages/Home";
+import Login from "./pages/member/Login";
+import Join from "./pages/member/Join.jsx";
 import Shleyz from "./pages/Shleyz";
 import Notice from "./pages/board/Notice";
 import Event from "./pages/board/Event";
@@ -46,6 +48,10 @@ function App() {
             <Header/>
             <Routes>
               <Route path="/" element={<Home/>}/>
+              <Route path="/member/">
+                <Route path="login" element={<Login/>}></Route>
+                <Route path="join" element={<Join/>}></Route>
+              </Route>
               <Route path="/about/">
                 <Route path="shleyz" element={<Shleyz/>}></Route>
               </Route>

@@ -70,9 +70,9 @@ export const NoticeProvider = ({ children }) => {
 
           const dateToday = new Date().toLocaleDateString("en-CA"); //"ko-KR":YYYY.MM.DD
           const addEventEnd = res.data.eventList.map(el=>{
-            const dateEnd = el.dateEnd || el.dateStart;
+            const dateEnd = el.dateEnd;
             const calcTime = new Date(dateEnd) - new Date(dateToday);
-            const dDay = Math.ceil(calcTime / (1000 * 60 * 60 * 24));
+            const dDay = el.dateEnd === el.dateStart ? "0" : Math.ceil(calcTime / (1000 * 60 * 60 * 24));
             return { ...el, dDay }
           })
 

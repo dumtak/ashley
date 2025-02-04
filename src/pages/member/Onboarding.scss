@@ -1,0 +1,127 @@
+[class^="onboarding__"] .heading {
+  margin-bottom: 32px;
+}
+
+.onboarding__login {
+  .inp_list li + li {
+    margin-top: 12px;
+  }
+
+  .flex_items:has(.security) {
+    height: 22px;
+    font-size: 14px;
+  }
+
+  .security input[type="checkbox"]:checked + .chk_txt .txt {
+    font-weight: 500;
+    color: var(--main-color1);
+  }
+
+  .flex_items:has(.security) .find {
+    color: var(--main-color3);
+    text-decoration: underline;
+  }
+
+  .social {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: var(--br-color);
+      display: block;
+    }
+
+    margin-top: 40px;
+    text-align: center;
+
+    .tit {
+      width: 110px;
+      padding: 0 8px;
+      margin: -10px auto 32px;
+      background-color: #fff;
+      font-size: 13px;
+      color: var(--main-color3);
+      position: relative;
+    }
+
+    li {
+      width: 60px;
+      height: 60px;
+      margin: 0 12px;
+      display: inline-block;
+    }
+  }
+}
+
+.onboarding__join {
+  .heading {
+    margin-bottom: 40px;
+
+    img[src*="eland"] {
+      height: 24px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .tb_item.terms {
+    padding-top: 40px;
+    border-top: 1px dashed var(--br-color);
+
+    .inp_list li {
+      position: relative;
+    }
+
+    .btn_more {
+      font-size: 13px;
+      color: var(--main-color3);
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-decoration: underline;
+
+      + .txt {
+        max-height: 0;
+        background-color: var(--bg-color);
+        font-size: 13px;
+        border-radius: 4px;
+        white-space: pre-line;
+        overflow: hidden;
+      }
+
+      &.active + .txt {
+        padding: 16px;
+        margin-top: 16px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+    }
+  }
+
+  .modal_info {
+    transform: translate(60px, -6px);
+  }
+}
+
+[class^="onboarding__join"] .btn_wrap.column {
+  margin-top: 60px;
+}
+
+.onboarding__join_result {
+  form {
+    background: transparent url("/images/bg-join.png") no-repeat right (top / 100px) auto;
+  }
+
+  dl {
+    font-size: 15px;
+    color: var(--main-color3);
+    display: flex;
+    letter-spacing: 0;
+    word-break: break-word;
+  }
+
+  dt {
+    min-width: 48px;
+    margin-right: 8px;
+    color: var(--main-color2);
+  }
+}

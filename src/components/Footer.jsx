@@ -11,16 +11,6 @@ const Footer = () => {
             <li><a href="#">영상정보처리기기관리방침</a></li>
             <li><a href="#">서비스 이용약관</a></li>
           </ul>
-          <div className="select_family">
-            <a href="#none">패밀리 사이트</a>
-            <ul>
-              <li><a href="https://www.elandeat.com/brandDetail/RI" target="_blank">리미니</a></li>
-              <li><a href="https://www.elandeat.com/brandDetail/PM" target="_blank">피자몰</a></li>
-              <li><a href="http://www.thecaffe.co.kr" target="_blank">더카페</a></li>
-              <li><a href="https://www.elandeat.com/brandDetail/OR" target="_blank">아시아문</a></li>
-              <li><a href="https://www.homestaurant.co.kr/main/index.php" target="_blank">홈스트랑</a></li>
-            </ul>
-          </div>
         </div>
       </div>
       <div className="bottom_corp">

@@ -27,7 +27,10 @@ const Event = () => {
                 { listItem && listItem.map(el => (
                   <li key={el.id}>
                     <Link to={`/event/detail?id=${el.id}`} className="item">
-                      <div className="badge">{el.category}</div>
+                      <span className="badge">{el.category}</span>
+                      { event && (
+                        <span className={`badge_date ${el.dDay < 0 ? "end" : "ing"}`}>{`${el.dDay === "0" ? "상시" : el.dDay === 0 ? "D-Day" : el.dDay > 0 ? `D-${el.dDay}` : "종료"}`}</span>
+                      ) }
                       <p className="tit">{el.subject}</p>
                       <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
                     </Link>
