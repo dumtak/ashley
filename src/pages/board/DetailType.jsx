@@ -13,7 +13,7 @@ const DetailType = () => {
   const id = searchParams.get("id");
   // const page = searchParams.get("page") || 1;
 
-  const { notice, event } = useContext(NoticeContext);
+  const { notice, event, visual } = useContext(NoticeContext);
   const [ eventStart, setEventStart ] = useState(null);
   const [ eventEnd, setEventEnd ] = useState(null);
   const [ matchItem, setMatchItem ] = useState(null);
@@ -21,7 +21,7 @@ const DetailType = () => {
   const [ matchNext, setMatchNext ] = useState();
 
   useEffect(() => {
-    if(type === "notice"){
+    if(type === "notice"){ //[#]공지사항
       console.log("type%%", type);
       //===글찾기
       const findItem = notice.find((item) => (category === "all" || category === item.categoryEn) && id === String(item.id));
@@ -45,15 +45,16 @@ const DetailType = () => {
         setMatchNext(findItemCate && findItemIdx < findItemCate.length - 1 ? findItemCate[findItemIdx + 1] : null);
       }
 
-    } else if(type === "event"){
+    } else if(type === "event"){ //[#]이벤트
       console.log("type%%", type);
       // const today = new Date().toLocaleDateString("en-CA"); //"ko-KR":YYYY.MM.DD
       // const eventEndDate = new Date(eventEnd).toLocaleDateString("en-CA");
       // console.log("date==", today, "////", eventEndDate);
       // console.log("date???", today > eventEndDate);
 
+
       //===글찾기
-      const findItem = event.find((item) => id === String(item.id));
+      const findItem = [...event, ...visual].find((item) => id === String(item.id));
       setMatchItem(findItem);
 
       //===날짜비교
@@ -66,7 +67,7 @@ const DetailType = () => {
       setMatchPrev(event[findItemIdx - 1] || null);
       setMatchNext(event[findItemIdx + 1] || null);
     }
-  }, [category, id, notice, event, matchItem]);
+  }, [category, id, notice, event, visual, matchItem]);
 
   console.log("##이전##", matchPrev);
   console.log("##찾았다##", matchItem);

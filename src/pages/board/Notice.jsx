@@ -9,7 +9,7 @@ import "../../assets/scss/NoticeCard.scss";
 
 const Notice = () => {
   const { notice, noticeEnMapping } = useContext(NoticeContext);
-  const { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage } = usePagination("notice",notice,6);
+  const { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage } = usePagination("notice",notice,9);
 
   return (
     <>

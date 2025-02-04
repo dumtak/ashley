@@ -18,6 +18,7 @@
         @media(max-width:767px){ padding:40px 24px; }
         .banner {
           img { width:100%; }
+          + .info { margin-top:32px; }
         }
         .info { line-height:1.68; font-size:15px; font-weight:400; color:var(--main-color2); white-space:pre-wrap; }
       }

@@ -16,9 +16,7 @@ import "./Home.scss";
 
 
 const Home = () => {
-  const { notice, event } = useContext(NoticeContext);
-
-
+  const { notice, event, visual } = useContext(NoticeContext);
 
 
   const setVisual = {
@@ -94,29 +92,37 @@ const Home = () => {
         </div>
         <div id="contents">
         <section className="main_section">
-        <div className="container"></div>
+
           <article className="main__visual" rel="js-main-visual">
             <div className="layout_fix">
             <Slider {...setVisual} className="slick_visual">
-              <div className="slide_item">
-                  <a href="#" target="_blank">
+              { visual.map(el => (
+                  <div key={el.id} className="slide_item">
+                    <Link to={`/event/detail?id=${el.id}`} target="_blank">
+                        <img src={el.imgPc} alt={el.subject} className="pc"/>
+                        <img src={el.imgMo} alt={el.subject} className="mo"/>
+                    </Link>
+                  </div>
+              )) }
+            </Slider>
+              {/* <div className="slide_item">
+                <Link to="/" target="_blank">
                     <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
                     <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                  </a>
+                </Link>
               </div>
               <div className="slide_item">
-                <a href="#" target="_blank">
+                <Link to="/" target="_blank">
                   <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
                   <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
-                </a>
+                </Link>
               </div>
               <div className="slide_item">
-                <a href="#" target="_blank">
+                <Link to="/" target="_blank">
                   <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
                   <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                </a>
-              </div>
-            </Slider>
+                </Link>
+              </div> */}
 
 
             {/* <div className="swiper-container">
@@ -293,22 +299,25 @@ const Home = () => {
                   <a className="swiper-next" href="#">다음</a>
                 </div> */}
               </div>
+              <div className="event_data">
                 <Slider {...setEvent} className="slick_event event_list">
-                  { event.slice(0,6).map(el => {
-                  return (
-                    <div key={el.subject} className="slide_item">
-                      <Link to={`/event/detail?id=${el.id}`}>
-                        <div className="item">
-                          <span className="badge">{el.category}</span>
-                          <p className="tit">{el.subject}</p>
-                          <p className="date">{el.date}</p>
-                        </div>
-                        <img src={el.imgThumb} alt={el.subject}/>
-                      </Link>
-                    </div>
-                  )
-                  } ) }
-                </Slider>
+                    { event.slice(0,6).map(el => {
+                    return (
+                      <div key={el.subject} className="slide_item">
+                        <Link to={`/event/detail?id=${el.id}`}>
+                          <div className="item">
+                            
+                            <span className="badge">{el.category}</span>
+                            <p className="tit">{el.subject}</p>
+                            <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
+                          </div>
+                          <img src={el.imgThumb} alt={el.subject}/>
+                        </Link>
+                      </div>
+                    )
+                    } ) }
+                  </Slider>
+              </div>
             </div>
           </article>
           <article className="main__insta">

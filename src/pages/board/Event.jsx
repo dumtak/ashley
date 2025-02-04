@@ -11,7 +11,7 @@ const Event = () => {
   const { event } = useContext(NoticeContext);
   const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination("event",event,6);
 
-
+  
   return (
     <>
       <div id="container" className="event__list">
@@ -23,17 +23,19 @@ const Event = () => {
                 <li>전체</li>
               </ul> */}
             </div>
-            <ul className="card_list">
-              { listItem && listItem.map(el => (
-                <li key={el.id}>
-                  <Link to={`/event/detail?id=${el.id}`} className="item">
-                    <div className="badge">{el.category}</div>
-                    <p className="tit">{el.subject}</p>
-                    <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
-                  </Link>
-                </li>
-              )) }
-            </ul>
+            <div className="event_data">
+              <ul className="card_list">
+                { listItem && listItem.map(el => (
+                  <li key={el.id}>
+                    <Link to={`/event/detail?id=${el.id}`} className="item">
+                      <div className="badge">{el.category}</div>
+                      <p className="tit">{el.subject}</p>
+                      <p className="date">{ el.dateStart === el.dateEnd ? el.dateStart : `${el.dateStart} ~  ${el.dateEnd}` }</p>
+                    </Link>
+                  </li>
+                )) }
+              </ul>
+            </div>
             { listItem.length !== 0 && paginationGroup && (
               <>
                 <div className="pagination">

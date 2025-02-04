@@ -19,10 +19,10 @@ const Header = () => {
         <a href="#none" className="btn_hamburger mo">모바일메뉴버튼</a>
         <ul className="gnb">
           
-          <li><Link to="/">회사소개</Link></li>
-          <li><Link to="/store">매장안내</Link></li>
+          <li><Link to="/notice">공지사항</Link></li>
           <li><Link to="/event">이벤트</Link></li> 
-          <li><Link to="/">멤버십</Link></li> 
+          <li><Link to="/store">매장안내</Link></li>
+          <li><Link to="/">멤버십</Link></li>
           <li><Link to="/">고객센터</Link></li>
         </ul>
         <Link to="/about/shleyz" className="shleyz">

@@ -1,23 +1,26 @@
 {
   "visualList":[
     {
-      "id": 1,
+      "id": 472839,
       "subject": "세계의 맛으로 즐기는 애슐리 데이",
       "imgPc": "/images/visual-banner1.png",
       "imgMo": "/images/visual-banner1-mo.png",
-      "imgDetail": ""
+      "imgDetail": "/banner/visual-banner-detail1.jpg",
+      "date": "2025-02-24"
     },{
-      "id": 2,
+      "id": 195620,
       "subject": "VIP 예약하고 웰컴 서비스 누리세요",
       "imgPc": "/images/visual-banner-gif2.gif",
       "imgMo": "/images/visual-banner-gif2-mo.gif",
-      "imgDetail": "/banner/visual-banner-detail2.jpg"
+      "imgDetail": "/banner/visual-banner-detail2.jpg",
+      "date": "2025-02-24"
     },{
-      "id": 3,
+      "id": 836501,
       "subject": "생일 인증하면 치즈케이크를 선물로 드려요",
       "imgPc": "/images/visual-banner-gif1.gif",
       "imgMo": "/images/visual-banner-gif1-mo.gif",
-      "imgDetail": "/banner/visual-banner-detail3.jpg"
+      "imgDetail": "/banner/visual-banner-detail3.jpg",
+      "date": "2025-02-24"
     }
   ],
   "eventList": [
@@ -27,7 +30,7 @@
       "subject": "Berry Sweet Love\n딸기와 초콜릿,\n베리 달콤해!",
       "content": "𝔹𝕖𝕣𝕣𝕪 𝕊𝕨𝕖𝕖𝕥 𝕃𝕠𝕧𝕖 ♥️🤎♥️\n𝟚𝟘𝟚𝟝. 𝟚. 𝟞(𝕋𝕙𝕦)\nℂ𝕠𝕞𝕚𝕟𝕘 𝕊𝕠𝕠𝕟\n\n딸기와 초콜릿으로 더 달콤하게 돌아온\n#애슐리퀸즈베리스위트러브\n무제한 생딸기 바스켓과\n딸기와 초콜릿이 만난 상큼한 디저트들! 기대해주세요♥️\n\n🍓Event\n애슐리퀸즈 베리스위트러브를\n함께 즐기고 싶은 친구를 @태그해 주세요!\n추첨을 통해 시즌 이용권을 보내드립니다😊\n\n❣️기간: 25.01.24 ~ 01.31\n❣️발표: 25.02.04\n❣️총 10명 추첨, 애슐리퀸즈 식사권 2매 지급\n❣️@your_ashley 팔로우 필수\n\n#애슐리퀸즈\n#베리스위트러브해",
       "dateStart": "2025-01-24",
-      "dateEnd": "2025-02-04",
+      "dateEnd": "2025-03-04",
       "imgThumb": "/banner/event1_thumb.jpg",
       "imgDetail": ""
     },
@@ -83,13 +86,13 @@
     },
     {
       "id": 7,
-      "category": "",
-      "subject": "",
-      "content": "",
-      "dateStart": "2024-12-05",
-      "dateEnd": "",
+      "category": "프로모션",
+      "subject": "2025 수능\n행운의 카드가\n도착했습니다!",
+      "content": "🧚 애슐리퀸즈가 수험생분들을 응원합니다 🧚",
+      "dateStart": "2024-11-06",
+      "dateEnd": "2024-11-15",
       "imgThumb": "/banner/event7_thumb.jpg",
-      "imgDetail": ""
+      "imgDetail": "/banner/event7_detail.jpg"
     }
   ]
 }

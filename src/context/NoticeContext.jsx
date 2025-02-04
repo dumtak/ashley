@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 // import PropTypes from "prop-types";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 
@@ -8,11 +8,17 @@ export const NoticeContext = createContext();
 
 export const NoticeProvider = ({ children }) => {
   const location = useLocation();
-  // const navigate = useNavigate();
   const pathcate = location.pathname.split("/")[1];
 
   const [ notice, setNotice ] = useState([]);
   const [ event, setEvent ] = useState([]);
+  const [ visual, setVisual ] = useState([]);
+
+  // const today = new Date().toLocaleDateString("en-CA"); //"ko-KR":YYYY.MM.DD
+  // const eventEndDate = new Date(eventEnd).toLocaleDateString("en-CA");
+  // console.log("date==", today, "////", eventEndDate);
+  // console.log("date???", today > eventEndDate);
+
   // const [noticeCategory, setNoticeCategory] = useState([]); //한글카테고리
   // const [noticeCategoryEn, setNoticeCategoryEn] = useState([]); //영문카테고리
   const noticeEnMapping = {
@@ -61,22 +67,25 @@ export const NoticeProvider = ({ children }) => {
         axios.get("/data/event.json")
         .then((res)=>{
           // console.log("event", res.data);
+
+
+
+
+
           setEvent(res.data.eventList);
+          setVisual(res.data.visualList);
+          
         })
         .catch((err)=> console.log(err));
       }
-      // else {
-      //   console.log("etc");
-      //   // navigate(-1);
-      // }
     };
 
     fetchData(pathcate);
-  }, [pathcate]);
+  }, [location]);
 
   
   return (
-    <NoticeContext.Provider value={{ notice, noticeEnMapping, event }}>
+    <NoticeContext.Provider value={{ notice, noticeEnMapping, event, visual }}>
       {children}
     </NoticeContext.Provider>
   );
