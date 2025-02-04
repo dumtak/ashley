@@ -10,7 +10,6 @@ import "../../assets/scss/NoticeCard.scss";
 const Event = () => {
   const { event } = useContext(NoticeContext);
   const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination("event",event,6);
-
   
   return (
     <>

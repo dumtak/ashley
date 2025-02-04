@@ -68,11 +68,16 @@ export const NoticeProvider = ({ children }) => {
         .then((res)=>{
           // console.log("event", res.data);
 
+          const dateToday = new Date().toLocaleDateString("en-CA"); //"ko-KR":YYYY.MM.DD
+          const addEventEnd = res.data.eventList.map(el=>{
+            const dateEnd = el.dateEnd || el.dateStart;
+            const calcTime = new Date(dateEnd) - new Date(dateToday);
+            const dDay = Math.ceil(calcTime / (1000 * 60 * 60 * 24));
+            return { ...el, dDay }
+          })
 
-
-
-
-          setEvent(res.data.eventList);
+          // setEvent(res.data.eventList);
+          setEvent(addEventEnd);
           setVisual(res.data.visualList);
           
         })
@@ -81,9 +86,12 @@ export const NoticeProvider = ({ children }) => {
     };
 
     fetchData(pathcate);
-  }, [location]);
+  }, [pathcate]);
 
-  
+  console.log(event);
+
+
+
   return (
     <NoticeContext.Provider value={{ notice, noticeEnMapping, event, visual }}>
       {children}
