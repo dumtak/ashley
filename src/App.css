@@ -1,7 +1,7 @@
 * { padding:0; margin:0; font-size:inherit; border:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 *, ::after, ::before { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
 
-:root { --main-color1:#00243d; --main-color2:#222; --main-color3:#666; --main-color4:#999; --wt-color:#fff; --bg-color:#f9f9f9; --br-color:#e2e2e2; --red-color:#e61d30; --yw-color:#ffe001; }
+:root { --main-color1:#00243d; --main-color2:#222; --main-color3:#666; --main-color4:#999; --wt-color:#fff; --bg-color:#f9f9f9; --br-color:#e2e2e2; --red-color:#e61d30; --yw-color:#ffe001; --gr-color:#12b886; }
 html { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; -ms-overflow-style:scrollbar; -webkit-tap-highlight-color:transparent; }
 body { font-family:"Noto Sans KR", "Apple SD Gothic Neo", "AppleGothic", sans-serif; font-size:15px; font-weight:400; color:var(--main-color2); background-color:#fff; letter-spacing:-0.5px; }
 html,body { min-width:1280px; }
@@ -82,9 +82,11 @@ strong { font-weight:600; }
 .inp_list li .flex_items { padding-bottom:4px; }
 .inp_list + .flex_items { margin-top:12px; }
 .inp_list li > .tit { margin-bottom:8px; font-size:15px; color:var(--main-color2); }
+.inp_list li > .tit ~ p { margin-top:2px; font-size:13px; color:var(--gr-color); }
+.inp_list li > .tit ~ p.error { color:var(--red-color); }
 .inp_list li > .tit.required::after { content:"*"; font-size:16px; font-weight:600; color:var(--red-color); position:relative; right:-4px; display:inline-block; }
 .inp_list li .addr .flex_items { max-width:256px; padding:0; }
-.inp_list li .addr .flex_items [class^="btn_"] { min-width:88px; line-height:48px; text-align:center; background-color:var(--main-color3); color:var(--wt-color); border:1px solid var(--main-color3); border-radius:4px; }
+.inp_list .btn_check, .inp_list li .addr .flex_items [class^="btn_"] { min-width:88px; line-height:48px; text-align:center; background-color:var(--main-color3); color:var(--wt-color); border:1px solid var(--main-color3); border-radius:4px; }
 .inp_list li .addr .flex_items ~ input { margin-top:8px; }
 
 /* ===== COMPONENT - TABLE */

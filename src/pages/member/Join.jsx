@@ -8,14 +8,16 @@ import "./Onboarding.scss";
 
 const Join = () => {
 
-  //### id trim 체크할것!
 
-  const [ formData, setFormData ] = useState({
-    region: '지역',
-    store: '지점',
+  //### id trim 체크할것!
+  const [ formData, setFormData ] = useState({ //입력값 담기
+    // region: '지역',
+    // store: '지점',
   });
 
-  const handleData = (e)=>{
+  const [errors, setErrors] = useState({});
+
+  const handleData = (e)=>{ //입력값 체크
     const { name,value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -23,10 +25,48 @@ const Join = () => {
     }))
   }
 
+  const [ idCheck, setIdCheck ] = useState(false);
+  const handleIdCheck = async ()=>{
+    console.log("####errors###", errors);
+    
+    try {
+      const response = await axios.get(`${API_URL}/users/check-id`, {
+        params:{user_id: formData.user_id},
+      });
+      console.log("==response==", response);
+      const idRule=/^[a-z0-9]{4,16}$/;
+      const trimId = formData.user_id.trim();
+
+      if(trimId === ""){
+        setErrors((el) => ({...el, user_id: "아이디를 입력하세요", user_id_state:"error"})); return;
+      } 
+      if(!idRule.test(trimId)){
+        setErrors((el) => ({...el, user_id: "소문자/숫자, 4~16자 조합", user_id_state:"error"})); return;
+      }
+      
+      if(!response.data.success){
+        setErrors((el) => ({ ...el, user_id: response.data.message, user_id_state:"error" }));
+      } else {
+        setErrors((el) => ({ ...el, user_id: response.data.message, user_id_state:"success" }));
+        setIdCheck(true);
+      }
+    } catch(err){
+      if(err.response){ //서버응답 있는 경우
+        setErrors((el) => ({ ...el, user_id: err.response.data.message, user_id_state:"error" }));
+      } else {
+        setErrors((el) => ({ ...el, user_id: "서버 오류 발생", user_id_state:"error" }));
+      }
+    }
+  }
+
   const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(e.target);
 
+    if(idCheck === false){
+      alert("아이디 중복확인 해주세요");
+      return;
+    }
     
     const required = ["name", "user_id", "password", "passwordConfirm", "phone", "email", "region", "store"];
     const requiredKo = {
@@ -36,8 +76,8 @@ const Join = () => {
       passwordConfirm : "비밀번호 재입력",
       phone : "핸드폰 번호",
       email : "이메일",
-      region : "리테일 선호 지역",
-      store : "리테일 선호 지점",
+      region : "선호지역",
+      store : "선호지점",
     }
     const requiredCheck = required.filter(item => !formData[item]); //찾기
 
@@ -45,14 +85,47 @@ const Join = () => {
     if(requiredCheck.length !== 0){
       const msg = requiredCheck.map(item => requiredKo[item]).join(",");
       alert(`${msg} 을 입력해주세요!`);
+      return;
     } else {
+
+      const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+      console.log("errors====", errors);
+      console.log("!pwRule.test(formData.password)",!pwRule.test(formData.password))
+      console.log("!pwRule.test(formData.passwordConfirm)",!pwRule.test(formData.passwordConfirm))
+
+      if (!formData.password || formData.password.trim() === "") { // 비밀번호가 비어 있으면
+        setErrors(prev => ({ ...prev, password: "비밀번호를 입력하세요", password_state: "error" }));
+        return;
+      }
+
+      if (!pwRule.test(formData.password)) { // 비밀번호가 규칙에 맞지 않으면
+        setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" }));
+        return;
+      } else {
+        setErrors(prev => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
+      }
+
+      if (!formData.passwordConfirm || formData.passwordConfirm.trim() === "") { // 비밀번호 재입력이 비어 있으면
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" }));
+        return;
+      }
+
+      if (!pwRule.test(formData.passwordConfirm)) { // 비밀번호 재입력이 규칙에 맞지 않으면
+        // setErrors(prev => ({ ...prev, passwordConfirm: "영문 대소문자/숫자/특수문자 8~16자 조합", passwordConfirm_state: "error" }));
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" }));
+        return;
+      }
+
+      if (formData.password !== formData.passwordConfirm) { // 비밀번호와 비밀번호 재입력이 일치하지 않으면
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" }));
+        return;
+      }
+      // if (pwRule.test(formData.password) && formData.password === formData.passwordConfirm) {
+      // }
+      setErrors(prev => ({ ...prev,  password: "올바른 비밀번호입니다",  passwordConfirm: "올바른 비밀번호입니다",  password_state: "success",  passwordConfirm_state: "success" }));
+
       try{
-        // const birth = (formData.birth1 && formData.birth2 && formData.birth3) ? `${formData.birth1}-${formData.birth2}-${formData.birth3}` : null;
-
-        const birth = (formData.birth1 && formData.birth2 && formData.birth3)
-        ? `${formData.birth1}-${formData.birth2}-${formData.birth3}`
-        : null;
-
+        const birth = (formData.birth1 && formData.birth2 && formData.birth3) ? `${formData.birth1}-${formData.birth2}-${formData.birth3}` : null;
         console.log('보낸다데이터===', {
           ...formData,
           birth: birth,
@@ -63,26 +136,26 @@ const Join = () => {
           birth: birth,
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
-          console.log('회원가입 성공 :? ', result.data)
+          console.log('회원가입 성공 ?? ', result.data)
           // history("/", {replace:true}) //성공시 뒤로가기 막기
         }).catch((error)=>{
           console.error(error)
         })
       }catch(error){
         //db에 회원가입 정보 넣기 실패
-        console.error('에러 상세:', error.response?.data, error.message);
+        console.error('에러===', error.response?.data, error.message);
       }
     }
 
-    // const { name,id,password,passwordConfirm } = formData;
-    // if(!name || !id || !password || !passwordConfirm){
-    //   alert("필수항목입력");
-    //   return;
-    // } else {
-    //   alert("정상");
-    // }
-    // console.log( name,id,password,passwordConfirm );
   }
+  // const { name,id,password,passwordConfirm } = formData;
+  // if(!name || !id || !password || !passwordConfirm){
+  //   alert("필수항목입력");
+  //   return;
+  // } else {
+  //   alert("정상");
+  // }
+  // console.log( name,id,password,passwordConfirm );
 
   useEffect(()=>{
     console.log(formData);
@@ -103,19 +176,25 @@ const Join = () => {
               <ul className="inp_list">
                 <li>
                   <div className="tit required">이름</div>
-                  <input type="text" name="name" onChange={(e)=>handleData(e)} autoFocus/>
+                  <input type="text" name="name" onChange={(e)=>handleData(e)} required autoFocus/>
                 </li>
                 <li>
                   <div className="tit required">회원아이디</div>
-                  <input type="text" name="user_id" onChange={(e)=>handleData(e)}/>
+                  <div className="flex_items">
+                    <input type="text" name="user_id" onChange={(e)=>handleData(e)} required/>
+                    <button onClick={handleIdCheck} className="btn_check">중복확인</button>
+                  </div>
+                  {errors.user_id && <p className={errors.user_id_state === "error" ? "error" : ""}>{errors.user_id}</p>}
                 </li>
                 <li>
                   <div className="tit required">비밀번호</div>
-                  <input type="password" name="password" onChange={(e)=>handleData(e)} placeholder="8~16자 영문 대/소문자, 숫자, 특수문자"/>
+                  <input type="password" name="password" onChange={(e)=>handleData(e)} placeholder="8~16자 영문 대/소문자, 숫자, 특수문자" required/>
+                  { errors.password && ( <p className={errors.password_state === "error" ? "error" : ""}>{errors.password}</p> ) }
                 </li>
                 <li>
                   <div className="tit required">비밀번호 재입력</div>
-                  <input type="password" name="passwordConfirm" onChange={(e)=>handleData(e)}/>
+                  <input type="password" name="passwordConfirm" onChange={(e)=>handleData(e)} required/>
+                  { errors.passwordConfirm && ( <p className={errors.passwordConfirm_state === "error" ? "error" : ""}>{errors.passwordConfirm}</p> ) }
                 </li>
                 <li>
                   <div className="tit">생년월일</div>
@@ -127,7 +206,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="tit required">핸드폰 번호</div>
-                  <input type="tel" name="phone" maxLength="11" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="(-) 제외"/>
+                  <input type="tel" name="phone" maxLength="11" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="(-) 제외" required/>
                 </li>
                 <li>
                   <div className="tit">주소</div>
@@ -142,29 +221,27 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="tit required">이메일</div>
-                  <input type="email" name="email" onChange={(e)=>handleData(e)}/>
+                  <input type="email" name="email" onChange={(e)=>handleData(e)} required/>
                 </li>
                 <li>
                   <div className="tit required">리테일 선호 지점</div>
                   <div className="flex_items">
-                    <select name="region" value={formData.region} onChange={(e)=>handleData(e)}>
-                      {/* <option selected disabled>지역</option> */}
-                      <option disabled>지역</option>
-                      <option>경기</option>
-                      <option>서울</option>
-                      <option>인천</option>
-                      <option>강원</option>
-                      <option>충남</option>
-                      <option>충북</option>
-                      <option>경북</option>
-                      <option>경남</option>
-                      <option>전북</option>
-                      <option>전남</option>
-                      <option>제주</option>
+                    <select name="region" value={formData.region || "지역"} onChange={(e)=>handleData(e)} required>
+                      <option value="지역" disabled>지역</option>
+                      <option value="경기">경기</option>
+                      <option value="서울">서울</option>
+                      <option value="인천">인천</option>
+                      <option value="강원">강원</option>
+                      <option value="충남">충남</option>
+                      <option value="충북">충북</option>
+                      <option value="경북">경북</option>
+                      <option value="경남">경남</option>
+                      <option value="전북">전북</option>
+                      <option value="전남">전남</option>
+                      <option value="제주">제주</option>
                     </select>
-                    <select name="store" value={formData.store} onChange={(e)=>handleData(e)}>
-                      {/* <option selected disabled>지점</option> */}
-                      <option disabled>지점</option>
+                    <select name="store" value={formData.store || "지점"} onChange={(e)=>handleData(e)} required>
+                      <option value="지점" disabled>지점</option>
                       <option>NC 강서점</option>
                       <option>NC 신구로점</option>
                       <option>NC 불광점</option>
