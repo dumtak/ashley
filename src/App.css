@@ -54,7 +54,7 @@ strong { font-weight:600; }
 .flex_items:not(.txt) :nth-child(even) { margin:0; }
 
 /* ===== COMPONENT - INPUT */
-.chk_bx ~ .chk_bx { margin-left:8px; }
+.chk_bx ~ .chk_bx { margin-left:12px; }
 .chk_bx input[type="checkbox"] + .chk_txt  { display:flex; align-items:center; gap:8px; user-select:none; }
 .chk_bx input[type="checkbox"] + .chk_txt span { line-height:1; color:var(--main-color3); vertical-align:middle; display:inline-block; }
 
@@ -96,12 +96,12 @@ form .tb_item h3.tit .btn_pop.active { opacity:.5; filter:grayscale(1); }
 /* ===== COMPONENT - BUTTON */
 .btn_wrap { margin-top:32px; display:flex; }
 .btn_wrap.column { flex-direction:column; flex-wrap:wrap; }
-.btn_wrap a { padding:12px 6px 13px; text-align:center; border:1px solid var(--main-color1); border-radius:4px; flex:1; }
+.btn_wrap a, .btn_wrap button { padding:12px 6px 13px; text-align:center; border:1px solid var(--main-color1); border-radius:4px; flex:1; }
 .btn_wrap .btn_dark { background-color:var(--main-color1); color:#fff; }
 .btn_wrap .btn_light { background-color:#fff; font-weight:500; color:var(--main-color1); }
 .btn_wrap .btn_basic { background-color:#fff; font-weight:500; color:var(--main-color2); border:1px solid var(--br-color); }
-.btn_wrap:not(.column) a ~ a { margin-left:8px; }
-.btn_wrap.column a ~ a { margin-top:12px; }
+.btn_wrap:not(.column) a ~ a, .btn_wrap:not(.column) button ~ a, .btn_wrap:not(.column) button ~ button { margin-left:8px; }
+.btn_wrap.column a ~ a, .btn_wrap.column button ~ a, .btn_wrap.column button ~ button { margin-top:12px; }
 
 /* ===== COMPONENT - TITLE */
 .heading h2.tit { line-height:1; font-size:26px; font-weight:500; color:var(--main-color2); }

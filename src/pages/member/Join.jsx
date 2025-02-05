@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { API_URL } from "../../config/constants";
 
 import "./Onboarding.scss";
 
 const Join = () => {
+
+  //### id trim 체크할것!
+
   const [ formData, setFormData ] = useState({
     region: '지역',
     store: '지점',
@@ -21,10 +27,52 @@ const Join = () => {
     e.preventDefault();
     console.log(e.target);
 
-    const required = ["name", "id", "password", "passwordConfirm"];
-    const requiredCheck = required.filter(item => !formData[item]);
+    
+    const required = ["name", "user_id", "password", "passwordConfirm", "phone", "email", "region", "store"];
+    const requiredKo = {
+      name : "이름",
+      user_id : "아이디",
+      password : "비밀번호",
+      passwordConfirm : "비밀번호 재입력",
+      phone : "핸드폰 번호",
+      email : "이메일",
+      region : "리테일 선호 지역",
+      store : "리테일 선호 지점",
+    }
+    const requiredCheck = required.filter(item => !formData[item]); //찾기
 
-    console.log("requiredCheck",requiredCheck);
+    // console.log(requiredCheck.length);
+    if(requiredCheck.length !== 0){
+      const msg = requiredCheck.map(item => requiredKo[item]).join(",");
+      alert(`${msg} 을 입력해주세요!`);
+    } else {
+      try{
+        // const birth = (formData.birth1 && formData.birth2 && formData.birth3) ? `${formData.birth1}-${formData.birth2}-${formData.birth3}` : null;
+
+        const birth = (formData.birth1 && formData.birth2 && formData.birth3)
+        ? `${formData.birth1}-${formData.birth2}-${formData.birth3}`
+        : null;
+
+        console.log('보낸다데이터===', {
+          ...formData,
+          birth: birth,
+        }); 
+
+        axios.post(`${API_URL}/users`, {
+          ...formData,
+          birth: birth,
+          // marketingChecked : marketingChecked ? "True" : "False"
+        }).then((result)=>{
+          console.log('회원가입 성공 :? ', result.data)
+          // history("/", {replace:true}) //성공시 뒤로가기 막기
+        }).catch((error)=>{
+          console.error(error)
+        })
+      }catch(error){
+        //db에 회원가입 정보 넣기 실패
+        console.error('에러 상세:', error.response?.data, error.message);
+      }
+    }
 
     // const { name,id,password,passwordConfirm } = formData;
     // if(!name || !id || !password || !passwordConfirm){
@@ -37,7 +85,7 @@ const Join = () => {
   }
 
   useEffect(()=>{
-    console.log(formData)
+    console.log(formData);
   },[formData])
 
   return (
@@ -50,7 +98,7 @@ const Join = () => {
             <h2 className="tit">회원가입</h2>
             <p className="desc">가입시 2,000P, 미션 수행시 최대 10,000P의 혜택을 드립니다!</p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="tb_item">
               <ul className="inp_list">
                 <li>
@@ -59,7 +107,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="tit required">회원아이디</div>
-                  <input type="text" name="id" onChange={(e)=>handleData(e)}/>
+                  <input type="text" name="user_id" onChange={(e)=>handleData(e)}/>
                 </li>
                 <li>
                   <div className="tit required">비밀번호</div>
@@ -856,7 +904,8 @@ const Join = () => {
               </div>
             </div>
             <div className="btn_wrap column">
-              <Link to="/member/join/result" className="btn_dark" onClick={(e)=>handleSubmit(e)}>회원가입</Link>
+              <button type="submit" className="btn_dark" onClick={(e)=>handleSubmit(e)}>회원가입</button>
+              {/* <Link to="/member/join/result" className="btn_dark" onClick={(e)=>handleSubmit(e)}>회원가입</Link> */}
             </div>
 
           </form>

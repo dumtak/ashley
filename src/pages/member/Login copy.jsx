@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const {setAccessToken} = useAccessToken();
 
-    const onSubmit = async (values) => {
+    const onFinish = async (values) => {
       try {
         const result = await axios.post(`${API_URL}/users/login`, {
           user_id: values.user_id,
@@ -29,6 +29,10 @@ const Login = () => {
         console.error(err);
       }
     }
+  
+    const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+    };
 
   return (
     <>
@@ -38,7 +42,7 @@ const Login = () => {
             <div className="heading">
               <h2 className="tit">로그인</h2>
             </div>
-            <form onSubmit={onSubmit}>
+            <form>
               <ul className="inp_list">
                 <li><input type="text" placeholder="아이디"/></li>
                 <li><input type="password" placeholder="비밀번호"/></li>
@@ -54,7 +58,7 @@ const Login = () => {
                 <Link to="/" className="find">아이디/비밀번호 찾기</Link>
               </div>
               <div className="btn_wrap column">
-                <button type="submit" className="btn_dark">로그인</button>
+                <Link to="/" className="btn_dark" onFinish={onFinish} onFinishFailed={onFinishFailed}>로그인</Link>
                 <Link to="/member/join" className="btn_light">회원가입</Link>
               </div>
               <div className="social">

@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import { NoticeProvider } from "./context/NoticeContext";
+import { AccessTokenProvider } from "./context/AccessTokenContext";
 
 import Header from './components/Header';
 import Home from "./pages/Home";
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <>
+    <AccessTokenProvider>
       <NoticeProvider>
         {/* <Router basename={import.meta.env.BASE_URL}> */}
           <DataContext.Provider value={loading}>
@@ -65,6 +67,7 @@ function App() {
           </DataContext.Provider>
         {/* </Router> */}
       </NoticeProvider>
+    </AccessTokenProvider>
     </>
   )
 }
