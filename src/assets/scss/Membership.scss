@@ -1,16 +1,33 @@
 .about__membership {
-  .heading { margin-bottom:60px; }
+  .heading { margin-bottom:60px;
+    @media(max-width:767px){ margin-bottom:32px; }
+  }
   .membership_list {
     > li {
       padding:40px;
+      position: relative;
       background-color:var(--bg-color);
       border-radius:16px;
-      & + li { margin-top:40px; }
-      p { margin-bottom:12px; font-size:22px; font-weight:500; color:var(--main-color2); }
+      & + li { margin-top:32px;
+        @media(max-width:767px){ margin-top:20px; }
+      }
+      &::before { content:''; width:48px; height:48px; background:transparent url("images/icon_membership.png") no-repeat center/contain; position:absolute; top:40px; right:40px;
+        @media(max-width:767px){ display:none; }
+      }
+      &:nth-child(2)::before { filter:hue-rotate(90deg); }
+      &:nth-child(3)::before { filter:hue-rotate(270deg); }
+      p { margin-bottom:12px; font-size:22px; font-weight:500; color:var(--main-color2);
+        @media(max-width:767px){ font-size:18px; }
+      }
       li {
+        padding-right:160px;
+        line-height: 1.56;
         color:var(--main-color3);
+        word-break: keep-all;
+        @media(max-width:767px){ font-size:14px; }
         &::before { content:'·'; margin-right:8px; }
         & + li { margin-top:6px; }
+        @media(max-width:767px){ padding:0; }
       }
     }
   }

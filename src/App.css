@@ -44,6 +44,7 @@ strong { font-weight:600; }
 .pagination span.disabled { visibility:hidden; cursor:default; }
 .pagination ol > li { padding:0 8px; margin:0 8px; color:var(--main-color3); display:inline-block; cursor:pointer; }
 .pagination ol > li.active { font-weight:600; color:var(--main-color2); }
+@media(max-width:767px){ .pagination{gap:16px; white-space:nowrap;} .pagination ol > li{margin:0 6px;} }
 
 /* ===== COMPONENT - FLEX */
 .flex_items { display:flex; align-items:center; }

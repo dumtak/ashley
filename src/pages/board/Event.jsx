@@ -41,7 +41,7 @@ const Event = () => {
             { listItem.length !== 0 && paginationGroup && (
               <>
                 <div className="pagination">
-                  { totalPagination > 3 && (
+                  { totalPagination >= 3 && (
                     <span onClick={(e)=>setPage(e, 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>&lt;&lt;</span>
                   ) }
                   <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>&lt;</span>
@@ -51,7 +51,7 @@ const Event = () => {
                     ))}
                   </ol>
                   <span onClick={(e)=>setPage(e, currentPage + 1)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>&gt;</span>
-                  { totalPagination > 3 && (
+                  { totalPagination >= 3 && (
                     <span onClick={(e)=>setPage(e, totalPagination)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>&gt;&gt;</span>
                   ) }
                 </div>

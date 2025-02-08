@@ -41,7 +41,9 @@
 
 //=== 매장안내
 .store__list {
-  .heading { margin-bottom:60px; }
+  .heading { margin-bottom:60px;
+    @media(max-width:767px){ margin-bottom:32px; }
+  }
   .tb_store { text-align:center;
     thead {
       th { min-width:40px; padding:18px 0 20px; font-size:14px; font-weight:500; border-top:1px solid var(--main-color2); border-bottom:1px solid var(--br-color); }
@@ -63,9 +65,9 @@
       tbody,tr,th,td { display:block; }
       tbody {
         tr{ padding:32px; border:1px solid var(--br-color); border-radius:16px;
-          + tr { margin-top:24px; }
-          td { height:auto; }
-          &:hover td { background-color:#fff; }
+          + tr { margin-top:20px; }
+          td { height:auto; text-align:left; border:0; }
+          &:not(.empty):hover td { background-color:#fff; }
         }
       }
     }

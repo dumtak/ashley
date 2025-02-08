@@ -63,7 +63,7 @@ const Home = () => {
     dots: true,
     arrows: true,
     speed: 500,
-    autoplay : true,
+    autoplay : false,
     // afterChange: handleChange,
     responsive: [
       {
@@ -71,8 +71,11 @@ const Home = () => {
         settings: {
           initialSlide: 0,
           infinite: true,
+          pauseOnHover: false,
           slidesToShow: 1,
           slidesToScroll: 1,
+          autoplay : true,
+          autoplaySpeed: 3000,
           arrows: false,
           // afterChange: handleAfterChange,
         }
