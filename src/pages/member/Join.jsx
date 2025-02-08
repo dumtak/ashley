@@ -5,8 +5,12 @@ import axios from "axios";
 import { API_URL } from "../../config/constants";
 
 import "./Onboarding.scss";
+import DaumAddr from "../../context/DaumAddr";
 
 const Join = () => {
+  //=== 다음 주소검색 API
+  const [ postcode, setPostcode ] = useState("");
+  const [ address, setAddress ] = useState("");
 
 
   //### id trim 체크할것!
@@ -65,8 +69,10 @@ const Join = () => {
 
     if(idCheck === false){
       alert("아이디 중복확인 해주세요");
+      window.scrollTo({ top:0, behavior:"smooth" });
       return;
     }
+    handleIdCheck();
     
     const required = ["name", "user_id", "password", "passwordConfirm", "phone", "email", "region", "store"];
     const requiredKo = {
@@ -82,11 +88,13 @@ const Join = () => {
     const requiredCheck = required.filter(item => !formData[item]); //찾기
 
     // console.log(requiredCheck.length);
-    if(requiredCheck.length !== 0){
-      const msg = requiredCheck.map(item => requiredKo[item]).join(",");
-      alert(`${msg} 을 입력해주세요!`);
-      return;
-    } else {
+    // if(requiredCheck.length !== 0){
+    //   const msg = requiredCheck.map(item => requiredKo[item]).join(",");
+    //   alert(`${msg} 을 입력해주세요!`);
+    //   return;
+    // } 
+    if((requiredCheck.length !== 0)) {
+    // else {
 
       const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
       console.log("errors====", errors);
@@ -99,25 +107,25 @@ const Join = () => {
       }
 
       if (!pwRule.test(formData.password)) { // 비밀번호가 규칙에 맞지 않으면
-        setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" }));
+        setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       } else {
         setErrors(prev => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
       }
 
       if (!formData.passwordConfirm || formData.passwordConfirm.trim() === "") { // 비밀번호 재입력이 비어 있으면
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" }));
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       }
 
       if (!pwRule.test(formData.passwordConfirm)) { // 비밀번호 재입력이 규칙에 맞지 않으면
         // setErrors(prev => ({ ...prev, passwordConfirm: "영문 대소문자/숫자/특수문자 8~16자 조합", passwordConfirm_state: "error" }));
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" }));
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       }
 
       if (formData.password !== formData.passwordConfirm) { // 비밀번호와 비밀번호 재입력이 일치하지 않으면
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" }));
+        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       }
       // if (pwRule.test(formData.password) && formData.password === formData.passwordConfirm) {
@@ -136,10 +144,11 @@ const Join = () => {
           birth: birth,
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
-          console.log('회원가입 성공 ?? ', result.data)
+          console.log('회원가입 성공 ?? ', result.data);
           // history("/", {replace:true}) //성공시 뒤로가기 막기
         }).catch((error)=>{
-          console.error(error)
+          console.error(error);
+          window.scrollTo({ top:0, behavior:"smooth" });
         })
       }catch(error){
         //db에 회원가입 정보 넣기 실패
@@ -181,7 +190,7 @@ const Join = () => {
                 <li>
                   <div className="tit required">회원아이디</div>
                   <div className="flex_items">
-                    <input type="text" name="user_id" onChange={(e)=>handleData(e)} required/>
+                    <input type="text" name="user_id" onChange={(e)=>handleData(e)} required />
                     <button onClick={handleIdCheck} className="btn_check">중복확인</button>
                   </div>
                   {errors.user_id && <p className={errors.user_id_state === "error" ? "error" : ""}>{errors.user_id}</p>}
@@ -212,10 +221,11 @@ const Join = () => {
                   <div className="tit">주소</div>
                   <div className="addr">
                     <div className="flex_items">
-                      <input type="text" placeholder="우편번호" readOnly disabled/>
-                      <a href="#" className="btn_basic">주소검색</a>
+                      <input type="text" value={postcode} placeholder="우편번호" readOnly disabled/>
+                      <DaumAddr setPostcode={setPostcode} setAddress={setAddress}/>
+                      {/* <a href="#" className="btn_basic">주소검색</a> */}
                     </div>
-                    <input type="text" placeholder="기본주소" readOnly disabled/>
+                    <input type="text" value={address} placeholder="기본주소" readOnly disabled/>
                     <input type="text" placeholder="나머지 주소(선택입력)"/>
                   </div>
                 </li>
