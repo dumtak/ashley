@@ -58,6 +58,7 @@ min-height: 86px;
  -webkit-line-clamp: 3;
  -webkit-box-orient: vertical;
  white-space:pre-wrap;
+ @media(max-width:767px){ height:auto; line-height:1.52; font-size:22px; }
 }
 
 :has([class*="notice"],[class*="event"]) [class*="_list"] .tit + .date {

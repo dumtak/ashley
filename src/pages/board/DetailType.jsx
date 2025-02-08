@@ -106,23 +106,27 @@ const DetailType = () => {
                   </tr>
                 </tbody>
               </table>
-              <ul className="nav_post">
-                { matchPrev && matchPrev !== null && (
-                  <li className="prev">
-                    <span>이전글</span>
-                    <Link to={{pathname:location.pathname, search:`${location.search.replace(`id=${matchItem.id}`,`id=${matchPrev.id}`)}`}}>{matchPrev.subject}</Link>
-                  </li>
-                ) }
-                { matchNext && matchNext !== null && (
-                  <li className="next">
-                    <span>다음글</span>
-                    <Link to={{pathname:location.pathname, search:`${location.search.replace(`id=${matchItem.id}`,`id=${matchNext.id}`)}`}}>{matchNext.subject}</Link>
-                  </li>
-                ) }
-              </ul>
-              <div className="btn_wrap">
-                <Link to={category ? `/${type}?category=${category}` : `/${type}`} className="btn_basic">목록으로</Link>
-              </div>
+              { (type === "notice" || (type === "event" && matchItem.category)) && (
+                <>
+                  <ul className="nav_post">
+                    { matchPrev && matchPrev !== null && (
+                      <li className="prev">
+                        <span>이전글</span>
+                        <Link to={{pathname:location.pathname, search:`${location.search.replace(`id=${matchItem.id}`,`id=${matchPrev.id}`)}`}}>{matchPrev.subject}</Link>
+                      </li>
+                    ) }
+                    { matchNext && matchNext !== null && (
+                      <li className="next">
+                        <span>다음글</span>
+                        <Link to={{pathname:location.pathname, search:`${location.search.replace(`id=${matchItem.id}`,`id=${matchNext.id}`)}`}}>{matchNext.subject}</Link>
+                      </li>
+                    ) }
+                  </ul>
+                  <div className="btn_wrap">
+                    <Link to={category ? `/${type}?category=${category}` : `/${type}`} className="btn_basic">목록으로</Link>
+                  </div>
+                </>
+              ) }
             </>
           ) : (
             <div>일치하는 결과를 찾을 수 없습니다 !</div>

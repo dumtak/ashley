@@ -3,14 +3,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { API_URL } from "../../config/constants";
+import DaumAddr from "../../context/DaumAddr";
 
 import "./Onboarding.scss";
-import DaumAddr from "../../context/DaumAddr";
 
 const Join = () => {
   //=== 다음 주소검색 API
   const [ postcode, setPostcode ] = useState("");
   const [ address, setAddress ] = useState("");
+  useEffect(()=>{
+    setFormData(prev => ({
+      ...prev,
+      addr1: postcode,
+      addr2: address
+    }))
+  },[postcode, address])
 
 
   //### id trim 체크할것!
@@ -33,6 +40,7 @@ const Join = () => {
   const handleIdCheck = async ()=>{
     console.log("####errors###", errors);
     
+    //##### 아이디
     try {
       const response = await axios.get(`${API_URL}/users/check-id`, {
         params:{user_id: formData.user_id},
@@ -88,42 +96,46 @@ const Join = () => {
     const requiredCheck = required.filter(item => !formData[item]); //찾기
 
     // console.log(requiredCheck.length);
-    // if(requiredCheck.length !== 0){
-    //   const msg = requiredCheck.map(item => requiredKo[item]).join(",");
-    //   alert(`${msg} 을 입력해주세요!`);
-    //   return;
-    // } 
-    if((requiredCheck.length !== 0)) {
+    if(requiredCheck.length !== 0){
+      const msg = requiredCheck.map(item => requiredKo[item]).join(",");
+      alert(`${msg} 을 입력해주세요!`);
+      return;
+    } else {
     // else {
 
+      //##### 이름
+      const nameRule = /^[a-zA-Z가-힣]{2,20}$/;
+      if(!nameRule.test(formData.name)){
+        setErrors(prev => ({ ...prev, name: "형식이 올바르지 않습니다", name_state: "error" }));
+        return;
+      } else {
+        setErrors(prev => ({ ...prev, name:"", name_state: "success" }));
+      }
+
+      //##### 비밀번호
       const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
       console.log("errors====", errors);
-      console.log("!pwRule.test(formData.password)",!pwRule.test(formData.password))
-      console.log("!pwRule.test(formData.passwordConfirm)",!pwRule.test(formData.passwordConfirm))
-
+      // console.log("!pwRule.test(formData.password)",!pwRule.test(formData.password))
+      // console.log("!pwRule.test(formData.passwordConfirm)",!pwRule.test(formData.passwordConfirm))
       if (!formData.password || formData.password.trim() === "") { // 비밀번호가 비어 있으면
         setErrors(prev => ({ ...prev, password: "비밀번호를 입력하세요", password_state: "error" }));
         return;
       }
-
       if (!pwRule.test(formData.password)) { // 비밀번호가 규칙에 맞지 않으면
         setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       } else {
         setErrors(prev => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
       }
-
       if (!formData.passwordConfirm || formData.passwordConfirm.trim() === "") { // 비밀번호 재입력이 비어 있으면
         setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       }
-
       if (!pwRule.test(formData.passwordConfirm)) { // 비밀번호 재입력이 규칙에 맞지 않으면
         // setErrors(prev => ({ ...prev, passwordConfirm: "영문 대소문자/숫자/특수문자 8~16자 조합", passwordConfirm_state: "error" }));
         setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
       }
-
       if (formData.password !== formData.passwordConfirm) { // 비밀번호와 비밀번호 재입력이 일치하지 않으면
         setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
         return;
@@ -132,22 +144,48 @@ const Join = () => {
       // }
       setErrors(prev => ({ ...prev,  password: "올바른 비밀번호입니다",  passwordConfirm: "올바른 비밀번호입니다",  password_state: "success",  passwordConfirm_state: "success" }));
 
+      //##### 핸드폰번호
+      const phoneRule = /^(?:(010)|(01[1|6|7|8|9]))\d{3,4}(\d{4})$/;
+      if(!phoneRule.test(formData.phone)){
+        setErrors(prev => ({ ...prev, phone: "형식이 올바르지 않습니다", phone_state: "error" }));
+        return;
+      } else {
+        setErrors(prev => ({ ...prev, phone:"", phone_state: "success" }));
+      }
+
+      //##### 이메일
+      const emailRule = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
+      if(!emailRule.test(formData.email)){
+        setErrors(prev => ({ ...prev, email: "형식이 올바르지 않습니다", email_state: "error" }));
+        return;
+      } else {
+        setErrors(prev => ({ ...prev, email:"", email_state: "success" }));
+      }
+
+
       try{
         const birth = (formData.birth1 && formData.birth2 && formData.birth3) ? `${formData.birth1}-${formData.birth2}-${formData.birth3}` : null;
+
+
+        const address = formData.addr3 && formData.addr3.trim() !== "" ? `${formData.addr2} ${formData.addr3.trim()}` : formData.addr2 || null;
+
         console.log('보낸다데이터===', {
           ...formData,
           birth: birth,
+          addr2: address
         }); 
 
         axios.post(`${API_URL}/users`, {
           ...formData,
           birth: birth,
+          addr2: address
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
           console.log('회원가입 성공 ?? ', result.data);
           // history("/", {replace:true}) //성공시 뒤로가기 막기
         }).catch((error)=>{
           console.error(error);
+          alert(error.response.data)
           window.scrollTo({ top:0, behavior:"smooth" });
         })
       }catch(error){
@@ -186,6 +224,7 @@ const Join = () => {
                 <li>
                   <div className="tit required">이름</div>
                   <input type="text" name="name" onChange={(e)=>handleData(e)} required autoFocus/>
+                  {errors.name && <p className={errors.name_state === "error" ? "error" : ""}>{errors.name}</p>}
                 </li>
                 <li>
                   <div className="tit required">회원아이디</div>
@@ -216,22 +255,24 @@ const Join = () => {
                 <li>
                   <div className="tit required">핸드폰 번호</div>
                   <input type="tel" name="phone" maxLength="11" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="(-) 제외" required/>
+                  {errors.phone && <p className={errors.phone_state === "error" ? "error" : ""}>{errors.phone}</p>}
                 </li>
                 <li>
                   <div className="tit">주소</div>
                   <div className="addr">
                     <div className="flex_items">
-                      <input type="text" value={postcode} placeholder="우편번호" readOnly disabled/>
+                      <input type="text" name="addr1" value={postcode} onInput={(e)=>handleData(e)} placeholder="우편번호" readOnly disabled/>
                       <DaumAddr setPostcode={setPostcode} setAddress={setAddress}/>
                       {/* <a href="#" className="btn_basic">주소검색</a> */}
                     </div>
-                    <input type="text" value={address} placeholder="기본주소" readOnly disabled/>
-                    <input type="text" placeholder="나머지 주소(선택입력)"/>
+                    <input type="text" value={address} name="addr2" onInput={(e)=>handleData(e)} placeholder="기본주소" readOnly disabled/>
+                    <input type="text" name="addr3" onChange={(e)=>handleData(e)} placeholder="나머지 주소(선택입력)" {...(address !== "" ? {} : {readOnly:true})}/>
                   </div>
                 </li>
                 <li>
                   <div className="tit required">이메일</div>
                   <input type="email" name="email" onChange={(e)=>handleData(e)} required/>
+                  {errors.email && <p className={errors.email_state === "error" ? "error" : ""}>{errors.email}</p>}
                 </li>
                 <li>
                   <div className="tit required">리테일 선호 지점</div>

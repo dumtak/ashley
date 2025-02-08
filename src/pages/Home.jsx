@@ -35,7 +35,8 @@ const Home = () => {
     appendArrows: document.querySelector(".main__visual .swiper-arrow"),
     prevArrow: document.querySelector(".main__visual .swiper-prev"),
     nextArrow: document.querySelector(".main__visual .swiper-next"),
-    autoplay : false,
+    autoplay : true,
+    autoplaySpeed: 3000,
     speed: 500,
     dots: true, // pagination
     pauseOnHover: true,
@@ -43,6 +44,7 @@ const Home = () => {
       {
         breakpoint: 991,
         settings: {
+          draggable : true,
           centerPadding: "0",
           arrows: false,
         }

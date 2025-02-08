@@ -2,6 +2,11 @@
   .main__visual {
     text-align: center;
     overflow: hidden;  
+
+    .layout_fix { 
+      @media(max-width:991px){ padding:0; overflow:hidden; }
+     }
+
     .slick_visual {
       .slick-list { 
         margin:0 -90px; 
@@ -87,6 +92,8 @@
     &:not([class*="visual"]) {
       padding-top: 100px;
       padding-bottom: 100px;
+
+      @media(max-width:991px){ padding-top:66px; padding-bottom:66px; }
     }
   
     .heading {
@@ -199,12 +206,15 @@
     background: transparent url("/images/bg-recruit.png")no-repeat center/cover;
     position: relative;
     overflow: hidden;
+    @media(max-width:767px){ text-align:center; }
 
     h3 {
       padding-left: 50px;
       font-size: 38px;
       font-weight: 400;
       color: var(--wt-color);
+      @media(max-width:991px){ font-size:26px; font-weight:400; }
+      @media(max-width:767px){ padding-left:0; text-align:center; font-size:24px; word-break:keep-all; }
     }
   
     .btn_link {
@@ -228,6 +238,8 @@
         color: var(--main-color2);
         border-color: var(--yw-color);
       }
+      @media(max-width:991px){ padding:10px 32px 12px; font-size:16px; }
+      @media(max-width:767px){ margin-top:32px; margin-bottom:0; font-size:15px; position:relative; top:auto; right:auto; }
     }
   }
 
@@ -251,11 +263,12 @@
     // }
   
     .slick-list { height:320px; position:relative; border-width:1px 0; border-style:solid; border-color:var(--br-color); overflow:hidden;
+      @media(max-width:767px){ height:280px; }
+
       .slick-active + .slick-active { border-left: 1px solid var(--br-color);
         @media(max-width:991px){ border:0; }
       }
       .slick-slide { overflow:hidden;
-  
         .slide_item {
           height: 100%;
           background-color: #fff;
@@ -272,6 +285,7 @@
             position: relative;
             background: #fff;
             display: table;
+            @media(max-width:767px){ height:280px; padding:40px 0 52px 24px; }
           }
       
           .item {
@@ -293,6 +307,8 @@
               overflow: hidden;
               border: 1px solid var(--main-color2);
               object-fit: contain;
+
+              @media(max-width:767px){ display:none; }
             }
           }
         }

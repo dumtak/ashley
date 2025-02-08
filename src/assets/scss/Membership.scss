@@ -1,0 +1,17 @@
+.about__membership {
+  .heading { margin-bottom:60px; }
+  .membership_list {
+    > li {
+      padding:40px;
+      background-color:var(--bg-color);
+      border-radius:16px;
+      & + li { margin-top:40px; }
+      p { margin-bottom:12px; font-size:22px; font-weight:500; color:var(--main-color2); }
+      li {
+        color:var(--main-color3);
+        &::before { content:'·'; margin-right:8px; }
+        & + li { margin-top:6px; }
+      }
+    }
+  }
+}

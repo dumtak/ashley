@@ -3,6 +3,8 @@ import axios from "axios";
 
 import usePagination from "../hooks/usePagination";
 
+import "../assets/scss/Heading.scss";
+
 const Store = () => {
   const [store, setStore] = useState([]);
   const [sido, setSido] = useState([]);
@@ -38,6 +40,9 @@ const Store = () => {
       <div id="container" className="store__list">
         <div id="contents">
           <div className="layout_fix">
+            <div className="heading">
+              <h2>매장안내</h2>
+            </div>
             <table className="tb_store">
               <thead>
                 <tr>
@@ -71,13 +76,19 @@ const Store = () => {
             { listItem.length !== 0 && paginationGroup && (
               <>
                 <div className="pagination">
-                  <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>이전</span>
+                  { totalPagination > 3 && (
+                    <span onClick={(e)=>setPage(e, 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>&lt;&lt;</span>
+                  ) }
+                  <span onClick={(e)=>setPage(e, currentPage - 1)} className={`prev ${currentPage === 1 ? "disabled" : ""}`}>&lt;</span>
                   <ol>
                     { paginationGroup.map((num) => (
                       <li onClick={(e) => setPage(e, num)} className={currentPage === num ? "active" : ""} key={num}>{num}</li>
                     ))}
                   </ol>
-                  <span onClick={(e)=>setPage(e, currentPage + 1)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>다음</span>
+                  <span onClick={(e)=>setPage(e, currentPage + 1)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>&gt;</span>
+                  { totalPagination > 3 && (
+                    <span onClick={(e)=>setPage(e, totalPagination)} className={`next ${currentPage === totalPagination ? "disabled" : ""}`}>&gt;&gt;</span>
+                  ) }
                 </div>
               </>
             )}

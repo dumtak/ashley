@@ -13,6 +13,7 @@ import Notice from "./pages/board/Notice";
 import Event from "./pages/board/Event";
 import DetailType from "./pages/board/DetailType";
 import Store from "./pages/Store";
+import Membership from "./pages/Membership";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
@@ -61,6 +62,7 @@ function App() {
               <Route path="/event" element={<Event/>}/>
               <Route path="/:type/detail" element={<DetailType/>}/>
               <Route path="/store" element={<Store/>}/>
+              <Route path="/membership" element={<Membership/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>
             <Footer/>
