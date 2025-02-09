@@ -191,14 +191,14 @@ form .tb_item h3.tit .btn_pop.active { opacity:.5; filter:grayscale(1); }
  header .topbar { display:none; }
  header h1.header_logo { width:128px; height:28px; margin-bottom:0; background-image:url(/images/logo-wt.svg); }
  header h1.header_logo a { height:28px; }
- header .btn_user { width:32px; height:32px; background:transparent url(/images/icon-user-wt.png)no-repeat center/28px; position:absolute; top:22px; right:70px; display:block; }
+ header .btn_user { width:32px; height:32px; background:transparent url(/images/icon-user-wt.png)no-repeat center/28px; font-size:0; position:absolute; top:22px; right:70px; display:block; }
  header .btn_hamburger { width:32px; height:32px; background:transparent url(/images/icon-hamburger-wt.svg) no-repeat center/contain; font-size:0; position:absolute; top:22px; right:25px; display:block; }
  header .gnb { height:0; opacity:0; visibility:hidden; }
  header .btn_hamburger.active + .gnb { height:auto; padding-top:24px; opacity:1; visibility:visible; }
  header .btn_hamburger + .gnb::before { content:''; width:0; height:0; background-color:transparent; position:fixed; top:0; left:0; }
  header .btn_hamburger.active + .gnb::before { width:100vw; height:100vh; background-color:rgba(0,0,0,.85); transition:background-color .35s ease; }
  header .gnb li { margin:0 0 24px; text-align:center; display:block; }
- header .gnb li a { min-width:160px; padding:16px 12px 18px; font-size:15px; color:var(--wt-color); }
+ header .gnb li a, header .gnb li button { min-width:160px; padding:16px 12px 18px; font-size:15px; color:var(--wt-color); }
  header .gnb li a::before { display:none; }
  header .btn_hamburger.active + .gnb li { animation:moveList .5s forwards; }
  @keyframes moveList { 0% { transform:translate(0,12px); } 100% { transform:translate(0,0); } }

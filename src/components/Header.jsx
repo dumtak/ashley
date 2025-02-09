@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import Quick from "../components/Quick"
 
 import "./Header.scss";
 
 const Header = () => {
+  const [ isHamburger, setIsHamburger ] = useState(false);
+
   return (
     <>
       <header>
@@ -16,14 +21,17 @@ const Header = () => {
         <h1 className="header_logo">
           <Link to="/">애슐리</Link>
         </h1>
-        <a href="#none" className="btn_hamburger mo">모바일메뉴버튼</a>
+        <Link to="/member/login" className="btn_user mo">My</Link>
+        <button className={`btn_hamburger mo ${isHamburger ? "active" : ""}`} onClick={()=>setIsHamburger(true)}>모바일메뉴버튼</button>
         <ul className="gnb">
-          
           <li><Link to="/notice">공지사항</Link></li>
           <li><Link to="/event">이벤트</Link></li> 
           <li><Link to="/store">매장안내</Link></li>
           <li><Link to="/membership">멤버십</Link></li>
           <li><Link to="/">고객센터</Link></li>
+          { isHamburger && (
+            <li className="btn_close"><button onClick={()=>setIsHamburger(false)}><img src="/images/btn-close-hamburger.png" alt="메뉴닫기"/></button></li>
+          ) }
         </ul>
         <Link to="/about/shleyz" className="shleyz">
           <ul>
@@ -35,6 +43,7 @@ const Header = () => {
         </Link>
       </div>
     </header>
+    <Quick/>
     </>
   );
 };

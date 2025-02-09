@@ -43,6 +43,8 @@
 .store__list {
   .heading { margin-bottom:60px;
     @media(max-width:767px){ margin-bottom:32px; }
+
+    &:has(.search_cont) { display:flex; justify-content:space-between; }
   }
   .tb_store { text-align:center;
     thead {

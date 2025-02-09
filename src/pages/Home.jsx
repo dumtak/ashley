@@ -1,23 +1,18 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
 import { NoticeContext } from "../context/NoticeContext";
+
 import "../assets/scss/NoticeCard.scss";
-
-
-// import "../context/NoticeContext.json";
 import "./Home.scss";
-
 
 
 const Home = () => {
   const { notice, event, visual } = useContext(NoticeContext);
-
 
   const setVisual = {
     infinite: true,
@@ -87,17 +82,8 @@ const Home = () => {
   return (
     <>
       <div id="main">
-        <div id="quick">
-          <ul>
-            <li title="채용"><a href="#">채용</a></li>
-            <li title="온라인몰"><a href="#">온라인몰</a></li>
-            <li title="딜리버리/TO-GO"><a href="#">딜리버리 / TO-GO</a></li>
-          </ul>
-          <a href="#!" className="pageTop"><img src="images/quick-top.png" alt=""/></a>
-        </div>
         <div id="contents">
         <section className="main_section">
-
           <article className="main__visual" rel="js-main-visual">
             <div className="layout_fix">
             <Slider {...setVisual} className="slick_visual">
@@ -110,164 +96,6 @@ const Home = () => {
                   </div>
               )) }
             </Slider>
-              {/* <div className="slide_item">
-                <Link to="/" target="_blank">
-                    <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
-                    <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                </Link>
-              </div>
-              <div className="slide_item">
-                <Link to="/" target="_blank">
-                  <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
-                  <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
-                </Link>
-              </div>
-              <div className="slide_item">
-                <Link to="/" target="_blank">
-                  <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
-                  <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                </Link>
-              </div> */}
-
-
-            {/* <div className="swiper-container">
-                <ul className="swiper-wrapper">
-                    <li className="swiper-slide" data-index="1">
-                      <a href="#" target="_blank">
-                        <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
-                        <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                      </a>
-                  </li>
-                  <li className="swiper-slide" data-index="2">
-                    <a href="#" target="_blank">
-                      <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
-                      <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
-                    </a>
-                  </li>
-                  <li className="swiper-slide" data-index="3">
-                    <a href="#" target="_blank">
-                      <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
-                      <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                    </a>
-                  </li>
-                  <li className="swiper-slide" data-index="1">
-                      <a href="#" target="_blank">
-                        <img src="images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
-                        <img src="images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                      </a>
-                  </li>
-                  <li className="swiper-slide" data-index="2">
-                    <a href="#" target="_blank">
-                      <img src="images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
-                      <img src="images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
-                    </a>
-                  </li>
-                  <li className="swiper-slide" data-index="3">
-                    <a href="#" target="_blank">
-                      <img src="images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
-                      <img src="images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="swiper-pager"></div>
-              <div className="swiper-arrow">
-                <a className="swiper-prev" href="#">이전</a>
-                <a className="swiper-next" href="#">다음</a>
-              </div> */}
-
-
-            {/* <Swiper className="swiper_visual"
-                modules={[Autoplay, Navigation, Pagination, A11y]}
-                init={true}
-                // effect='slide'
-                initialSlide={0}
-                loop={document.querySelectorAll(".main__visual .swiper-slide").length > 2 ? true : false}
-                // loop={true}
-                // observer={true}
-                // observeParents={true}
-                slidesPerView={1}
-                // loopedSlides={1} //err
-                // loopedSlides={3}
-                // loopAdditionalSlides={1}
-                // loopAdditionalSlides={1}
-                spaceBetween={0}
-                // centeredSlides={true}
-                watchOverflow={true}
-                allowTouchMove={false}
-                // grabCursor={false}
-                // navigation={{ prevEl:'.swiper-prev', nextEl:'.swiper-next' }}
-                navigation={{
-                  prevEl: '[rel="js-main-visual"] .swiper-prev',
-                  nextEl: '[rel="js-main-visual"] .swiper-next',
-                }}
-                pagination={{ type:'bullets', clickable: true }}
-                // autoplay={{
-                //   delay: 3500,
-                //   disableOnInteraction: false,
-                // }}
-                    //     navigation: {
-    //       prevEl: '[rel="js-main-visual"] .swiper-prev',
-    //       nextEl: '[rel="js-main-visual"] .swiper-next',
-    //     },
-                // onSwiper={(e) => { console.log("load",e) }}
-                // onSwiper={handleSwiperInit}
-                // onActiveIndexChange={(e)=> { console.log(e) } }
-                onSlideChange={(swiper) => {
-                  console.log(swiper)
-                  // const maxTranslate = -1300; // 최대 이동 범위 설정
-                  // if (swiper.translate < maxTranslate) {
-                  //   swiper.setTranslate(maxTranslate);  // transform 값을 최대 범위로 제한
-                  // }
-                }}
-                onBeforeInit={(swiper) => {
-                  swiper.params.navigation.prevEl = prevRef.current;
-                  swiper.params.navigation.nextEl = nextRef.current;
-                  swiper.navigation.update();
-                }}
-                // onSlideChange={(swiper)=>{ swiper.update(); }}
-                // onActiveIndexChange={(swiper) => {
-                //   setTimeout(() => {
-                //     if(swiper.slides){
-                //       console.log(swiper.slides[swiper.activeIndex].getAttribute('data-swiper-slide-index'))
-                //     }
-                //   }, 0);
-                // }}
-                // swiperRef.current.update();
-                // onActiveIndexChange={(e)=> { console.log("change",e) }}
-                breakpoints={{
-                  992: {
-                    spaceBetween: 60
-                  }
-                }}
-              >
-              <SwiperSlide data-index="1">
-                <Link to="/" target="_blank">
-                  <img src="./images/visual-banner1.png" alt="배너 이미지1" className="pc"/>
-                  <img src="./images/visual-banner1-mo.png" alt="배너 이미지1" className="mo"/>
-                </Link>
-              </SwiperSlide>
-              <SwiperSlide data-index="2">
-                <Link to="/" target="_blank">
-                  <img src="./images/visual-banner-gif2.gif" alt="배너 이미지2" className="pc"/>
-                  <img src="./images/visual-banner-gif2-mo.gif" alt="배너 이미지2" className="mo"/>
-                </Link>
-              </SwiperSlide>
-              <SwiperSlide data-index="3">
-                <Link to="/" target="_blank">
-                  <img src="./images/visual-banner-gif1.gif" alt="배너 이미지3" className="pc"/>
-                  <img src="./images/visual-banner-gif1-mo.gif" alt="배너 이미지3" className="mo"/>
-                </Link>
-              </SwiperSlide>
-            </Swiper>
-            <div className="swiper-arrow">
-              <span className="swiper-prev" ref={prevRef}>left</span>
-              <span className="swiper-next" ref={nextRef}>right</span>
-            </div> */}
-
-           
-
-
             </div>
           </article>
           <article className="main__notice" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
