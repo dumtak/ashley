@@ -11,7 +11,7 @@
       & + li { margin-top:32px;
         @media(max-width:767px){ margin-top:20px; }
       }
-      &::before { content:''; width:48px; height:48px; background:transparent url("images/icon_membership.png") no-repeat center/contain; position:absolute; top:40px; right:40px;
+      &::before { content:''; width:48px; height:48px; background:transparent url("/images/icon_membership.png") no-repeat center/contain; position:absolute; top:40px; right:40px;
         @media(max-width:767px){ display:none; }
       }
       &:nth-child(2)::before { filter:hue-rotate(90deg); }
