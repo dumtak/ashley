@@ -70,9 +70,9 @@ const Store = () => {
                 <tr>
                   <th>번호</th>
                   <th>매장명</th>
-                  <th>영업시간</th>
                   <th>주소</th>
                   <th>전화번호</th>
+                  <th>영업시간</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,9 +82,9 @@ const Store = () => {
                     {/* <td className="idx">{ !searchParams ? store.length - (10 * (currentPage - 1) + idx) : (10 * (currentPage - 1) + idx + 1) }</td> */}
                     <td className="idx">{ !searchParams ? store.length - (10 * (currentPage - 1) + idx) : searchResult.length - (10 * (currentPage - 1) + idx) }</td>
                     <td className="name">{el.consumerplantname}</td>
-                    <td className="time">{el.opentime}</td>
                     <td className="addr">{el.address1}</td>
                     <td className="num">{el.comptelno}</td>
+                    <td className="time">{el.opentime}</td>
                   </tr>
                 ))
               ) : (
