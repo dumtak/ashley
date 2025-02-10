@@ -94,33 +94,27 @@ function App() {
     
     if (imgEl) {
       imgEl.src = getRandomImage(); // 처음 랜덤이미지 설정
-      
-      const interval = setInterval(() => { //주기적으로 랜덤이미지 설정
-        console.log("계속돈다")
-        imgEl.src = getRandomImage();
+  
+      const interval = setInterval(() => {
+        if (loading) {  //주기적으로 랜덤이미지 설정
+          imgEl.src = getRandomImage();
+        } else {
+          clearInterval(interval);
+        }
       }, 250);
   
       const loadingTimeout = setTimeout(() => { //로딩상태확인
-        console.log("로딩성공")
-        window.onload = () => {
+        if (document.readyState === "complete") {
           setLoading(false);
-        };
-      }, 1000);
-
-      const loadingReload = setTimeout(() => {
-        console.log("5000")
-        if (document.readyState !== "complete") {
-          window.location.reload();
         }
-      }, 5000);
+      }, 1500);
   
       return () => {
-        clearInterval(interval); 
+        clearInterval(interval);
         clearTimeout(loadingTimeout);
-        clearTimeout(loadingReload);
       };
     }
-  }, [location]);
+  }, [loading]);
 
   // useEffect(()=>{
   //   let timeout = null;
