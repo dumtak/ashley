@@ -104,10 +104,17 @@ function App() {
           setLoading(false);
         }
       }, 1000);
+
+      const loadingReload = setTimeout(() => {
+        if (document.readyState !== "complete") {
+          window.location.reload();
+        }
+      }, 5000);
   
       return () => {
         clearInterval(interval); 
         clearTimeout(loadingTimeout);
+        clearTimeout(loadingReload);
       };
     }
   }, [location]);
