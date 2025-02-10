@@ -97,6 +97,7 @@ function App() {
   
       const interval = setInterval(() => {
         if (loading) {  //주기적으로 랜덤이미지 설정
+          console.log("계속돈다", loading);
           imgEl.src = getRandomImage();
         } else {
           clearInterval(interval);
@@ -104,6 +105,7 @@ function App() {
       }, 250);
   
       const loadingTimeout = setTimeout(() => { //로딩상태확인
+        console.log("로딩성공", loading);
         if (document.readyState === "complete") {
           setLoading(false);
         }
