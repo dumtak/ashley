@@ -102,9 +102,9 @@ function App() {
   
       const loadingTimeout = setTimeout(() => { //로딩상태확인
         console.log("로딩성공")
-        if (document.readyState === "complete") {
+        window.onload = () => {
           setLoading(false);
-        }
+        };
       }, 1000);
 
       const loadingReload = setTimeout(() => {
@@ -120,7 +120,7 @@ function App() {
         clearTimeout(loadingReload);
       };
     }
-  }, [location.key]);
+  }, [location]);
 
   // useEffect(()=>{
   //   let timeout = null;
