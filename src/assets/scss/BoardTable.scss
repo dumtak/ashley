@@ -38,6 +38,16 @@
   }
 }
 
+@media(max-width:767px){
+  .board__detail {
+    .nav_post {
+      li { padding:18px 16px 20px;
+        a { max-width:75%; }
+      }
+    }
+  }
+}
+
 
 //=== 매장안내
 .store__list {

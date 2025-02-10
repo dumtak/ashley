@@ -15,6 +15,7 @@ const Home = () => {
   const { notice, event, visual } = useContext(NoticeContext);
 
   const setVisual = {
+    initialSlide: 0,
     infinite: true,
     className: "center",
     // slide: "div",
@@ -39,6 +40,8 @@ const Home = () => {
       {
         breakpoint: 991,
         settings: {
+          autoplay : true,
+          autoplaySpeed: 2500,
           draggable : true,
           centerPadding: "0",
           arrows: false,
