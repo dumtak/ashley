@@ -71,7 +71,7 @@ min-height: 86px;
 @media(max-width:991px){
   .card_list {
     li { width:50%; min-width:50%; }
-    .item { padding:50px 50px 50px 40px;
+    .item { padding:50px 50px 50px 40px; font-weight:500;
       .tit { height:110px; font-size:26px; }
       .date { margin-top:40px; }
     }

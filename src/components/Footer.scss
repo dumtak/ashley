@@ -24,10 +24,6 @@ footer {
   }
 }
 
-:has(#container) footer .bottom_cont {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 footer .bottom_cont {
   .layout_fix {
     align-items: center;

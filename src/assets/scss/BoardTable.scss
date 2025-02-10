@@ -42,8 +42,6 @@
 //=== 매장안내
 .store__list {
   .heading { margin-bottom:60px;
-    @media(max-width:767px){ margin-bottom:32px; }
-
     &:has(.search_cont) { display:flex; justify-content:space-between; }
   }
   .tb_store { text-align:center;
@@ -62,6 +60,7 @@
 
 @media(max-width:767px){
   .store__list {
+    .heading { margin-bottom:32px; flex-direction:column; gap:24px; }
     .tb_store { border:0;
       thead { display:none; }
       tbody,tr,th,td { display:block; }

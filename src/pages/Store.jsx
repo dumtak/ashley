@@ -76,7 +76,7 @@ const Store = () => {
                 </tr>
               </thead>
               <tbody>
-              { listItem.length !== 0 && (
+              { listItem.length !== 0 ? (
                 listItem.map((el,idx)=> (
                   <tr key={store.length-(10*(currentPage-1)+idx)}>
                     {/* <td className="idx">{ !searchParams ? store.length - (10 * (currentPage - 1) + idx) : (10 * (currentPage - 1) + idx + 1) }</td> */}
@@ -87,12 +87,12 @@ const Store = () => {
                     <td className="num">{el.comptelno}</td>
                   </tr>
                 ))
-              ) }
-              { searchParams && searchResult.length === 0 && (
+              ) : (
                 <tr className="empty">
                   <td colSpan="5">일치하는 결과를 찾을 수 없습니다 !</td>
                 </tr>
-              )  }
+              ) }
+              {/* { listItem.length === 0 && ()  } */}
               </tbody>
             </table>
             { listItem.length !== 0 && paginationGroup && (
