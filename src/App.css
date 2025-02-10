@@ -186,7 +186,8 @@ form .tb_item h3.tit .btn_pop.active { opacity:.5; filter:grayscale(1); }
 }
 @media (max-width:767px) { /*Mobile*/
  #main #contents { padding-top:72px; }
- #container #contents { padding-top:138px; padding-bottom:66px; }
+ #container #contents { padding-top:120px; padding-bottom:66px; }
+ /* #container #contents { padding-top:138px; padding-bottom:66px; } */
  header { height:72px; background-color:var(--main-color1); }
  header .topbar { display:none; }
  header h1.header_logo { width:128px; height:28px; margin-bottom:0; background-image:url(/images/logo-wt.svg); }

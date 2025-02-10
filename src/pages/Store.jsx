@@ -83,7 +83,7 @@ const Store = () => {
                     <td className="idx">{ !searchParams ? store.length - (10 * (currentPage - 1) + idx) : searchResult.length - (10 * (currentPage - 1) + idx) }</td>
                     <td className="name">{el.consumerplantname}</td>
                     <td className="addr">{el.address1}</td>
-                    <td className="num">{el.comptelno}</td>
+                    <td className="tel"><a href={`tel:${el.comptelno}`}>{el.comptelno}</a></td>
                     <td className="time">{el.opentime}</td>
                   </tr>
                 ))
