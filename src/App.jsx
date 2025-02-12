@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import gsap from 'gsap';
 
 import { NoticeProvider } from "./context/NoticeContext";
 import { AccessTokenProvider } from "./context/AccessTokenContext";
@@ -8,13 +7,15 @@ import { AccessTokenProvider } from "./context/AccessTokenContext";
 import Header from './components/Header';
 import Home from "./pages/Home";
 import Login from "./pages/member/Login";
-import Join from "./pages/member/Join.jsx";
+import Join from "./pages/member/Join";
+import JoinResult from "./pages/member/JoinResult";
 import Shleyz from "./pages/Shleyz";
 import Notice from "./pages/board/Notice";
 import Event from "./pages/board/Event";
 import DetailType from "./pages/board/DetailType";
 import Store from "./pages/Store";
 import Membership from "./pages/Membership";
+import Mypage from "./pages/mypage/Mypage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
@@ -36,7 +37,6 @@ function App() {
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const [loadPercentage, setLoadPercentage] = useState(0);
   const images = [
     "/images/shleyz-cota-i1.png",
     "/images/shleyz-cota-i2.png",
@@ -110,10 +110,18 @@ function App() {
           setLoading(false);
         }
       }, 1500);
+
+      const loadingReload = setTimeout(() => {
+        console.log("3000")
+        if (document.readyState !== "complete") {
+          window.location.reload();
+        }
+      }, 3000);
   
       return () => {
         clearInterval(interval);
         clearTimeout(loadingTimeout);
+        clearTimeout(loadingReload);
       };
     }
   }, [loading]);
@@ -188,6 +196,7 @@ function App() {
               <Route path="/member/">
                 <Route path="login" element={<Login/>}></Route>
                 <Route path="join" element={<Join/>}></Route>
+                <Route path="joinResult" element={<JoinResult/>}></Route>
               </Route>
               <Route path="/about/">
                 <Route path="shleyz" element={<Shleyz/>}></Route>
@@ -197,6 +206,7 @@ function App() {
               <Route path="/:type/detail" element={<DetailType/>}/>
               <Route path="/store" element={<Store/>}/>
               <Route path="/membership" element={<Membership/>}/>
+              <Route path="/mypage" element={<Mypage/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>
             <Footer/>

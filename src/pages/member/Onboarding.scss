@@ -97,9 +97,11 @@
     }
   }
 
-  .modal_info {
-    transform: translate(60px, -6px);
+  .modal_info { transform: translate(60px,-6px);
+    @media(max-width:767px){ width:calc(100% - 48px); min-width:320px; left:50%; transform: translate(-50%,-6px); }
+    .txt_bx .dot { font-size:13px; font-weight:500; color:var(--main-color2); }
   }
+
 }
 
 [class^="onboarding__join"] .btn_wrap.column {

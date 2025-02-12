@@ -18,8 +18,17 @@ header {
     font-weight: 300;
     color: #fff;
 
-    a {
+    a,button {
       margin-left: 24px;
+    }
+    
+    .name {
+      text-decoration: underline;
+    }
+    
+    button {
+      font-weight: 300;
+      color:#fff;
     }
   }
 

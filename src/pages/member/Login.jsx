@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -10,25 +11,33 @@ const Login = () => {
   const navigate = useNavigate();
   const {setAccessToken} = useAccessToken();
 
-    const onSubmit = async (values) => {
-      try {
-        const result = await axios.post(`${API_URL}/users/login`, {
-          user_id: values.user_id,
-          pw: values.password,
-        });
-        if (result.data.user === values.user_id) {
-            alert("로그인이 성공했습니다.");
-            // accessToken을 Context와 localStorage에 저장
-            setAccessToken(result.data.accessToken);
-            localStorage.setItem('accessToken', result.data.accessToken);
-            navigate('/'); // 메인 화면으로 이동
-        } else {
-            alert("로그인 정보를 다시 확인해주세요");
-        }
-      } catch(err){
-        console.error(err);
+  const [error,setError] = useState([]);
+  const refUserId = useRef();
+  const refUserPassword = useRef();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const userId = refUserId.current.value;
+    const userPassword = refUserPassword.current.value;
+
+    try {
+      const result = await axios.post(`${API_URL}/users/login`, {
+        userId, userPassword
+      });
+      if (result.data.user === userId) {
+          alert("로그인 성공!");
+          // accessToken을 Context와 localStorage에 저장
+          setAccessToken(result.data.accessToken);
+          localStorage.setItem('accessToken', result.data.accessToken);
+          navigate('/'); // 메인 화면으로 이동
+      } else {
+          alert("로그인 정보를 다시 확인해주세요");
       }
+    } catch(err){
+      setError(err.response.data);
+      console.error(err);
     }
+  }
 
   return (
     <>
@@ -40,9 +49,10 @@ const Login = () => {
             </div>
             <form onSubmit={onSubmit}>
               <ul className="inp_list">
-                <li><input type="text" placeholder="아이디"/></li>
-                <li><input type="password" placeholder="비밀번호"/></li>
+                <li><input type="text" name="user_id" ref={refUserId} placeholder="아이디"/></li>
+                <li><input type="password" name="password" ref={refUserPassword} placeholder="비밀번호"/></li>
               </ul>
+              { error && ( <p className="error">{error.message}</p> ) }
               <div className="flex_items justify">
                 <div className="security chk_bx">
                   <input type="checkbox" id="login_keep" name="login_keep"/>
@@ -57,7 +67,7 @@ const Login = () => {
                 <button type="submit" className="btn_dark">로그인</button>
                 <Link to="/member/join" className="btn_light">회원가입</Link>
               </div>
-              <div className="social">
+              <div className="displaynone social">
                 <p className="tit">SNS 간편 로그인</p>
                 <ul>
                   <li><Link to="/"><img src="../images/social-kakao.png" alt="카카오 로그인"/></Link></li>

@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { API_URL } from "../../config/constants";
 import DaumAddr from "../../context/DaumAddr";
 
+import { useAccessToken } from '../../context/AccessTokenContext';
+
 import "./Onboarding.scss";
 
 const Join = () => {
+  const navigate = useNavigate();
   //=== 다음 주소검색 API
   const [ postcode, setPostcode ] = useState("");
   const [ address, setAddress ] = useState("");
@@ -18,7 +21,7 @@ const Join = () => {
       addr2: address
     }))
   },[postcode, address])
-
+  
 
   //### id trim 체크할것!
   const [ formData, setFormData ] = useState({ //입력값 담기
@@ -158,6 +161,7 @@ const Join = () => {
 
 
   //===회원가입버튼
+  const { setAccessToken } = useAccessToken();
   const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(e.target);
@@ -269,6 +273,16 @@ const Join = () => {
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
           console.log('회원가입 성공 ?? ', result.data);
+          // console.log("result.data.token111",result.data.token)
+          // console.log("result.data.token222",result.data.accessToken)
+          //회원가입완료 전달
+          const accessToken = result.data.accessToken;
+          setAccessToken(accessToken); // 상태 업데이트
+          localStorage.setItem("accessToken", accessToken);
+          
+          navigate('/member/joinResult', {
+            state: { name:formData.name, id:formData.user_id, email:formData.email },
+          });
           // history("/", {replace:true}) //성공시 뒤로가기 막기
         }).catch((error)=>{
           console.error(error);
@@ -278,22 +292,19 @@ const Join = () => {
         //db에 회원가입 정보 넣기 실패
         console.error('에러===', error.response?.data, error.message);
       }
+
     }
 
   }
-  // const { name,id,password,passwordConfirm } = formData;
-  // if(!name || !id || !password || !passwordConfirm){
-  //   alert("필수항목입력");
-  //   return;
-  // } else {
-  //   alert("정상");
-  // }
-  // console.log( name,id,password,passwordConfirm );
 
-  useEffect(()=>{
-    console.log(formData);
-  },[formData])
 
+  //===물음표안내
+  const modalPop = (e)=>{
+    e.preventDefault();
+    const modal = document.querySelector(`.modal_info[data-popup="${e.target.dataset.popup}"]`);
+    const isOpen = modal.style.display === 'block';
+    !isOpen ? (e.target.classList.add("active"), modal.style.display = "block") : (e.target.classList.remove("active"), modal.style.display = "none");
+  }
 
   const [isTermsCheckedAll,setIsTermsCheckedAll] = useState(false);
   const [isTermsChecked,setIsTermsChecked] = useState([]);
@@ -450,7 +461,7 @@ const Join = () => {
                 <li>
                   <div className="chk_bx">
                     <input type="checkbox" id="join_terms_all" name="join_terms_all" checked={isTermsCheckedAll}
-                    onChange={()=> { setIsTermsCheckedAll(isTermsChecked.length === chkEl.length); setIsTermsChecked(prev => prev.length ? [] : [...chkEl].map(el => el.id) ); } }/>
+                    onChange={()=> { setIsTermsChecked(prev => prev.length ? [] : [...chkEl].map(el => el.id) ); } }/> {/* setIsTermsCheckedAll(isTermsCheckedAll); */}
                     <label className="chk_txt" htmlFor="join_terms_all">
                         <span className="chk"></span>
                         <span className="txt"><b>모든 약관을 확인하고 전체 동의합니다.</b></span>
@@ -1098,7 +1109,7 @@ const Join = () => {
               </ul>
             </div>
             <div className="tb_item">
-              <h3 className="tit">마케팅 정보 수신동의<button className="btn_pop" data-popup="join_mk">?</button></h3>
+              <h3 className="tit">마케팅 정보 수신동의<button className="btn_pop" data-popup="join_mk" onClick={(e)=>modalPop(e)}>?</button></h3>
               <div className="modal_info" data-popup="join_mk">
                 <h4 className="tit">[선택] 서비스 정보를 받으시려면 동의해주세요.</h4>
                 <div className="bg_bx">

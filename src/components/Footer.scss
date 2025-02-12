@@ -43,7 +43,7 @@ footer .bottom_cont {
 
 footer {
   .bottom_corp {
-    padding: 40px 0;
+    padding: 40px 0; border-top:1px solid var(--br-color);
 
     .layout_fix {
       align-items: end;

@@ -18,8 +18,8 @@ export const isActiveToken = async (accessToken) => {
     const resResult = response.data.result;
     console.log("API응답===", response);
 
-    if (resResult && resResult.id) {
-      return { accessResult: true, user_id: resResult.id };
+    if (resResult && resResult.user_key) {
+      return { accessResult: true, user_id: resResult.user_key }; //{server} res.send({ user: result.user_id,
     } else if (resResult === false) { // 유효하지 않은 토큰
       console.warn("Token is invalid.");
       localStorage.removeItem('accessToken');
@@ -43,24 +43,6 @@ export const AccessTokenProvider = ({ children }) => {
 
   useEffect(() => {
     const verifyToken = async () => {
-      // if (accessToken) { 
-      //   const result = await isActiveToken(accessToken);
-      //   setAccessResult(result.accessResult);
-      //   setUserId(result.user_id);
-
-      //   // if (result.accessResult) {
-      //   //   setAccessResult(true);
-      //   //   setUserId(result.user_id);
-      //   // } else {
-      //   //   setAccessResult(false);
-      //   //   setUserId(null);  // 토큰이 유효하지 않으면 user_id를 null로 설정
-      //   // }
-
-      // } else {
-      //   setAccessResult(false);
-      //   setUserId(null);
-      // }
-
         console.log("인증토큰===", accessToken);
         if (!accessToken) { // accessToken 없을 경우
           console.log("==인증토큰없음==");
@@ -89,7 +71,7 @@ export const AccessTokenProvider = ({ children }) => {
   }, [accessToken]);
 
   return (
-    <AccessTokenContext.Provider value={{ accessToken, setAccessToken, accessResult, user_id, loading }}>
+    <AccessTokenContext.Provider value={{ accessToken,setAccessToken, accessResult,setAccessResult, user_id, loading }}>
       {children}
     </AccessTokenContext.Provider>
   );
