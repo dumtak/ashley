@@ -25,9 +25,6 @@ const Join = () => {
     // region: '지역',
     // store: '지점',
   });
-
-  const [errors, setErrors] = useState({});
-
   const handleData = (e)=>{ //입력값 체크
     const { name,value } = e.target;
     setFormData(prev => ({
@@ -35,11 +32,13 @@ const Join = () => {
       [name] : value
     }))
   }
+  const [errors, setErrors] = useState({});
 
+
+  //===아이디 중복확인 버튼
   const [ idCheck, setIdCheck ] = useState(false);
   const handleIdCheck = async ()=>{
     console.log("####errors###", errors);
-    
     //##### 아이디
     try {
       const response = await axios.get(`${API_URL}/users/check-id`, {
@@ -71,6 +70,94 @@ const Join = () => {
     }
   }
 
+
+  //===onBlur
+  const confirmName = (name)=>{
+    const nameRule = /^[a-zA-Z가-힣]{2,20}$/;
+    if(/\s/.test(name) || !nameRule.test(name)){ //공백 및 rule 확인
+      setErrors(prev => ({ ...prev, name: "형식이 올바르지 않습니다", name_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, name:"", name_state: "success" }));
+    }
+  }
+  const confirmPassword = (password)=>{
+    const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+    if(!password) return;
+    if (!password || password.trim() === "") {
+      setErrors((prev) => ({ ...prev, password: "비밀번호를 입력하세요", password_state: "error" }));
+      return false;
+    }
+    if (!pwRule.test(password)) {
+      setErrors((prev) => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" }));
+      return false;
+    }
+    setErrors((prev) => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
+    return true;
+  }
+  const confirmPasswordConfirm = (password, passwordConfirm)=>{
+    const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+    console.log("passwordRule", password)
+    if(!passwordConfirm) return;
+    if(!pwRule.test(password)){
+      setErrors((prev) => ({ ...prev, passwordConfirm: "비밀번호를 재설정하고 입력하세요", passwordConfirm_state: "error" }));
+      return;
+    }
+    if (password !== passwordConfirm) {
+      setErrors((prev) => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" }));
+      return false;
+    }
+    setErrors((prev) => ({ ...prev, passwordConfirm: "비밀번호와 일치합니다", passwordConfirm_state: "success" }));
+    return true;
+  }
+  const confirmBirth = (birth1, birth2, birth3) => {
+    const birthRule1 = /^(19[0-9]{2}|20[0-9]{2})$/; // 1900년 ~ 2099년
+    const birthRule2 = /^(0?[1-9]|1[0-2])$/; //1~12월, 01~12월
+    const birthRule3 = /^(0?[1-9]|[12][0-9]|3[01])$/; // 1~31일,01~31일
+
+    if (!birth1 || !birth2 || !birth3 || birth1==="" || birth2==="" || birth3==="") return;
+    if (!birthRule1.test(birth1)) {
+      setErrors(prev => ({ ...prev, birth1: "올바른 연도를 입력하세요", birth1_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, birth1: "", birth1_state: "success" }));
+    }
+    if (!birthRule2.test(birth2)) {
+      setErrors(prev => ({ ...prev, birth2: "올바른 월을 입력하세요", birth2_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, birth2: "", birth2_state: "success" }));
+    }
+    if (!birthRule3.test(birth3)) {
+      setErrors(prev => ({ ...prev, birth3: "올바른 일을 입력하세요", birth3_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, birth3: "", birth3_state: "success" }));
+    }
+  }
+  const confirmPhone = (phone)=>{
+    const phoneRule = /^(?:(010)|(01[1|6|7|8|9]))\d{3,4}(\d{4})$/;
+    if(!phone) return;
+    if(!phoneRule.test(phone)){
+      setErrors(prev => ({ ...prev, phone: "형식이 올바르지 않습니다", phone_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, phone:"", phone_state: "success" }));
+    }
+  }
+  const confirmEmail = (email)=>{
+    const emailRule = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
+    if(!email) return;
+    if(!emailRule.test(email)){
+      setErrors(prev => ({ ...prev, email: "형식이 올바르지 않습니다", email_state: "error" }));
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, email:"", email_state: "success" }));
+    }
+  }
+
+
+  //===회원가입버튼
   const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(e.target);
@@ -104,81 +191,81 @@ const Join = () => {
     // else {
 
       //##### 이름
-      const nameRule = /^[a-zA-Z가-힣]{2,20}$/;
-      if(!nameRule.test(formData.name)){
-        setErrors(prev => ({ ...prev, name: "형식이 올바르지 않습니다", name_state: "error" }));
-        return;
-      } else {
-        setErrors(prev => ({ ...prev, name:"", name_state: "success" }));
-      }
+      // const nameRule = /^[a-zA-Z가-힣]{2,20}$/;
+      // if(!nameRule.test(formData.name)){
+      //   setErrors(prev => ({ ...prev, name: "형식이 올바르지 않습니다", name_state: "error" }));
+      //   return;
+      // } else {
+      //   setErrors(prev => ({ ...prev, name:"", name_state: "success" }));
+      // }
 
       //##### 비밀번호
-      const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
-      console.log("errors====", errors);
-      // console.log("!pwRule.test(formData.password)",!pwRule.test(formData.password))
-      // console.log("!pwRule.test(formData.passwordConfirm)",!pwRule.test(formData.passwordConfirm))
-      if (!formData.password || formData.password.trim() === "") { // 비밀번호가 비어 있으면
-        setErrors(prev => ({ ...prev, password: "비밀번호를 입력하세요", password_state: "error" }));
-        return;
-      }
-      if (!pwRule.test(formData.password)) { // 비밀번호가 규칙에 맞지 않으면
-        setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
-        return;
-      } else {
-        setErrors(prev => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
-      }
-      if (!formData.passwordConfirm || formData.passwordConfirm.trim() === "") { // 비밀번호 재입력이 비어 있으면
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
-        return;
-      }
-      if (!pwRule.test(formData.passwordConfirm)) { // 비밀번호 재입력이 규칙에 맞지 않으면
-        // setErrors(prev => ({ ...prev, passwordConfirm: "영문 대소문자/숫자/특수문자 8~16자 조합", passwordConfirm_state: "error" }));
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
-        return;
-      }
-      if (formData.password !== formData.passwordConfirm) { // 비밀번호와 비밀번호 재입력이 일치하지 않으면
-        setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
-        return;
-      }
-      // if (pwRule.test(formData.password) && formData.password === formData.passwordConfirm) {
+      // const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
+      // console.log("errors====", errors);
+      // // console.log("!pwRule.test(formData.password)",!pwRule.test(formData.password))
+      // // console.log("!pwRule.test(formData.passwordConfirm)",!pwRule.test(formData.passwordConfirm))
+      // if (!formData.password || formData.password.trim() === "") { // 비밀번호가 비어 있으면
+      //   setErrors(prev => ({ ...prev, password: "비밀번호를 입력하세요", password_state: "error" }));
+      //   return;
       // }
-      setErrors(prev => ({ ...prev,  password: "올바른 비밀번호입니다",  passwordConfirm: "올바른 비밀번호입니다",  password_state: "success",  passwordConfirm_state: "success" }));
+      // if (!pwRule.test(formData.password)) { // 비밀번호가 규칙에 맞지 않으면
+      //   setErrors(prev => ({ ...prev, password: "영문 대소문자/숫자/특수문자 8~16자 조합", password_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
+      //   return;
+      // } else {
+      //   setErrors(prev => ({ ...prev, password: "올바른 비밀번호입니다", password_state: "success" }));
+      // }
+      // if (!formData.passwordConfirm || formData.passwordConfirm.trim() === "") { // 비밀번호 재입력이 비어 있으면
+      //   setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호를 재입력하세요", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
+      //   return;
+      // }
+      // if (!pwRule.test(formData.passwordConfirm)) { // 비밀번호 재입력이 규칙에 맞지 않으면
+      //   // setErrors(prev => ({ ...prev, passwordConfirm: "영문 대소문자/숫자/특수문자 8~16자 조합", passwordConfirm_state: "error" }));
+      //   setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
+      //   return;
+      // }
+      // if (formData.password !== formData.passwordConfirm) { // 비밀번호와 비밀번호 재입력이 일치하지 않으면
+      //   setErrors(prev => ({ ...prev, passwordConfirm: "비밀번호와 재입력이 일치하지 않습니다", passwordConfirm_state: "error" })); window.scrollTo({ top:0, behavior:"smooth" });
+      //   return;
+      // }
+      // // if (pwRule.test(formData.password) && formData.password === formData.passwordConfirm) {
+      // // }
+      // setErrors(prev => ({ ...prev,  password: "올바른 비밀번호입니다",  passwordConfirm: "올바른 비밀번호입니다",  password_state: "success",  passwordConfirm_state: "success" }));
 
       //##### 핸드폰번호
-      const phoneRule = /^(?:(010)|(01[1|6|7|8|9]))\d{3,4}(\d{4})$/;
-      if(!phoneRule.test(formData.phone)){
-        setErrors(prev => ({ ...prev, phone: "형식이 올바르지 않습니다", phone_state: "error" }));
-        return;
-      } else {
-        setErrors(prev => ({ ...prev, phone:"", phone_state: "success" }));
-      }
+      // const phoneRule = /^(?:(010)|(01[1|6|7|8|9]))\d{3,4}(\d{4})$/;
+      // if(!phoneRule.test(formData.phone)){
+      //   setErrors(prev => ({ ...prev, phone: "형식이 올바르지 않습니다", phone_state: "error" }));
+      //   return;
+      // } else {
+      //   setErrors(prev => ({ ...prev, phone:"", phone_state: "success" }));
+      // }
 
       //##### 이메일
-      const emailRule = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
-      if(!emailRule.test(formData.email)){
-        setErrors(prev => ({ ...prev, email: "형식이 올바르지 않습니다", email_state: "error" }));
-        return;
-      } else {
-        setErrors(prev => ({ ...prev, email:"", email_state: "success" }));
-      }
+      // const emailRule = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
+      // if(!emailRule.test(formData.email)){
+      //   setErrors(prev => ({ ...prev, email: "형식이 올바르지 않습니다", email_state: "error" }));
+      //   return;
+      // } else {
+      //   setErrors(prev => ({ ...prev, email:"", email_state: "success" }));
+      // }
 
 
       try{
         const birth = (formData.birth1 && formData.birth2 && formData.birth3) ? `${formData.birth1}-${formData.birth2}-${formData.birth3}` : null;
-
-
         const address = formData.addr3 && formData.addr3.trim() !== "" ? `${formData.addr2} ${formData.addr3.trim()}` : formData.addr2 || null;
 
         console.log('보낸다데이터===', {
           ...formData,
           birth: birth,
+          addr1: formData.addr1,
           addr2: address
         }); 
 
         axios.post(`${API_URL}/users`, {
           ...formData,
           birth: birth,
-          addr2: address
+          addr1: formData.addr1,
+          addr2: address,
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
           console.log('회원가입 성공 ?? ', result.data);
@@ -188,7 +275,7 @@ const Join = () => {
           alert(error.response.data)
           window.scrollTo({ top:0, behavior:"smooth" });
         })
-      }catch(error){
+      } catch(error){
         //db에 회원가입 정보 넣기 실패
         console.error('에러===', error.response?.data, error.message);
       }
@@ -208,6 +295,18 @@ const Join = () => {
     console.log(formData);
   },[formData])
 
+
+  const [isTermsCheckedAll,setIsTermsCheckedAll] = useState(false);
+  const [isTermsChecked,setIsTermsChecked] = useState([]);
+  const chkEl = document.querySelectorAll("input[name='join_terms']");
+  const chkChange = (id)=>{
+    setIsTermsChecked(prev => prev.includes(id) ? prev.filter(el => el !== id) : [...prev, id]);
+  }
+  useEffect(()=>{
+    setIsTermsCheckedAll(isTermsChecked.length === chkEl.length);
+  },[isTermsChecked])
+
+
   return (
     <>
       <div id="container" className="onboarding__join">
@@ -223,38 +322,58 @@ const Join = () => {
               <ul className="inp_list">
                 <li>
                   <div className="tit required">이름</div>
-                  <input type="text" name="name" onChange={(e)=>handleData(e)} required autoFocus/>
-                  {errors.name && <p className={errors.name_state === "error" ? "error" : ""}>{errors.name}</p>}
+                  <input type="text" name="name"
+                  onChange={(e)=>handleData(e)}
+                  onBlur={()=>confirmName(formData.name)} aria-required="true" required/>
+                  {errors.name_state === "error" && <p className="error">{errors.name}</p>}
+                  {/* {errors.name && <p className={errors.name_state === "error" ? "error" : ""}>{errors.name}</p>} */}
                 </li>
                 <li>
                   <div className="tit required">회원아이디</div>
                   <div className="flex_items">
-                    <input type="text" name="user_id" onChange={(e)=>handleData(e)} required />
+                    <input type="text" name="user_id" onChange={(e)=>handleData(e)} aria-required="true" required />
                     <button onClick={handleIdCheck} className="btn_check">중복확인</button>
                   </div>
                   {errors.user_id && <p className={errors.user_id_state === "error" ? "error" : ""}>{errors.user_id}</p>}
                 </li>
                 <li>
                   <div className="tit required">비밀번호</div>
-                  <input type="password" name="password" onChange={(e)=>handleData(e)} placeholder="8~16자 영문 대/소문자, 숫자, 특수문자" required/>
+                  <input type="password" name="password"
+                  onChange={(e)=>handleData(e)} placeholder="8~16자 영문 대/소문자, 숫자, 특수문자"
+                  onBlur={()=>confirmPassword(formData.password)} aria-required="true" required/>
                   { errors.password && ( <p className={errors.password_state === "error" ? "error" : ""}>{errors.password}</p> ) }
                 </li>
                 <li>
                   <div className="tit required">비밀번호 재입력</div>
-                  <input type="password" name="passwordConfirm" onChange={(e)=>handleData(e)} required/>
+                  <input type="password" name="passwordConfirm"
+                  onChange={(e)=>handleData(e)}
+                  onBlur={()=>confirmPasswordConfirm(formData.password, formData.passwordConfirm)} aria-required="true" required/>
                   { errors.passwordConfirm && ( <p className={errors.passwordConfirm_state === "error" ? "error" : ""}>{errors.passwordConfirm}</p> ) }
                 </li>
                 <li>
                   <div className="tit">생년월일</div>
                   <div className="flex_items">
-                    <input type="tel" name="birth1" maxLength="4" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="연도"/>
-                    <input type="tel" name="birth2" maxLength="2" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="월"/>
-                    <input type="tel" name="birth3" maxLength="2" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="일"/>
+                    <input type="tel" name="birth1" maxLength="4" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} onBlur={()=>confirmBirth(formData.birth1,formData.birth2,formData.birth3)} placeholder="연도"/>
+                    <input type="tel" name="birth2" maxLength="2" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} onBlur={()=>confirmBirth(formData.birth1,formData.birth2,formData.birth3)} placeholder="월"/>
+                    <input type="tel" name="birth3" maxLength="2" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} onBlur={()=>confirmBirth(formData.birth1,formData.birth2,formData.birth3)} placeholder="일"/>
                   </div>
+                  {
+                    (errors.birth1 || errors.birth2 || errors.birth3) && (
+                      <p className={( errors.birth1_state === "error" || errors.birth2_state === "error" || errors.birth3_state === "error") ? "error" : ""}>
+                        {errors.birth1 || errors.birth2 || errors.birth3}
+                      </p>
+                    )
+                  }
+                  {/* { errors.birth1_state === "error" ? errors.birth1 : "1에러아님" }
+                  { errors.birth2_state === "error" ? errors.birth2 : "2에러아님" }
+                  { errors.birth3_state === "error" ? errors.birth3 : "3에러아님" } */}
                 </li>
                 <li>
                   <div className="tit required">핸드폰 번호</div>
-                  <input type="tel" name="phone" maxLength="11" onChange={(e)=>handleData(e)} onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')} placeholder="(-) 제외" required/>
+                  <input type="tel" name="phone" maxLength="11" placeholder="(-) 제외" 
+                  onChange={(e)=>handleData(e)}
+                  onInput={(e)=>e.target.value=e.target.value.replace(/[^0-9]/g,'')}
+                  onBlur={()=>confirmPhone(formData.phone)} aria-required="true" required/>
                   {errors.phone && <p className={errors.phone_state === "error" ? "error" : ""}>{errors.phone}</p>}
                 </li>
                 <li>
@@ -271,13 +390,15 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="tit required">이메일</div>
-                  <input type="email" name="email" onChange={(e)=>handleData(e)} required/>
+                  <input type="email" name="email"
+                  onChange={(e)=>handleData(e)}
+                  onBlur={()=>confirmEmail(formData.email)} aria-required="true" required/>
                   {errors.email && <p className={errors.email_state === "error" ? "error" : ""}>{errors.email}</p>}
                 </li>
                 <li>
                   <div className="tit required">리테일 선호 지점</div>
                   <div className="flex_items">
-                    <select name="region" value={formData.region || "지역"} onChange={(e)=>handleData(e)} required>
+                    <select name="region" value={formData.region || "지역"} onChange={(e)=>handleData(e)} aria-required="true" required>
                       <option value="지역" disabled>지역</option>
                       <option value="경기">경기</option>
                       <option value="서울">서울</option>
@@ -291,7 +412,7 @@ const Join = () => {
                       <option value="전남">전남</option>
                       <option value="제주">제주</option>
                     </select>
-                    <select name="store" value={formData.store || "지점"} onChange={(e)=>handleData(e)} required>
+                    <select name="store" value={formData.store || "지점"} onChange={(e)=>handleData(e)} aria-required="true" required>
                       <option value="지점" disabled>지점</option>
                       <option>NC 강서점</option>
                       <option>NC 신구로점</option>
@@ -329,7 +450,8 @@ const Join = () => {
               <ul className="inp_list">
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms_all" name="join_terms"/>
+                    <input type="checkbox" id="join_terms_all" name="join_terms_all" checked={isTermsCheckedAll}
+                    onChange={()=> { setIsTermsCheckedAll(isTermsChecked.length === chkEl.length); setIsTermsChecked(prev => prev.length ? [] : [...chkEl].map(el => el.id) ); } }/>
                     <label className="chk_txt" htmlFor="join_terms_all">
                         <span className="chk"></span>
                         <span className="txt"><b>모든 약관을 확인하고 전체 동의합니다.</b></span>
@@ -338,7 +460,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms1" name="join_terms"/>
+                    <input type="checkbox" id="join_terms1" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms1")} onChange={(e)=>chkChange(e.target.id)}/>
                     <label className="chk_txt" htmlFor="join_terms1">
                         <span className="chk"></span>
                         <span className="txt">[필수] E-POINT 이용약관 동의</span>
@@ -685,7 +807,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms2" name="join_terms"/>
+                    <input type="checkbox" id="join_terms2" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms2")} onChange={(e)=>chkChange(e.target.id)}/>
                     <label className="chk_txt" htmlFor="join_terms2">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 수집동의</span>
@@ -771,7 +893,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms3" name="join_terms"/>
+                    <input type="checkbox" id="join_terms3" name="join_terms" checked={isTermsChecked.includes("join_terms3")} onChange={(e)=>chkChange(e.target.id)}/>
                     <label className="chk_txt" htmlFor="join_terms3">
                         <span className="chk"></span>
                         <span className="txt">[선택] 개인정보 수집동의</span>
@@ -857,7 +979,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms4" name="join_terms"/>
+                    <input type="checkbox" id="join_terms4" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms4")} onChange={(e)=>chkChange(e.target.id)}/>
                     <label className="chk_txt" htmlFor="join_terms4">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 제 3자 제공 동의</span>

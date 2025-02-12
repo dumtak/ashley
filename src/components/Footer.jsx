@@ -31,7 +31,7 @@ const Footer = () => {
             <div>
               <span>호스팅 서비스 제공자 : 라드씨엔에스</span>
             </div>
-            <p>Copyright © 2024 ASHLEY</p>
+            <p>Copyright © 2025 ASHLEY</p>
           </div>
           <ul className="social">
             <li><a href="#"><img src="/images/footer-social-facebook.png" alt="페이스북 아이콘"/></a></li>
