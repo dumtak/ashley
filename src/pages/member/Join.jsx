@@ -272,8 +272,7 @@ const Join = () => {
           // history("/", {replace:true}) //성공시 뒤로가기 막기
         }).catch((error)=>{
           console.error(error);
-          alert(error.response.data)
-          window.scrollTo({ top:0, behavior:"smooth" });
+          alert(error.response.data);
         })
       } catch(error){
         //db에 회원가입 정보 넣기 실패
@@ -298,7 +297,7 @@ const Join = () => {
 
   const [isTermsCheckedAll,setIsTermsCheckedAll] = useState(false);
   const [isTermsChecked,setIsTermsChecked] = useState([]);
-  const chkEl = document.querySelectorAll("input[name='join_terms']");
+  const chkEl = document.querySelectorAll("input[name^='join_terms']:not([name$='_all'])");
   const chkChange = (id)=>{
     setIsTermsChecked(prev => prev.includes(id) ? prev.filter(el => el !== id) : [...prev, id]);
   }
@@ -460,7 +459,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms1" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms1")} onChange={(e)=>chkChange(e.target.id)}/>
+                    <input type="checkbox" id="join_terms1" name="join_terms1" aria-required="true" checked={isTermsChecked.includes("join_terms1")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms1">
                         <span className="chk"></span>
                         <span className="txt">[필수] E-POINT 이용약관 동의</span>
@@ -807,7 +806,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms2" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms2")} onChange={(e)=>chkChange(e.target.id)}/>
+                    <input type="checkbox" id="join_terms2" name="join_terms2" aria-required="true" checked={isTermsChecked.includes("join_terms2")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms2">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 수집동의</span>
@@ -893,7 +892,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms3" name="join_terms" checked={isTermsChecked.includes("join_terms3")} onChange={(e)=>chkChange(e.target.id)}/>
+                    <input type="checkbox" id="join_terms3" name="join_terms3" checked={isTermsChecked.includes("join_terms3")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms3">
                         <span className="chk"></span>
                         <span className="txt">[선택] 개인정보 수집동의</span>
@@ -979,7 +978,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms4" name="join_terms" aria-required="true" checked={isTermsChecked.includes("join_terms4")} onChange={(e)=>chkChange(e.target.id)}/>
+                    <input type="checkbox" id="join_terms4" name="join_terms4" aria-required="true" checked={isTermsChecked.includes("join_terms4")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms4">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 제 3자 제공 동의</span>
@@ -1124,28 +1123,28 @@ const Join = () => {
               </div>
               <div className="chk_cont">
                 <span className="chk_bx">
-                  <input type="checkbox" id="join_mk1" name="join_mk"/>
+                  <input type="checkbox" id="join_mk1" name="join_mk_mail" onChange={(e)=>handleData(e)}/>
                   <label className="chk_txt" htmlFor="join_mk1">
                       <span className="chk"></span>
                       <span className="txt">메일 수신</span>
                   </label>
                 </span>
                 <span className="chk_bx">
-                  <input type="checkbox" id="join_mk2" name="join_mk"/>
+                  <input type="checkbox" id="join_mk2" name="join_mk_sms" onChange={(e)=>handleData(e)}/>
                   <label className="chk_txt" htmlFor="join_mk2">
                       <span className="chk"></span>
                       <span className="txt">SMS 수신</span>
                   </label>
                 </span>
                 <span className="chk_bx">
-                  <input type="checkbox" id="join_mk3" name="join_mk"/>
+                  <input type="checkbox" id="join_mk3" name="join_mk_dm" onChange={(e)=>handleData(e)}/>
                   <label className="chk_txt" htmlFor="join_mk3">
                       <span className="chk"></span>
                       <span className="txt">DM 수신</span>
                   </label>
                 </span>
                 <span className="chk_bx">
-                  <input type="checkbox" id="join_mk4" name="join_mk"/>
+                  <input type="checkbox" id="join_mk4" name="join_mk_coupon" onChange={(e)=>handleData(e)}/>
                   <label className="chk_txt" htmlFor="join_mk4">
                       <span className="chk"></span>
                       <span className="txt">쿠폰북 수신</span>
