@@ -38,10 +38,9 @@ const Join = () => {
   }
   const [errors, setErrors] = useState({});
 
-  useEffect(()=>{
-    console.log("formData",formData)
-  },[formData])
-
+  // useEffect(()=>{
+  //   console.log("formData",formData)
+  // },[formData])
 
   //===아이디 중복확인 버튼
   const [ idCheck, setIdCheck ] = useState(false);
@@ -338,6 +337,17 @@ const Join = () => {
     handleChkData();
   },[isTermsChecked,isTermsCheckedAll])
 
+  const termsBx = (e)=>{
+    e.preventDefault();
+    // console.log("termsBx",e.target);
+
+    document.querySelectorAll(".tb_item.terms .btn_more").forEach(el => {
+      // if(el !== e.target)
+      el.classList.toggle("active", el === e.target && !el.classList.contains("active"));
+      el.nextElementSibling.style.maxHeight = el.classList.contains("active") ? "160px" : "0";
+    })
+  }
+
 
 
   return (
@@ -506,7 +516,7 @@ const Join = () => {
                         <span className="txt">[필수] E-POINT 이용약관 동의</span>
                     </label>
                   </div>
-                  <button className="btn_more">전문보기</button>
+                  <button className="btn_more" onClick={termsBx}>전문보기</button>
                   <div className="txt">제 1 장 총칙
                     제 1 조 (목적)
                     본 약관은 "이포인트 회원"이 이랜드리테일(이하 "당사")가 제공하는 "이포인트 서비스"를 이용함에 있어 "이포인트 회원"과 당사와의 제반 권리, 의무 및 관련 절차 등을 규정하는데 그 목적이 있습니다.
@@ -853,7 +863,7 @@ const Join = () => {
                         <span className="txt">[필수] 개인정보 수집동의</span>
                     </label>
                   </div>
-                  <button className="btn_more">전문보기</button>
+                  <button className="btn_more" onClick={termsBx}>전문보기</button>
                   <div className="txt">① 회사는 서비스제공을 위하여 필요한 최소한의 범위 내에서 아래와 같은 목적으로 개인정보를 수집하고 있습니다.
                     1. 서비스 제공에 관한 계약이행 및 서비스 제공에 따른 요금정산
                     - 컨텐츠 제공, 물품 및 경품 배송 또는 청구서 등 발송, 금융거래 본인인증 및 금융서비스, 구매 및 요금결제. 요금추심 이랜드레테일 Membership 포인트적립
@@ -939,7 +949,7 @@ const Join = () => {
                         <span className="txt">[선택] 개인정보 수집동의</span>
                     </label>
                   </div>
-                  <button className="btn_more">전문보기</button>
+                  <button className="btn_more" onClick={termsBx}>전문보기</button>
                   <div className="txt">① 회사는 서비스제공을 위하여 필요한 최소한의 범위 내에서 아래와 같은 목적으로 개인정보를 수집하고 있습니다.
                     1. 서비스 제공에 관한 계약이행 및 서비스 제공에 따른 요금정산
                     - 컨텐츠 제공, 물품 및 경품 배송 또는 청구서 등 발송, 금융거래 본인인증 및 금융서비스, 구매 및 요금결제. 요금추심 이랜드레테일 Membership 포인트적립
@@ -1025,7 +1035,7 @@ const Join = () => {
                         <span className="txt">[필수] 개인정보 제 3자 제공 동의</span>
                     </label>
                   </div>
-                  <button className="btn_more">전문보기</button>
+                  <button className="btn_more" onClick={termsBx}>전문보기</button>
                   <div className="txt">제 1 조 (개인정보의 제3자 제공)
                     ① 당사는 고객이 개인정보를 사전 동의 없이 제3자에게 제공하지 않습니다.다만 정보 주체의 동의, 법률의 특별한 규정에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.
                     ② 당사는 보다 나은 서비스 제공, 고객편의 등을 위하여 동의하시는 고객에 한해서 아래와 같이 개인정보를 제3자에게 제공하고 있습니다.
