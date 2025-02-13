@@ -43,10 +43,10 @@ const Join = () => {
   const handleIdCheck = async ()=>{
     console.log("####errors###", errors);
     //##### 아이디
+    const response = await axios.get(`${API_URL}/users/check-id`, {
+      params:{user_id:formData.user_id},
+    });
     try {
-      const response = await axios.get(`${API_URL}/users/check-id`, {
-        params:{user_id:formData.user_id},
-      });
       console.log("값체크", formData.user_id);
       console.log("==response==", response);
       console.log("==response.data==", response.data);
@@ -70,6 +70,9 @@ const Join = () => {
       if(err.response){ //서버응답 있는 경우
         setErrors((el) => ({ ...el, user_id: err.response.data.message, user_id_state:"error" }));
       } else {
+        console.log("값체크", formData.user_id);
+        console.log("==response==", response);
+        console.log("==response.data==", response.data);
         setErrors((el) => ({ ...el, user_id: "서버 오류 발생", user_id_state:"error" }));
       }
     }
