@@ -103,7 +103,7 @@ const Join = () => {
   }
   const confirmPasswordConfirm = (password, passwordConfirm)=>{
     const pwRule = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
-    console.log("passwordRule", password)
+    // console.log("passwordRule", password)
     if(!passwordConfirm) return;
     if(!pwRule.test(password)){
       setErrors((prev) => ({ ...prev, passwordConfirm: "비밀번호를 재설정하고 입력하세요", passwordConfirm_state: "error" }));
@@ -276,8 +276,8 @@ const Join = () => {
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
           console.log('회원가입 성공 ?? ', result.data);
-          // console.log("result.data.token111",result.data.token)
-          // console.log("result.data.token222",result.data.accessToken)
+          console.log("result.data.token111",result.data.token)
+          console.log("result.data.token222",result.data.accessToken)
           //회원가입완료 전달
           const accessToken = result.data.accessToken;
           setAccessToken(accessToken); // 상태 업데이트
@@ -300,7 +300,6 @@ const Join = () => {
 
   }
 
-
   //===물음표안내
   const modalPop = (e)=>{
     e.preventDefault();
@@ -309,6 +308,7 @@ const Join = () => {
     !isOpen ? (e.target.classList.add("active"), modal.style.display = "block") : (e.target.classList.remove("active"), modal.style.display = "none");
   }
 
+  //===약관체크박스
   const [isTermsCheckedAll,setIsTermsCheckedAll] = useState(false);
   const [isTermsChecked,setIsTermsChecked] = useState([]);
   const chkEl = document.querySelectorAll("input[name^='join_terms']:not([name$='_all'])");
@@ -317,7 +317,7 @@ const Join = () => {
   }
   useEffect(()=>{
     setIsTermsCheckedAll(isTermsChecked.length === chkEl.length);
-  },[isTermsChecked])
+  },[chkChange])
 
 
   return (
@@ -464,7 +464,7 @@ const Join = () => {
                 <li>
                   <div className="chk_bx">
                     <input type="checkbox" id="join_terms_all" name="join_terms_all" checked={isTermsCheckedAll}
-                    onChange={()=> { setIsTermsChecked(prev => prev.length ? [] : [...chkEl].map(el => el.id) ); } }/> {/* setIsTermsCheckedAll(isTermsCheckedAll); */}
+                    onChange={() => { setIsTermsChecked(isTermsCheckedAll ? [] : [...chkEl].map(el => el.id)) }}/>
                     <label className="chk_txt" htmlFor="join_terms_all">
                         <span className="chk"></span>
                         <span className="txt"><b>모든 약관을 확인하고 전체 동의합니다.</b></span>

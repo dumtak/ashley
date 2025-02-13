@@ -8,6 +8,7 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],  // '@'를 '/src' 폴더로 대체
   },
   server: {
+    port: 5173,
     proxy: {
       '/auth': {
         target: 'http://port-0-ashley-server-m68t82tub8d34ceb.sel4.cloudtype.app',
