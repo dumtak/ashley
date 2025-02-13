@@ -1,1 +1,1 @@
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+export const API_URL= import.meta.env.MODE === "production" ? "https://port-0-ashley-server-m68t82tub8d34ceb.sel4.cloudtype.app" : "http://localhost:8080";

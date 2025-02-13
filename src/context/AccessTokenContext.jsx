@@ -14,7 +14,9 @@ export const isActiveToken = async (accessToken) => {
   }
 
   try {
-    const response = await axios.post(`${API_URL}/auth`, { accessToken });
+    const response = await axios.post(`${API_URL}/auth`, { accessToken },  {
+      headers: { "Content-Type": "application/json" }
+    });
     const resResult = response.data.result;
     console.log("API응답===", response);
 
