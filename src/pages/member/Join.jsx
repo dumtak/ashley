@@ -45,9 +45,11 @@ const Join = () => {
     //##### 아이디
     try {
       const response = await axios.get(`${API_URL}/users/check-id`, {
-        params:{user_id: formData.user_id},
+        params:{user_id:formData.user_id},
       });
+      console.log("값체크", formData.user_id);
       console.log("==response==", response);
+      console.log("==response.data==", response.data);
       const idRule=/^[a-z0-9]{4,16}$/;
       const trimId = formData.user_id.trim();
 
