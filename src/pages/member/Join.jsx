@@ -45,6 +45,7 @@ const Join = () => {
     //##### 아이디
     const response = await axios.get(`${API_URL}/users/check-id`, {
       params:{user_id:formData.user_id},
+      withCredentials: true //CORS 문제 방지
     });
     try {
       console.log("값체크", formData.user_id);
