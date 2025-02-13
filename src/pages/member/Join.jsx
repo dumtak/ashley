@@ -29,13 +29,18 @@ const Join = () => {
     // store: '지점',
   });
   const handleData = (e)=>{ //입력값 체크
-    const { name,value } = e.target;
+    const { name,value, type,checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name] : value
+      [name] : type === "checkbox" ? checked : value
+      // [name] : value
     }))
   }
   const [errors, setErrors] = useState({});
+
+  useEffect(()=>{
+    console.log("formData",formData)
+  },[formData])
 
 
   //===아이디 중복확인 버튼
@@ -276,8 +281,8 @@ const Join = () => {
           // marketingChecked : marketingChecked ? "True" : "False"
         }).then((result)=>{
           console.log('회원가입 성공 ?? ', result.data);
-          console.log("result.data.token111",result.data.token)
-          console.log("result.data.token222",result.data.accessToken)
+          // console.log("result.data.token111",result.data.token); //undefined
+          // console.log("result.data.token222",result.data.accessToken) //success
           //회원가입완료 전달
           const accessToken = result.data.accessToken;
           setAccessToken(accessToken); // 상태 업데이트
@@ -312,12 +317,27 @@ const Join = () => {
   const [isTermsCheckedAll,setIsTermsCheckedAll] = useState(false);
   const [isTermsChecked,setIsTermsChecked] = useState([]);
   const chkEl = document.querySelectorAll("input[name^='join_terms']:not([name$='_all'])");
-  const chkChange = (id)=>{
+  const chkChange = (id)=>{ //항목체크
     setIsTermsChecked(prev => prev.includes(id) ? prev.filter(el => el !== id) : [...prev, id]);
   }
-  useEffect(()=>{
+  useEffect(()=>{ //항목체크=>전체체크
     setIsTermsCheckedAll(isTermsChecked.length === chkEl.length);
-  },[chkChange])
+  },[setIsTermsCheckedAll,chkChange])
+
+  const handleChkData = ()=>{ //전체체크=>데이터
+    chkEl.forEach(chkEl => {
+      handleData({target:chkEl})
+    });
+  }
+  useEffect(()=>{ //체크마다=>데이터
+    // console.log("isTermsCheckedAll",isTermsCheckedAll)
+    // console.log("isTermsChecked",isTermsChecked)
+    // chkEl.forEach((chkEl, idx) => {
+    //   console.log(`체크박스${idx + 1}확인`,chkEl,chkEl.checked);
+    // });
+    handleChkData();
+  },[isTermsChecked,isTermsCheckedAll])
+
 
 
   return (
@@ -463,8 +483,15 @@ const Join = () => {
               <ul className="inp_list">
                 <li>
                   <div className="chk_bx">
+                    {/* <input type="checkbox" id="join_terms_all" name="join_terms_all" checked={isTermsCheckedAll}
+                    onChange={() => { isTermsCheckedAll ? //항목체크데이터전환 및 항목체크전환
+                    ( chkEl.forEach(el=>handleData({target:el})),setIsTermsChecked([]) )
+                    : setIsTermsChecked([...chkEl].map(el=>{ handleData({target:el}); return el.id;} )) }}/> */}
+
+
+
                     <input type="checkbox" id="join_terms_all" name="join_terms_all" checked={isTermsCheckedAll}
-                    onChange={() => { setIsTermsChecked(isTermsCheckedAll ? [] : [...chkEl].map(el => el.id)) }}/>
+                      onChange={() => { setIsTermsChecked(isTermsCheckedAll ? [] : [...chkEl].map(el=>el.id)); }}/>
                     <label className="chk_txt" htmlFor="join_terms_all">
                         <span className="chk"></span>
                         <span className="txt"><b>모든 약관을 확인하고 전체 동의합니다.</b></span>
@@ -473,7 +500,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms1" name="join_terms1" aria-required="true" checked={isTermsChecked.includes("join_terms1")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
+                    <input type="checkbox" id="join_terms1" name="join_terms1" checked={isTermsChecked.includes("join_terms1")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms1">
                         <span className="chk"></span>
                         <span className="txt">[필수] E-POINT 이용약관 동의</span>
@@ -820,7 +847,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms2" name="join_terms2" aria-required="true" checked={isTermsChecked.includes("join_terms2")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
+                    <input type="checkbox" id="join_terms2" name="join_terms2" checked={isTermsChecked.includes("join_terms2")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms2">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 수집동의</span>
@@ -992,7 +1019,7 @@ const Join = () => {
                 </li>
                 <li>
                   <div className="chk_bx">
-                    <input type="checkbox" id="join_terms4" name="join_terms4" aria-required="true" checked={isTermsChecked.includes("join_terms4")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
+                    <input type="checkbox" id="join_terms4" name="join_terms4" checked={isTermsChecked.includes("join_terms4")} onChange={(e)=> {chkChange(e.target.id); handleData(e);} }/>
                     <label className="chk_txt" htmlFor="join_terms4">
                         <span className="chk"></span>
                         <span className="txt">[필수] 개인정보 제 3자 제공 동의</span>

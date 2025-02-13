@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-// import { useAccessToken } from '../../context/AccessTokenContext';
+import { useAccessToken } from '../../context/AccessTokenContext';
 
 
 const JoinResult = () => {
@@ -9,20 +9,11 @@ const JoinResult = () => {
   const navigate = useNavigate();
   const { name,id,email } = location.state || {};
 
-
-  // console.log("LocalStorage AccessToken:", localStorage.getItem("accessToken"));
-  // const { setAccessToken } = useAccessToken();
-  // useEffect(() => {
-  //   console.log(1111)
-  //   const accessTokenFromStorage = localStorage.getItem("accessToken");
-  //   if (accessTokenFromStorage) {
-  //     console.log(2222)
-  //     setAccessToken(accessTokenFromStorage);
-  //   }
-  // }, []);
-
-
-
+  const { setAccessResult } = useAccessToken();
+  const handleRemove = ()=>{
+    setAccessResult(false);
+    localStorage.removeItem('accessToken');
+  }
 
   useEffect(()=>{
     if(!name || !id || !email){
@@ -36,16 +27,6 @@ const JoinResult = () => {
     window.onpopstate = () => navigate("/", { replace: true });
     return () => window.onpopstate = null; // 언마운트 시 리소스 해제
   }, [navigate]);
-
-
-  // const { setAccessToken, setAccessResult, setUserId } = useAccessToken();
-  // const token = localStorage.getItem("accessToken");
-  // useEffect(() => {
-  //   localStorage.setItem("accessToken", accessToken); // 토큰 저장
-  //   setAccessToken(accessToken);
-  //   // localStorage.setItem("userInfo", JSON.stringify( {name,id,email} ));
-  // }, [setAccessToken, setAccessResult, setUserId]);
-
 
   return (
     <>
@@ -77,7 +58,7 @@ const JoinResult = () => {
                 </li>
               </ul>
               <div className="btn_wrap column">
-                <Link to="/member/login" onClick={()=>localStorage.removeItem('userInfo')} className="btn_dark">로그인</Link>
+                <Link to="/member/login" onClick={handleRemove} className="btn_dark">로그인</Link>
                 <Link to="/" className="btn_light">메인으로</Link>
               </div>
             </form>

@@ -49,11 +49,11 @@ const Login = () => {
             </div>
             <form onSubmit={onSubmit}>
               <ul className="inp_list">
-                <li><input type="text" name="user_id" ref={refUserId} placeholder="아이디"/></li>
+                <li><input type="text" name="user_id" ref={refUserId} placeholder="아이디" autoFocus/></li>
                 <li><input type="password" name="password" ref={refUserPassword} placeholder="비밀번호"/></li>
               </ul>
               { error && ( <p className="error">{error.message}</p> ) }
-              <div className="flex_items justify">
+              <div className="displaynone flex_items justify">
                 <div className="security chk_bx">
                   <input type="checkbox" id="login_keep" name="login_keep"/>
                   <label className="chk_txt" htmlFor="login_keep">
