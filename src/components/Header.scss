@@ -1,196 +1,333 @@
 header {
-  width: 100%;
-  min-width: 1280px;
-  height: 150px;
-  background-color: #fff;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 31;
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
+  width:100%;
+  min-width:1280px;
+  height:150px;
+  background-color:#fff;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  z-index:31;
+  box-shadow:0 8px 24px 0 rgba(0, 0, 0, 0.04);
 
   .topbar {
-    padding: 4px 0 6px;
-    text-align: right;
-    background-color: var(--main-color1);
-    font-size: 14px;
-    font-weight: 300;
-    color: #fff;
+    padding:4px 0 6px;
+    text-align:right;
+    background-color:var(--main-color1);
+    font-size:14px;
+    font-weight:300;
+    color:#fff;
 
     a,button {
-      margin-left: 24px;
+      margin-left:24px;
     }
     
     .name {
-      text-decoration: underline;
+      text-decoration:underline;
     }
     
     button {
-      font-weight: 300;
+      font-weight:300;
       color:#fff;
     }
   }
 
   > .layout_fix {
-    padding: 22px 20px;
+    padding:22px 20px;
   }
 
   h1.header_logo {
-    width: 150px;
-    height: 32px;
-    margin-bottom: 22px;
-    color: transparent;
-    background: transparent url("/images/logo.svg") no-repeat center (center / contain);
-    text-indent: -9999px;
+    width:150px;
+    height:32px;
+    margin-bottom:22px;
+    color:transparent;
+    background:transparent url("/images/logo.svg") no-repeat center (center / contain);
+    text-indent:-9999px;
 
     a {
-      height: 32px;
-      display: block;
+      height:32px;
+      display:block;
     }
   }
 
   .gnb li {
-    margin-right: 60px;
-    position: relative;
-    display: inline-block;
+    margin-right:60px;
+    position:relative;
+    display:inline-block;
 
     a {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--main-color2);
+      font-size:16px;
+      font-weight:500;
+      color:var(--main-color2);
 
       &::before {
-        content: "";
-        width: 0;
-        height: 1px;
-        background-color: var(--main-color2);
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        transition: 0.25s ease;
-        display: block;
+        content:"";
+        width:0;
+        height:1px;
+        background-color:var(--main-color2);
+        position:absolute;
+        right:0;
+        bottom:0;
+        transition:0.25s ease;
+        display:block;
       }
 
       &:hover::before {
-        width: 100%;
-        right: auto;
-        left: 0;
+        width:100%;
+        right:auto;
+        left:0;
       }
     }
 
     &.btn_close {
-      display: none;
+      display:none;
     }
   }
 
   .shleyz {
-    position: absolute;
-    right: 20px;
-    bottom: -4px;
+    position:absolute;
+    right:20px;
+    bottom:-4px;
 
     ul {
-      display: flex;
-      gap: 10px;
+      display:flex;
+      gap:10px;
     }
 
     img {
-      position: relative;
+      position:relative;
     }
 
     .berry img {
-      height: 82px;
-      bottom: -21px;
+      height:82px;
+      bottom:-21px;
     }
 
     .ramzzi img {
-      height: 80px;
-      bottom: -24px;
+      height:80px;
+      bottom:-24px;
     }
 
     .sae img {
-      height: 70px;
-      bottom: -32px;
+      height:70px;
+      bottom:-32px;
     }
 
     .cota img {
-      height: 104px;
-      bottom: -2px;
+      height:104px;
+      bottom:-2px;
     }
   }
 }
 
 #main #quick {
-  visibility: hidden;
+  visibility:hidden;
 }
 
 #quick {
-  text-align: center;
-  position: fixed;
-  top: 200px;
-  left: calc(50% + 660px);
-  z-index: 30;
-  transition: left 0.35s ease;
+  text-align:center;
+  position:fixed;
+  top:200px;
+  left:calc(50% + 660px);
+  z-index:30;
+  transition:left 0.35s ease;
 
   ul {
-    width: 60px;
-    padding: 16px 8px 0;
-    background: linear-gradient(to bottom, #003b64, #00243d 100%);
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--wt-color);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width:60px;
+    padding:16px 8px 0;
+    background:linear-gradient(to bottom, #003b64, #00243d 100%);
+    font-size:11px;
+    font-weight:400;
+    color:var(--wt-color);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
 
     li {
-      margin-bottom: 16px;
+      margin-bottom:16px;
 
       a {
-        position: relative;
-        display: block;
+        position:relative;
+        display:block;
 
         &::before {
-          content: "";
-          width: 30px;
-          height: 30px;
-          margin: 0 auto 2px;
-          background-color: transparent;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: contain;
-          display: block;
+          content:"";
+          width:30px;
+          height:30px;
+          margin:0 auto 2px;
+          background-color:transparent;
+          background-repeat:no-repeat;
+          background-position:center;
+          background-size:contain;
+          display:block;
         }
       }
 
       &[title="채용"] a::before {
-        background-image: url("/images/quick-recruit.png");
+        background-image:url("/images/quick-recruit.png");
       }
 
       &[title="온라인몰"] a::before {
-        background-image: url("/images/quick-delv.png");
+        background-image:url("/images/quick-delv.png");
       }
 
       &[title*="딜리버리"] a::before {
-        background-image: url("/images/quick-togo.png");
+        background-image:url("/images/quick-togo.png");
       }
     }
   }
 
   .pageTop {
-    width: 50px;
-    margin-top: 10px;
-    background-color: var(--main-color1);
-    color: var(--wt-color);
-    border-radius: 100px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width:50px;
+    margin-top:10px;
+    background-color:var(--main-color1);
+    color:var(--wt-color);
+    border-radius:100px;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
   }
 }
 
-@media (max-width: 1460px) {
+@media (max-width:1460px) {
   #quick {
-    left: 100%;
-    visibility: hidden;
+    left:100%;
+    visibility:hidden;
+  }
+}
+
+@media(max-width:991px){
+  #quick { display:none; }
+  header {
+    min-width:320px;
+  
+    > .layout_fix {
+      padding:22px 24px;
+    }
+  
+    .gnb li {
+      margin-right:42px;
+    }
+  
+    .shleyz {
+      right:-32px;
+      bottom:-18px;
+      transform:scale(0.7);
+    }
+  }
+}
+
+@media(max-width:767px){
+  header { height:72px; background-color:var(--main-color1);
+    .topbar { display:none; }
+  
+    h1.header_logo {
+      width:128px;
+      height:28px;
+      margin-bottom:0;
+      background-image:url("/images/logo-wt.svg");
+  
+      a {
+        height:28px;
+      }
+    }
+  
+    .btn_user {
+      width:32px;
+      height:32px;
+      background:transparent url("/images/icon-user-wt.png") no-repeat (center / 28px);
+      font-size:0;
+      position:absolute;
+      top:22px;
+      right:70px;
+      display:block;
+    }
+  
+    .btn_hamburger {
+      width:32px;
+      height:32px;
+      background:transparent url("/images/icon-hamburger-wt.svg") no-repeat (center / contain);
+      font-size:0;
+      position:absolute;
+      top:22px;
+      right:25px;
+      display:block;
+    }
+  
+    .gnb { height:0; opacity:0; visibility:hidden; }
+  
+    .btn_hamburger {
+      &.active {
+        + .gnb {
+          height:auto;
+          padding-top:24px;
+          opacity:1;
+          visibility:visible;
+        }
+  
+        + .gnb::before {
+          width:100vw;
+          height:100vh;
+          background-color:rgba(0, 0, 0, 0.85);
+          transition:background-color .35s ease;
+        }
+      }
+  
+      + .gnb::before {
+        content:'';
+        width:0;
+        height:0;
+        background-color:transparent;
+        position:fixed;
+        top:0;
+        left:0;
+      }
+    }
+  
+    .gnb li {
+      margin:0 0 24px;
+      text-align:center;
+      display:block;
+  
+      a, button {
+        min-width:160px;
+        padding:16px 12px 18px;
+        font-size:15px;
+        color:var(--wt-color);
+      }
+  
+      a::before {
+        display:none;
+      }
+    }
+  
+    .btn_hamburger.active + .gnb li { animation:moveList .5s forwards; }
+    .gnb li.btn_close { display:block;
+      img {
+        width:50px;
+        animation:rotation .5s .1s forwards;
+      }
+    }
+    
+    .shleyz { display:none; }
+  }
+  
+  @keyframes moveList {
+    0% {
+      transform:translate(0, 12px);
+    }
+  
+    100% {
+      transform:translate(0, 0);
+    }
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform:rotate(0deg);
+    }
+  
+    100% {
+      transform:rotate(180deg);
+    }
   }
 }
