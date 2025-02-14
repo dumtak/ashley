@@ -101,7 +101,7 @@ const Home = () => {
             </Slider>
             </div>
           </article>
-          <article className="main__notice" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
+          <article className="main__notice">
             <div className="layout_fix">
               <div className="heading">
                 <h2 className="tit">공지사항<Link to="/notice" className="btn_more">더보기</Link></h2>
@@ -120,13 +120,13 @@ const Home = () => {
               </ul>
             </div>
           </article>
-          <article className="main__banner" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
-            <div className="layout_fix" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
+          <article className="main__banner">
+            <div className="layout_fix">
               <h3>모두가 누리는 맛있는 세상<br/>당신의 열정과 꿈을 키우세요!</h3>
               <Link to="https://elandeats.career.greetinghr.com" target="_blank" className="btn_link">채용 바로가기</Link>
             </div>
           </article>
-          <article className="main__event" rel="js-main-event" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
+          <article className="main__event" rel="js-main-event">
             <div className="layout_fix">
               <div className="heading">
                 <h2 className="tit">이벤트<Link to="/event" className="btn_more">더보기</Link></h2>
@@ -159,8 +159,8 @@ const Home = () => {
               </div>
             </div>
           </article>
-          <article className="main__insta">
-            <div className="layout_fix" data-aos="fade-up" data-aos-offset="200" data-aos-duration="500">
+          <article className="main__insta" onClick={()=>alert("이미지입니다!")}>
+            <div className="layout_fix">
               <div className="heading">
                 <h2 className="tit">Instagram</h2>
                 <p className="desc">@Your_ashley</p>

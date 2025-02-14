@@ -9,12 +9,13 @@ import Home from "./pages/Home";
 import Login from "./pages/member/Login";
 import Join from "./pages/member/Join";
 import JoinResult from "./pages/member/JoinResult";
-import Shleyz from "./pages/Shleyz";
+import Shleyz from "./pages/shleyz/Shleyz";
 import Notice from "./pages/board/Notice";
 import Event from "./pages/board/Event";
 import DetailType from "./pages/board/DetailType";
-import Store from "./pages/Store";
-import Membership from "./pages/Membership";
+import Store from "./pages/store/Store";
+import Membership from "./pages/membership/Membership";
+import Customer from "./pages/customer/Customer";
 import Mypage from "./pages/mypage/Mypage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
@@ -206,6 +207,7 @@ function App() {
               <Route path="/:type/detail" element={<DetailType/>}/>
               <Route path="/store" element={<Store/>}/>
               <Route path="/membership" element={<Membership/>}/>
+              <Route path="/customer" element={<Customer/>}/>
               <Route path="/mypage" element={<Mypage/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>

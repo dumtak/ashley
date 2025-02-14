@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.scss";
 
 const Footer = () => {
@@ -7,9 +8,9 @@ const Footer = () => {
       <div className="bottom_cont">
         <div className="layout_fix">
           <ul className="link">
-            <li><a href="#"><b>개인정보처리방침</b></a></li>
-            <li><a href="#">영상정보처리기기관리방침</a></li>
-            <li><a href="#">서비스 이용약관</a></li>
+            <li><Link to="/" onClick={(e)=>e.preventDefault()}><b>개인정보처리방침</b></Link></li>
+            <li><Link to="/" onClick={(e)=>e.preventDefault()}>영상정보처리기기관리방침</Link></li>
+            <li><Link to="/" onClick={(e)=>e.preventDefault()}>서비스 이용약관</Link></li>
           </ul>
         </div>
       </div>
@@ -34,8 +35,8 @@ const Footer = () => {
             <p>Copyright © 2025 ASHLEY</p>
           </div>
           <ul className="social">
-            <li><a href="#"><img src="/images/footer-social-facebook.png" alt="페이스북 아이콘"/></a></li>
-            <li><a href="#"><img src="/images/footer-social-insta.png" alt="인스타 아이콘"/></a></li>
+            <li><Link to="https://www.facebook.com/wowAshley" target="_blank"><img src="/images/footer-social-facebook.png" alt="페이스북 아이콘"/></Link></li>
+            <li><Link to="https://www.instagram.com/Your_ashley" target="_blank"><img src="/images/footer-social-insta.png" alt="인스타 아이콘"/></Link></li>
           </ul>
         </div>
       </div>

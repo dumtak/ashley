@@ -1,6 +1,6 @@
 
-import "../assets/scss/Membership.scss";
-import "../assets/scss/Heading.scss";
+import "./Membership.scss";
+import "../../assets/scss/Heading.scss";
 
 const Membership = () => {
   return (

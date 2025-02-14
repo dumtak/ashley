@@ -38,6 +38,42 @@
   }
 }
 
+//=== 매장안내
+.store__list {
+  .heading { margin-bottom:60px;
+    &:has(.search_cont) { display:flex; justify-content:space-between; }
+  }
+  .tb_store { text-align:center;
+    thead {
+      th { min-width:40px; padding:18px 0 20px; font-size:14px; font-weight:500; background-color:var(--bg-color); border-top:1px solid var(--main-color2); border-bottom:1px solid var(--br-color); }
+    }
+    tbody {
+      tr {
+        &.empty td { padding:160px 0; text-align:center; font-size:16px; color:var(--main-color3); }
+        td { height:62px; padding:0 0 2px; font-size:14px; color:var(--main-color2); border-bottom:1px solid var(--br-color); }
+        @media(min-width:768px){ &:not(.empty):hover td { background-color:rgba(255,224,1,.05); } }
+      }
+    }
+  }
+}
+
+//=== 고객센터
+.customer__list {
+  .faq_list { margin-top:32px; border-top:1px solid var(--main-color2);
+    @media(max-width:767px){ margin:0; }
+    > li { border-bottom:1px solid var(--br-color);
+      ._q { position:relative;
+        &::before { content:''; width:12px; height:6px; background:transparent url("/images/arrow_select.png")no-repeat center/contain; position:absolute; top:50%; right:24px; transform:translateY(-50%) rotate(0deg); transition:.35s ease; display:inline-block; }
+        button { width:100%; padding:20px 56px 20px 24px; text-align:left; font-weight:inherit; display:block; }
+      }
+      &.active ._q { font-weight:500; }
+      &.active ._q::before { margin-top:-4px; transform:rotate(180deg); }
+      ._a { height:0; padding:0 24px; line-height:1.62; background-color:var(--bg-color); font-size:14px; color:var(--main-color3); border-top:1px solid transparent; overflow:hidden; white-space:pre-wrap; transition:.35s ease; }
+      &.active ._a { border-color:var(--br-color); }
+    }
+  }
+}
+
 @media(max-width:767px){
   .board__detail {
     .nav_post {
@@ -46,29 +82,7 @@
       }
     }
   }
-}
 
-
-//=== 매장안내
-.store__list {
-  .heading { margin-bottom:60px;
-    &:has(.search_cont) { display:flex; justify-content:space-between; }
-  }
-  .tb_store { text-align:center;
-    thead {
-      th { min-width:40px; padding:18px 0 20px; font-size:14px; font-weight:500; border-top:1px solid var(--main-color2); border-bottom:1px solid var(--br-color); }
-    }
-    tbody {
-      tr {
-        &.empty td { padding:160px 0; text-align:center; font-size:16px; color:var(--main-color3); }
-        td { height:62px; padding:0 0 2px; font-size:14px; color:var(--main-color2); border-bottom:1px solid var(--br-color); }
-        @media(min-width:768px){ &:not(.empty):hover td { background-color:var(--bg-color); } }
-      }
-    }
-  }
-}
-
-@media(max-width:767px){
   .store__list {
     .heading { margin-bottom:32px; flex-direction:column; gap:24px; }
     .tb_store { border-top:1px solid var(--br-color); border-bottom:1px solid var(--br-color);
@@ -89,5 +103,12 @@
         }
       }
     }
+  }
+
+  .customer__list {
+    .faq_list > li { word-break:keep-all;
+      ._q button { padding-left:16px; font-size:14px; }
+      ._a { padding-left:16px !important; font-size:13px; }
+    } 
   }
 }

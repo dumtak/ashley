@@ -1,18 +1,36 @@
 :not(:has([class*="main__"])) .heading { margin-bottom:32px;
   h2 { line-height:1; font-size:40px; font-weight:500; color:var(--main-color1);
     @media(max-width:767px) { font-size:26px; }
+    &:not(.tit) + .desc { margin-top:16px; font-size:24px; color:var(--main-color3);
+      @media(max-width:767px){ font-size:18px; }
+    }
   }
 }
 
 [class$="__list"]{
-  .tab_category { margin-top:40px; display:flex; gap:24px;
+  [class^="tab_"]{ margin-top:40px; display:flex; gap:24px; }
+  .tab_category {
     @media(max-width:767px){ gap:16px; }
     > li { line-height:1; font-size:24px; color:var(--main-color3); cursor:pointer; border-bottom:2px solid transparent;
       @media(max-width:767px){ font-size:18px; }
+        button { font-weight:inherit; color:inherit; }
       &.active { padding-bottom:8px; font-weight:500; opacity:1; border-color:var(--main-color2); animation:tabActive .25s cubic-bezier(.4,0,.2,1) forwards;
-        @keyframes tabActive { 0%{ color:var(--main-color4); } 100%{ color:var(--main-color2); } }
+      @keyframes tabActive { 0%{ color:var(--main-color4); } 100%{ color:var(--main-color2); } }
+      }
+    }
+  }
+  .tab_type { gap:12px;
+    @media(max-width:767px){ border-width:1px 1px 0 0; border-style:solid; border-color:var(--br-color); gap:0; }
+    > li {
+      @media(max-width:767px){ text-align:center; border-left:1px solid var(--br-color); flex:1; }
+      button { height:42px; padding:0 16px 2px; background-color:#fff; color:var(--main-color2); border:1px solid var(--br-color); border-radius:50px;
+        @media(max-width:767px){ width:100%; height:36px; padding:0 10px; font-size:13px; white-space:nowrap; border:0; border-radius:0; }
+      }
+      &.active button { background-color:rgba(0,36,61,.1); color:var(--main-color1); border:1px solid var(--main-color1);
+        @media(max-width:767px){ background-color:var(--main-color2); color:#fff; border:0; }
       }
     }
   }
 }
+
 

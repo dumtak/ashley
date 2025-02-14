@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import usePagination from "../hooks/usePagination";
+import usePagination from "../../hooks/usePagination";
 
-import "../assets/scss/Heading.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import "../../assets/scss/Heading.scss";
 
 const Store = () => {
   const [store, setStore] = useState([]); //전체리스트
-  const [sido, setSido] = useState([]); //지역
+  // const [sido, setSido] = useState([]); //지역
 
   useEffect(()=>{
     const fetchStore = ()=>{
@@ -22,15 +22,15 @@ const Store = () => {
     fetchStore();
   },[])
 
-  useEffect(()=>{
-    const currentSido = [];
-    store.forEach(el => {
-      if(!currentSido.includes(el.sido)){
-        currentSido.push(el.sido);
-      }
-      setSido(currentSido);
-    })
-  },[store])
+  // useEffect(()=>{
+  //   const currentSido = [];
+  //   store.forEach(el => {
+  //     if(!currentSido.includes(el.sido)){
+  //       currentSido.push(el.sido);
+  //     }
+  //     setSido(currentSido);
+  //   })
+  // },[store])
 
 
   //=== 검색
