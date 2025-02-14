@@ -31,7 +31,6 @@ strong { font-weight:600; }
 
 .layout_fix { width:1280px; padding:0 20px; margin:0 auto; position:relative; }
 @media(max-width:991px){  .layout_fix { width:100%; min-width:320px; padding:0 24px; } }
-[class^="onboarding__"] .layout_fix { width:100%; max-width:400px; padding:0; }
 
 #contents { min-height:680px; padding-top:150px; }
 #main #contents { padding-top:175px; }
@@ -113,7 +112,7 @@ form .tb_item h3.tit .btn_pop.active { opacity:.5; filter:grayscale(1); }
 
 /* ===== COMPONENT - TITLE */
 .heading h2.tit { line-height:1; font-size:26px; font-weight:500; color:var(--main-color2); }
-.heading h2.tit + .desc { margin-top:12px; font-size:14px; color:var(--main-color3); }
+.heading h2.tit + .desc { margin-top:12px; font-size:14px; color:var(--main-color3); word-break:keep-all; }
 @media (max-width:767px) { .heading h2.tit { font-size:22px; } }
 
 /* ===== COMPONENT - MODAL */

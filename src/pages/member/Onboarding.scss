@@ -1,7 +1,4 @@
-
-@media(max-width:767px){
-  [class^="onboarding__"] .layout_fix { padding:0 24px; }
-}
+[class^="onboarding__"] .layout_fix { width:100%; max-width:400px; }
 
 [class^="onboarding__"] .heading {
   margin-bottom:32px;
