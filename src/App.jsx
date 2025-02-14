@@ -70,14 +70,14 @@ function App() {
       }, 250);
   
       const loadingTimeout = setTimeout(() => { //로딩상태확인
-        console.log("로딩성공", loading);
+        console.log("로딩성공", loading, document.readyState);
         if (document.readyState === "complete") {
           setLoading(false);
         }
       }, 1500);
 
       const loadingReload = setTimeout(() => {
-        console.log("3000")
+        console.log("3000", document.readyState)
         if (document.readyState !== "complete") {
           window.location.reload();
         }
@@ -90,6 +90,15 @@ function App() {
       };
     }
   }, [loading]);
+
+
+      //===Hello Modal
+      const [hello,setHello] = useState(true);
+      useEffect(()=>{
+        const hasHello = localStorage.getItem('hasHello');
+        hasHello ? setHello(false) : localStorage.setItem('hasHello', 'true');
+      },[])
+      const handleHello = ()=> setHello(false);
 
 
   //===Page Scroll
@@ -105,6 +114,56 @@ function App() {
         <div id="modal" className="modal_load">
           <div className="load_cont">
             <div className="load_slot"><img src={images[2]} alt="랜덤이미지"/></div>
+          </div>
+        </div>
+      ) }
+      { hello && (
+        <div id="modal" className="modal_info">
+          <div className="contents">
+            <div className="hello">
+            <h2>🚩 프로젝트 기능을 소개해드리겠습니다!</h2>
+            <p className="help">※ 해당 창을 다시 보시려면<br/>
+              ( F12 )&nbsp;&nbsp;&gt;&nbsp;&nbsp;<button onClick={()=>{ navigator.clipboard.writeText('localStorage.removeItem("hasHello")'); alert("복사!"); }}>{`localStorage.removeItem("hasHello")`}</button>
+            </p>
+            <div className="txt">
+              <b>## 공지사항</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 분류 (전체)<br/>
+              - 카테고리별 이전글 / 다음글<br/>
+              - 날짜 순서 정렬<br/>  
+              - 페이지네이션<br/> 
+              <br/>
+              <b>## 이벤트</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 뱃지<br/>  
+              - 날짜 남은 기간 및 진행상태 뱃지<br/>
+              - 날짜 순서 정렬<br/>
+              - 페이지네이션<br/>  
+              <br/>
+              <b>## 매장안내</b><br/>
+              - JSON 데이터<br/>
+              - 매장명 검색<br/> 
+              - 페이지네이션<br/>
+              <br/>
+              <b>## 멤버십</b><br/>
+              <br/>
+              <b>## 고객센터</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 분류<br/>
+              - 카테고리별 아코디언<br/> 
+              <br/>
+              <b>## 로그인 및 회원가입</b><br/>
+              - SQLite3<br/>
+              - Cloudtype 서버 배포<br/>
+              - Vercel 프론트 배포<br/>
+              <br/>
+              <b>## 슬라이더</b><br/>
+              - Slick<br/>
+            </div>
+            </div>
+            <div className="btn_wrap">
+              <button onClick={handleHello}>닫기</button>
+            </div>
           </div>
         </div>
       ) }
