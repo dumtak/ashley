@@ -1,6 +1,8 @@
 //===:has(메인 외 bg 설정)
 :has(#container) footer { background-color:var(--bg-color); font-weight:400; color:var(--main-color2); }
-:has(#container) footer .bottom_cont { border-bottom:1px solid rgba(255, 255, 255, 0.1); }
+:has(#container) footer .bottom_corp { border-top:1px solid rgba(0, 0, 0, 0.1);
+  @media(max-width:767px){ border:0; }
+}
 
 footer { height:250px; background-color:var(--main-color1); font-weight:300; color:#fff;
   .layout_fix {

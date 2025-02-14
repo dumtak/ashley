@@ -1,4 +1,4 @@
-import { useContext, useState,useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
@@ -156,14 +156,16 @@ const Home = () => {
               </div>
             </div>
           </article>
-          <article className="main__insta" onClick={()=>alert("이미지입니다!")}>
+          <article className="main__insta">
             <div className="layout_fix">
               <div className="heading">
                 <h2 className="tit">Instagram</h2>
                 <p className="desc">@Your_ashley</p>
               </div>
-              <img className="pc" src="./images/insta-group.png" alt="인스타더미" style={{cursor:"pointer"}}/>
-              <img className="mo" src="./images/insta-group-mo.png" alt="인스타더미" style={{cursor:"pointer"}}/>
+              <div onClick={()=>alert("이미지입니다!")}>
+                <img className="pc" src="./images/insta-group.png" alt="인스타더미" style={{cursor:"pointer"}}/>
+                <img className="mo" src="./images/insta-group-mo.png" alt="인스타더미" style={{cursor:"pointer"}}/>
+              </div>
             </div>
           </article>
         </section>
