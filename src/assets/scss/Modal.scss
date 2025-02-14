@@ -29,7 +29,7 @@
 }
 
 /* HELLO MODAL */
-.modal_info { 
+.modal_hello { 
   .hello { padding:40px 40px 0; line-height:1.5; word-break:keep-all;
     h2 { margin-bottom:8px; font-size:18px; font-weight:400; }
     .help { margin-bottom:32px; font-size:13px; color:var(--main-color3);
@@ -52,9 +52,9 @@
       width:100%; min-width:272px; max-width:400px;
     }
 
-    &.modal_info{
-      .hello { padding:24px;
-        .txt { max-height:45vh; }
+    &.modal_hello{
+      .hello { padding:24px 24px 0;
+        .txt { max-height:42vh; padding-bottom:24px; }
       }
     }
   }

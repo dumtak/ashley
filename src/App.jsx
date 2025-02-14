@@ -118,7 +118,7 @@ function App() {
         </div>
       ) }
       { hello && (
-        <div id="modal" className="modal_info">
+        <div id="modal" className="modal_hello">
           <div className="contents">
             <div className="hello">
             <h2>🚩 프로젝트 기능을 소개해드리겠습니다!</h2>
