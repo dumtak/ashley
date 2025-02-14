@@ -11,10 +11,12 @@ const Quick = () => {
     window.scrollTo({ top:0, behavior:"smooth" })
   }
   useEffect(() => {
-    const handleScroll = () => {
-      const notice = document.querySelector(".main__notice");
-      const footer = document.querySelector("footer");
+    const notice = document.querySelector(".main__notice");
+    const footer = document.querySelector("footer");
 
+    if(!notice) setIsVisible(true);
+
+    const handleScroll = () => {
       if (!quickRef.current || !footer) return;
 
       const quick = quickRef.current;
@@ -23,7 +25,8 @@ const Quick = () => {
 
       if (notice) {
         setIsVisible(scrollY > notice.offsetTop - 150);
-      }
+      } 
+      // else { etIsVisible(true); }
 
       if (scrollY >= footerTop - quick.offsetHeight - 200) {
         setIsFixed(false);
@@ -60,7 +63,7 @@ const Quick = () => {
         </li>
       </ul>
       <button className="pageTop" onClick={()=>pageTop()}>
-        <img src="images/quick-top.png" alt="상단으로"/>
+        <img src="/images/quick-top.png" alt="상단으로"/>
       </button>
     </div>
   );
