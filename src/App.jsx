@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
-import { NoticeProvider } from "./context/NoticeContext";
+import { NoticeProvider } from "./context/BoardContext";
 import { AccessTokenProvider } from "./context/AccessTokenContext";
 
 import Header from './components/Header';
@@ -35,8 +35,9 @@ export default function Main() { //useLocation 사용으로 Router 분리
 
 function App() {
   const DataContext = createContext();
-
   const location = useLocation();
+
+  //===Loading
   const [loading, setLoading] = useState(true);
   const images = [
     "/images/shleyz-cota-i1.png",
@@ -53,49 +54,12 @@ function App() {
     "/images/shleyz-ramzzi-i3.png"
   ];
 
-  // useEffect(()=>{
-  //   const timeout = setTimeout(()=>{
-  //     const interval = setInterval(()=>{
-  //       console.log(document.readyState,1111)
-  //       const imgEl = document.querySelector(".load_slot img");
-  //         // if(!imgEl) return;
-  //       if(imgEl){
-  //         gsap.to(".load_slot img", {
-  //           duration: .25,
-  //           yoyo: true,
-  //           repeat: -1,
-  //           repeatDelay: 0,
-  //           // stagger:{ each:100 },
-  //           onRepeat: () => {
-  //             // document.querySelector(".load_slot img").src = images[Math.floor(Math.random() * images.length)];
-  //             imgEl.src = images[Math.floor(Math.random() * images.length)];
-  //             gsap.fromTo(imgEl, { visibility:"hidden" }, { visibility:"visible" });
-  //           }
-  //         });
-  //         clearInterval(interval);
-  //       }
-  //     },50)
-        
-  //     if(document.readyState === "complete"){
-  //       console.log(document.readyState,2222)
-  //       setLoading(false);
-  //     }
-
-  //   }, 1000)
-  //   return () => clearTimeout(timeout);
-  // },[location])
-
-
-  
-  
-
   useEffect(() => {
     const imgEl = document.querySelector(".load_slot img");
     const getRandomImage = () => images[Math.floor(Math.random() * images.length)];
     
     if (imgEl) {
       imgEl.src = getRandomImage(); // 처음 랜덤이미지 설정
-  
       const interval = setInterval(() => {
         if (loading) {  //주기적으로 랜덤이미지 설정
           console.log("계속돈다", loading);
@@ -127,64 +91,20 @@ function App() {
     }
   }, [loading]);
 
-  // useEffect(()=>{
-  //   let timeout = null;
-  //   let interval = null;
-  //   timeout = setTimeout(()=>{
-  //     setLoading(true);
-  //   },1000);
-  //   interval = setInterval(()=>{
-  //     setLoadPercentage((time) => {
-  //       if(time >= 100){
-  //         const imgEl = document.querySelector(".load_slot img");
-  //         if(!imgEl) return;
-  //           gsap.to(".load_slot img", {
-  //             duration: .25,
-  //             yoyo: true,
-  //             repeat: -1,
-  //             repeatDelay: 0,
-  //             // stagger:{ each:100 },
-  //             onRepeat: () => {
-  //               const randomImage = images[Math.floor(Math.random() * images.length)];
-  //               gsap.fromTo(imgEl, { visibility: "hidden" }, { visibility: "visible" });
-  //               imgEl.src = randomImage;
 
-
-  //               // if(imgEl){
-  //               //   imgEl.src = images[Math.floor(Math.random() * images.length)];
-  //               //   gsap.fromTo(imgEl, { visibility:"hidden" }, { visibility:"visible" });
-  //               // }
-  //             }
-  //           });
-  //         clearTimeout(timeout);
-  //         clearInterval(interval);
-  //         setLoading(false);
-  //         return 100;
-  //       }
-  //       return time + 50; //비율 증가
-  //     });
-  //   }, 250)
-  //   return () => {
-  //     clearTimeout(timeout);
-  //     clearInterval(interval);
-  //   }
-  // },[location])
-
-
+  //===Page Scroll
   useEffect(()=>{
     window.scrollTo({ top: 0 });
   },[location])
 
+
   return (
     <>
     <AccessTokenProvider>
-    { AccessTokenProvider && loading && (
+    { loading && (
         <div id="modal" className="modal_load">
           <div className="load_cont">
             <div className="load_slot"><img src={images[2]} alt="랜덤이미지"/></div>
-            {/* <div className="cover_fill">
-              <div className="fill" style={{height:`${loadPercentage}px`}}></div>
-            </div> */}
           </div>
         </div>
       ) }

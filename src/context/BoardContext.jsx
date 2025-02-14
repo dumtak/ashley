@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 
-export const NoticeContext = createContext();
+export const BoardContext = createContext();
 
 export const NoticeProvider = ({ children }) => {
   const location = useLocation();
@@ -88,14 +88,14 @@ export const NoticeProvider = ({ children }) => {
     fetchData(pathcate);
   }, [pathcate]);
 
-  console.log(event);
+  // console.log(event);
 
 
 
   return (
-    <NoticeContext.Provider value={{ notice, noticeEnMapping, event, visual }}>
+    <BoardContext.Provider value={{ notice, noticeEnMapping, event, visual }}>
       {children}
-    </NoticeContext.Provider>
+    </BoardContext.Provider>
   );
 };
 

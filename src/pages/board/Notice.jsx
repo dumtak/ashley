@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { NoticeContext } from "../../context/NoticeContext";
+import { BoardContext } from "../../context/BoardContext";
 
 import usePagination from "../../hooks/usePagination";
 
@@ -8,7 +8,7 @@ import "../../assets/scss/Heading.scss";
 import "../../assets/scss/NoticeCard.scss";
 
 const Notice = () => {
-  const { notice, noticeEnMapping } = useContext(NoticeContext);
+  const { notice, noticeEnMapping } = useContext(BoardContext);
   const { category, currentPage, listItem, totalPagination, paginationGroup, setCategory,setPage } = usePagination("notice",notice,9);
 
   return (

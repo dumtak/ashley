@@ -1,57 +1,61 @@
 #modal {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 33;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color:rgba(0, 0, 0, 0.5);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:33;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   &[class^="modal_"] > .contents {
-    background-color: #fff;
-    overflow: hidden;
+    width:420px;
+    background-color:#fff;
+    overflow:hidden;
+    border-radius:16px;
   }
 
-  &.modal_load {
-    background-color: var(--bg-color);
+  &.modal_load { z-index:40;
+    background-color:var(--bg-color);
   }
 }
 
 /* LOADING */
 .modal_load .load_cont {
   .load_slot{ width:100px; height:150px; display:flex; align-items:end; justify-content:center;
-
   }
-  // width: 120px;
-  // height: 120px;
-  // position: relative;
+}
 
-  // img {
-  //   width: 100%;
-  //   position: relative;
-  //   z-index: 1;
-  // }
+/* HELLO MODAL */
+.modal_info { 
+  .hello { padding:40px 40px 0; line-height:1.5; word-break:keep-all;
+    h2 { margin-bottom:8px; font-size:18px; font-weight:400; }
+    .help { margin-bottom:32px; font-size:13px; color:var(--main-color3);
+      button { text-decoration:underline;
+        &:hover { color:var(--main-color2); }
+      }
+    }
+    .txt { max-height:350px; padding-bottom:32px; font-size:14px; overflow-y:scroll;
+      .desc { font-size:13px; color:var(--main-color3); }
+    }
+  }
+  .btn_wrap { margin:0;
+    button { padding:16px 0 18px; color:var(--main-color3); border-width:1px 0 0; border-color:var(--br-color); }
+  }
+}
 
-  // .cover_fill {
-  //   width: 96px;
-  //   height: 96px;
-  //   margin: 0 auto;
-  //   position: absolute;
-  //   right: 0;
-  //   bottom: 27px;
-  //   left: 0;
-  //   border-radius: 100px;
-  //   overflow: hidden;
+@media(max-width:767px){
+  #modal{
+    &[class^="modal_"] > .contents {
+      width:100%; min-width:272px; max-width:400px;
+    }
 
-  //   .fill {
-  //     width: 100%;
-  //     height: 0px;
-  //     background-color: var(--main-color1);
-  //     position: absolute;
-  //     bottom: 0;
-  //   }
-  // }
+    &.modal_info{
+      .hello { padding:24px;
+        .txt { max-height:45vh; }
+      }
+    }
+  }
 }

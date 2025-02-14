@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 
-import { NoticeContext } from "../../context/NoticeContext";
+import { BoardContext } from "../../context/BoardContext";
 
 import "../../assets/scss/BoardTable.scss";
 
@@ -13,7 +13,7 @@ const DetailType = () => {
   const id = searchParams.get("id");
   // const page = searchParams.get("page") || 1;
 
-  const { notice, event, visual } = useContext(NoticeContext);
+  const { notice, event, visual } = useContext(BoardContext);
   const [ eventStart, setEventStart ] = useState(null);
   const [ eventEnd, setEventEnd ] = useState(null);
   const [ matchItem, setMatchItem ] = useState(null);

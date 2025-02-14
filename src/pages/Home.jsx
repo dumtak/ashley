@@ -1,24 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
-import { NoticeContext } from "../context/NoticeContext";
+import { BoardContext } from "../context/BoardContext";
 
 import "../assets/scss/NoticeCard.scss";
 import "./Home.scss";
 
 
 const Home = () => {
-  const { notice, event, visual } = useContext(NoticeContext);
+  const { notice, event, visual } = useContext(BoardContext);
 
+    //===Hello Modal
+    const [hello,setHello] = useState(true);
+    useEffect(()=>{
+      const hasHello = localStorage.getItem('hasHello');
+      hasHello ? setHello(false) : localStorage.setItem('hasHello', 'true');
+    },[])
+    const handleHello = ()=> setHello(false);
+
+
+  //===Slick Setting
   const setVisual = {
     initialSlide: 0,
     infinite: true,
     className: "center",
-    // slide: "div",
     slide: 'div',
     draggable : false,
     centerMode: true,
@@ -55,14 +64,12 @@ const Home = () => {
     draggable : true,
     touchThreshold:10000,
     pauseOnHover: true,
-    // slide: 'ul',
     slidesToShow: 2,
     slidesToScroll: 2,
     dots: true,
     arrows: true,
     speed: 500,
     autoplay : false,
-    // afterChange: handleChange,
     responsive: [
       {
         breakpoint: 991,
@@ -75,7 +82,6 @@ const Home = () => {
           autoplay : true,
           autoplaySpeed: 3000,
           arrows: false,
-          // afterChange: handleAfterChange,
         }
       }
     ]
@@ -84,6 +90,56 @@ const Home = () => {
 
   return (
     <>
+     { hello && (
+        <div id="modal" className="modal_info">
+          <div className="contents">
+            <div className="hello">
+            <h2>🚩 프로젝트 기능을 소개해드리겠습니다!</h2>
+            <p className="help">※ 해당 창을 다시 보시려면<br/>
+              ( F12 )&nbsp;&nbsp;&gt;&nbsp;&nbsp;<button onClick={()=>{ navigator.clipboard.writeText('localStorage.removeItem("hasHello")'); alert("복사!"); }}>{`localStorage.removeItem("hasHello")`}</button>
+            </p>
+            <div className="txt">
+              <b>## 공지사항</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 분류 (전체)<br/>
+              - 카테고리별 이전글 / 다음글<br/>
+              - 날짜 순서 정렬<br/>  
+              - 페이지네이션<br/> 
+              <br/>
+              <b>## 이벤트</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 뱃지<br/>  
+              - 날짜 남은 기간 및 진행상태 뱃지<br/>
+              - 날짜 순서 정렬<br/>
+              - 페이지네이션<br/>  
+              <br/>
+              <b>## 매장안내</b><br/>
+              - JSON 데이터<br/>
+              - 매장명 검색<br/> 
+              - 페이지네이션<br/>
+              <br/>
+              <b>## 멤버십</b><br/>
+              <br/>
+              <b>## 고객센터</b><br/>
+              - JSON 데이터<br/>
+              - 카테고리 분류<br/>
+              - 카테고리별 아코디언<br/> 
+              <br/>
+              <b>## 로그인 및 회원가입</b><br/>
+              - SQLite3<br/>
+              - Cloudtype 서버 배포<br/>
+              - Vercel 프론트 배포<br/>
+              <br/>
+              <b>## 슬라이더</b><br/>
+              - Slick<br/>
+            </div>
+            </div>
+            <div className="btn_wrap">
+              <button onClick={handleHello}>닫기</button>
+            </div>
+          </div>
+        </div>
+      ) }
       <div id="main">
         <div id="contents">
         <section className="main_section">

@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { NoticeContext } from "../../context/NoticeContext";
+import { BoardContext } from "../../context/BoardContext";
 import usePagination from "../../hooks/usePagination";
 
 import "../../assets/scss/Heading.scss";
 import "../../assets/scss/NoticeCard.scss";
 
 const Event = () => {
-  const { event } = useContext(NoticeContext);
+  const { event } = useContext(BoardContext);
   const { currentPage, listItem, totalPagination, paginationGroup, setPage } = usePagination("event",event,6);
   
   return (
@@ -18,9 +18,6 @@ const Event = () => {
           <div className="layout_fix">
             <div className="heading">
               <h2>이벤트</h2>
-              {/* <ul className="tab_category">
-                <li>전체</li>
-              </ul> */}
             </div>
             <div className="event_data">
               <ul className="card_list">
