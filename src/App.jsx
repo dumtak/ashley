@@ -68,10 +68,10 @@ function App() {
           clearInterval(interval);
         }
       }, 250);
-  
+
       const loadingTimeout = setTimeout(() => { //로딩상태확인
         console.log("로딩성공", loading, document.readyState);
-        if (document.readyState === "complete") {
+        if (document.readyState === "complete" && loading) {
           setLoading(false);
         }
       }, 1500);
