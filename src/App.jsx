@@ -71,14 +71,14 @@ function App() {
 
       const loadingTimeout = setTimeout(() => { //로딩상태확인
         console.log("로딩성공", loading, document.readyState);
-        if (document.readyState === "complete" && loading) {
+        if (document.readyState === "complete") {
           setLoading(false);
         }
       }, 1500);
 
       const loadingReload = setTimeout(() => {
         console.log("3000", document.readyState)
-        if (document.readyState !== "complete") {
+        if (document.readyState === "complete") {
           window.location.reload();
         }
       }, 3000);
