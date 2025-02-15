@@ -92,13 +92,16 @@ function App() {
   }, [loading]);
 
 
-      //===Hello Modal
-      const [hello,setHello] = useState(true);
-      useEffect(()=>{
-        const hasHello = localStorage.getItem('hasHello');
-        hasHello ? setHello(false) : localStorage.setItem('hasHello', 'true');
-      },[])
-      const handleHello = ()=> setHello(false);
+  //===Hello Modal
+  const [hello,setHello] = useState(true);
+  useEffect(() => {
+    const hasHello = localStorage.getItem('hasHello');
+    if (hasHello) setHello(false);
+  }, []);
+  const handleHello = () => {
+    localStorage.setItem("hasHello","true");
+    setHello(false);
+  };
 
 
   //===Page Scroll
