@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import Quick from "../components/Quick"
 
@@ -30,6 +30,12 @@ const Header = () => {
   
     if (accessResult === null) verifyToken();  // 처음 상태가 null이면 API호출하지 않음
   }, [accessToken, accessResult]);
+
+  const location = useLocation();
+  useEffect(()=>{
+    document.querySelector(".btn_hamburger").classList.remove("active");
+    setIsHamburger(false);
+  },[location])
 
 
   return (
