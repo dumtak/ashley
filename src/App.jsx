@@ -19,15 +19,16 @@ import Customer from "./pages/customer/Customer";
 import Mypage from "./pages/mypage/Mypage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import Smooth from './assets/js/Smooth.jsx';
 
 import './App.css'
 import "./assets/scss/Modal.scss"
 
 
-
 export default function Main() { //useLocation 사용으로 Router 분리
   return (
     <Router basename={import.meta.env.BASE_URL}>
+      <Smooth/> 
       <App />
     </Router>
   );
