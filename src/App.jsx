@@ -155,8 +155,9 @@ function App() {
               - Cloudtype 서버 배포<br/>
               - Vercel 프론트 배포<br/>
               <br/>
-              <b>## 슬라이더</b><br/>
+              <b>## 라이브러리리</b><br/>
               - Slick<br/>
+              - Lenis
             </div>
             </div>
             <div className="btn_wrap">
