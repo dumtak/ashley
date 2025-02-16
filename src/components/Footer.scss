@@ -17,6 +17,8 @@ footer { height:250px; background-color:var(--main-color1); font-weight:300; col
       margin-right:24px;
       font-size:13px;
       display:inline-block;
+
+      a { pointer-events:none; }
   
       b {
         font-weight:500;

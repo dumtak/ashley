@@ -19,8 +19,7 @@ const Event = () => {
             <div className="heading">
               <h2>이벤트</h2>
             </div>
-            <div className="event_data">
-              <ul className="card_list">
+            <ul className="card_list">
                 { listItem && listItem.map(el => (
                   <li key={el.id}>
                     <Link to={`/event/detail?id=${el.id}`} className="item">
@@ -34,7 +33,6 @@ const Event = () => {
                   </li>
                 )) }
               </ul>
-            </div>
             { listItem.length !== 0 && paginationGroup && (
               <>
                 <div className="pagination">

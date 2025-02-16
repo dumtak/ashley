@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { NoticeProvider } from "./context/BoardContext";
 import { AccessTokenProvider } from "./context/AccessTokenContext";
@@ -20,6 +20,7 @@ import Mypage from "./pages/mypage/Mypage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import Smooth from './assets/js/Smooth.jsx';
+import ScrollTop from "./assets/js/ScrollTop.jsx";
 
 import './App.css'
 import "./assets/scss/Modal.scss"
@@ -28,7 +29,6 @@ import "./assets/scss/Modal.scss"
 export default function Main() { //useLocation 사용으로 Router 분리
   return (
     <Router basename={import.meta.env.BASE_URL}>
-      <Smooth/> 
       <App />
     </Router>
   );
@@ -36,7 +36,6 @@ export default function Main() { //useLocation 사용으로 Router 분리
 
 function App() {
   const DataContext = createContext();
-  const location = useLocation();
 
   //===Loading
   const [loading, setLoading] = useState(true);
@@ -99,16 +98,11 @@ function App() {
     const hasHello = localStorage.getItem('hasHello');
     if (hasHello) setHello(false);
   }, []);
-  const handleHello = () => {
+  const handleHello = (e) => {
+    e.preventDefault();
     localStorage.setItem("hasHello","true");
     setHello(false);
   };
-
-
-  //===Page Scroll
-  useEffect(()=>{
-    window.scrollTo({ top: 0 });
-  },[location])
 
 
   return (
@@ -129,7 +123,7 @@ function App() {
             <p className="help">※ 해당 창을 다시 보시려면<br/>
               ( F12 )&nbsp;&nbsp;&gt;&nbsp;&nbsp;<button onClick={()=>{ navigator.clipboard.writeText('localStorage.removeItem("hasHello")'); alert("복사!"); }}>{`localStorage.removeItem("hasHello")`}</button>
             </p>
-            <div className="txt">
+            <div className="txt" data-lenis-prevent>
               <b>## 공지사항</b><br/>
               - JSON 데이터<br/>
               - 카테고리 분류 (전체)<br/>
@@ -174,6 +168,8 @@ function App() {
       <NoticeProvider>
         {/* <Router basename={import.meta.env.BASE_URL}> */}
           <DataContext.Provider value={loading}>
+            <ScrollTop/> 
+            <Smooth/>
             <Header/>
             <Routes>
               <Route path="/" element={<Home/>}/>

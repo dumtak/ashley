@@ -125,6 +125,7 @@ form .tb_item h3.tit .btn_pop.active { opacity:.5; filter:grayscale(1); }
 /* ===== SWIPER */
 .slick-slider { position:relative; }
 .slick-arrow { font-size:0; background-color:transparent; background-repeat:no-repeat; background-size:contain; text-indent:-9999px; }
+.slick-arrow.slick-disabled { opacity:.4; cursor:default; }
 .slick-dots { height:20px; margin-top:16px; text-align:center; display:flex !important; justify-content:center; }
 .slick-dots > li { margin:0 5px; }
 .slick-dots > li button { width:8px; height:8px; margin-top:10px; background:var(--main-color1); font-size:0; opacity:0.3; transition:0.25s cubic-bezier(0.25, 1, 0.5, 1); border-radius:50px; display:block; }

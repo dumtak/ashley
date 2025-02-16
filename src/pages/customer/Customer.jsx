@@ -63,8 +63,9 @@ const Customer = () => {
             <div className="heading">
               <h2>고객센터</h2>
               <p className="desc">자주하는 질문</p>
-              {/* <ul className="tab_category"> */}
-              <ul className="tab_type">
+            </div>
+                          {/* <ul className="tab_category"> */}
+                          <ul className="tab_type">
                 { customerCate.map((el,idx)=>(
                   <li className={isTabActive === el ? "active" : ""} key={idx}><button onClick={()=>setIsTabActive(el)}>{el}</button></li>
                 ) ) }
@@ -78,7 +79,18 @@ const Customer = () => {
                   </li>
                 ) ) }
               </ul>
-            </div>
+              <ul className="loop_text">
+                <li>Eats, Always Great!</li>
+                <li>Ashley</li>
+                <li>Eats, Always Great!</li>
+                <li>Ashley</li>
+                <li>Eats, Always Great!</li>
+                <li>Ashley</li>
+                <li>Eats, Always Great!</li>
+                <li>Ashley</li>
+                <li>Eats, Always Great!</li>
+                <li>Ashley</li>
+              </ul>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="bottom_cont">
         <div className="layout_fix">
           <ul className="link">
-            <li><Link to="/" onClick={(e)=>e.preventDefault()}><b>개인정보처리방침</b></Link></li>
-            <li><Link to="/" onClick={(e)=>e.preventDefault()}>영상정보처리기기관리방침</Link></li>
-            <li><Link to="/" onClick={(e)=>e.preventDefault()}>서비스 이용약관</Link></li>
+            <li><Link to="/"><b>개인정보처리방침</b></Link></li>
+            <li><Link to="/">영상정보처리기기관리방침</Link></li>
+            <li><Link to="/">서비스 이용약관</Link></li>
           </ul>
         </div>
       </div>

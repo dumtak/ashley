@@ -58,7 +58,7 @@
 }
 
 //=== 고객센터
-.customer__list {
+.customer__list { overflow:hidden;
   .faq_list { margin-top:32px; border-top:1px solid var(--main-color2);
     @media(max-width:767px){ margin:0; }
     > li { border-bottom:1px solid var(--br-color);
@@ -72,6 +72,10 @@
       &.active ._a { border-color:var(--br-color); }
     }
   }
+  .loop_text { margin-top:80px; font-size:40px; white-space:nowrap; display:flex; align-items:center; gap:40px; animation:loopText 10s linear infinite; mix-blend-mode:difference;
+    @media(max-width:991px){ display:none; }
+  }
+  @keyframes loopText { 0%{ transform:translate3d(-50%,0,0);} 100%{ transform:translate3d(-100%,0,0); } }
 }
 
 @media(max-width:767px){
