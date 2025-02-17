@@ -22,7 +22,7 @@
     display: block;
 
     .tit { height:128px; white-space:pre-wrap; }
-    .date { margin-top:60px; font-weight:400; }
+    .date { margin-top:60px; line-height: 1; font-size: 13px; font-weight:400; color: var(--main-color3); }
 
     &:hover {
       /* transform:translate(0,-5px); */
@@ -61,12 +61,11 @@ min-height: 86px;
  @media(max-width:767px){ height:auto; line-height:1.52; font-size:22px; }
 }
 
-:has([class*="notice"],[class*="event"]) [class*="_list"] .tit + .date {
-// [class*="main__"] [class*="_list"] .tit + .date {
- line-height: 1;
- font-size: 13px;
- color: var(--main-color3);
-}
+// :has([class*="notice"],[class*="event"]) [class*="_list"] .tit + .date {
+//  line-height: 1;
+//  font-size: 13px;
+//  color: var(--main-color3);
+// }
 
 @media(max-width:991px){
   .card_list {
