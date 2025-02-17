@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Quick = () => {
+  const location = useLocation();
   const quickRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isFixed, setIsFixed] = useState(true);
@@ -14,7 +15,7 @@ const Quick = () => {
     const notice = document.querySelector(".main__notice");
     const footer = document.querySelector("footer");
 
-    if(!notice) setIsVisible(true);
+    !notice ? setIsVisible(true) : setIsVisible(false);
 
     const handleScroll = () => {
       if (!quickRef.current || !footer) return;
@@ -39,7 +40,7 @@ const Quick = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location]);
 
   return (
     <div id="quick" ref={quickRef}
