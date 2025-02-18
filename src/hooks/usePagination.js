@@ -31,10 +31,10 @@ const usePagination = (type, list, listLimit = 10, paginationLimit = 5)=>{
     setSearchParams( {category:cate, page:1} );
   }
   const setPage = (e, num)=>{
-    console.log("???search", e, searchWord)
+    // console.log("???search", e, searchWord)
     const numLimit = Math.max(1, Math.min(num, totalPagination)); //최소1,최대제한
-    (type === "notice") ? setSearchParams( {category:category, page:numLimit} ) : setSearchParams( {page:numLimit} );
-    (type !== "notice") || (type === "store") && typeof e !== "object" ? setSearchParams( {result:e, page:numLimit} ) : setSearchParams( {page:numLimit} );
+    (type === "notice") ? setSearchParams( {category, page:numLimit} ) : setSearchParams( {page:numLimit} );
+    (type === "store") ? setSearchParams( {result:e, page:numLimit} ) : setSearchParams( {page:numLimit} );
     if(currentPage === numLimit){
       e.preventDefault();
       return;
