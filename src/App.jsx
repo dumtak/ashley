@@ -153,11 +153,7 @@ function App() {
               <b>## 로그인 및 회원가입</b><br/>
               - SQLite3<br/>
               - Cloudtype 서버 배포<br/>
-              - Vercel 프론트 배포<br/>
-              <br/>
-              <b>## 라이브러리리</b><br/>
-              - Slick<br/>
-              - Lenis
+              - Vercel 프론트 배포
             </div>
             </div>
             <div className="btn_wrap">
