@@ -33,8 +33,11 @@ const usePagination = (type, list, listLimit = 10, paginationLimit = 5)=>{
   const setPage = (e, num)=>{
     // console.log("???search", e, searchWord)
     const numLimit = Math.max(1, Math.min(num, totalPagination)); //최소1,최대제한
-    (type === "notice") ? setSearchParams( {category, page:numLimit} ) : setSearchParams( {page:numLimit} );
-    (type === "store") ? setSearchParams( {result:e, page:numLimit} ) : setSearchParams( {page:numLimit} );
+    // (type === "notice") ? setSearchParams( {category:category, page:numLimit} ) : setSearchParams( {page:numLimit} );
+    // (type === "store") ? setSearchParams( {result:e, page:numLimit} ) : setSearchParams( {page:numLimit} );
+    if(type === "notice") setSearchParams( {category:category, page:numLimit} );
+    if(type === "event") setSearchParams( {page:numLimit} );
+    (type === "store") && typeof e === "object" ? setSearchParams( {page:numLimit} ) : setSearchParams( {result:e, page:numLimit} );
     if(currentPage === numLimit){
       e.preventDefault();
       return;
