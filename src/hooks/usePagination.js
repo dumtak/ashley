@@ -9,8 +9,6 @@ const usePagination = (type, list, listLimit = 10, paginationLimit = 5)=>{
   const category = (!searchParams.get("category") || searchParams.get("category") === "all") ? "all" : searchParams.get("category"); //현재 카테고리
   const currentPage = (parseInt(searchParams.get("page")) === 0 || !searchParams.get("page")) ? 1 : parseInt(searchParams.get("page")); //현재 페이지번호
   const filterList = category === "all" ? list : list.filter(el => category === el.categoryEn);
-  const searchWord = type === "event" && searchParams.get("result");
-
 
   //===list
   const listSplit = (currentPage - 1) * listLimit; //0번에서부터 9번까지 (1)
@@ -31,7 +29,6 @@ const usePagination = (type, list, listLimit = 10, paginationLimit = 5)=>{
     setSearchParams( {category:cate, page:1} );
   }
   const setPage = (e, num)=>{
-    console.log("???", e, searchWord)
     const numLimit = Math.max(1, Math.min(num, totalPagination)); //최소1,최대제한
     if(type === "notice") { //[#]공지사항
       setSearchParams({ category, page:numLimit })
